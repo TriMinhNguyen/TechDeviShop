@@ -1,0 +1,444 @@
+﻿@model TechDeviShopVs002.Models.Product
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Delete
+}
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Suppliers.SupplierName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Suppliers.SupplierName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetaTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetaTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoreImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoreImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PromotionPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PromotionPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncludeVAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncludeVAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Warranty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Warranty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetalKeywords)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetalKeywords)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetalDescriptions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetalDescriptions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TopHot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TopHot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ViewCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ViewCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CpuChip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CpuChip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CpuType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CpuType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CpuSpeed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CpuSpeed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CpuMaxSpeed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CpuMaxSpeed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusSpeed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusSpeed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RamType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RamType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BusRamSpeed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BusRamSpeed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxRam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxRam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HardDrive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HardDrive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Material)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Material)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScreenSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScreenSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resolution)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resolution)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScreenTechnology)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScreenTechnology)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TouchScreen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TouchScreen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GraphicsCard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GraphicsCard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sound)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sound)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConnectionPort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConnectionPort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WirelessConnection)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WirelessConnection)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemoryCardSlot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemoryCardSlot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpticalDiskDrive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpticalDiskDrive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Webcam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Webcam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KeyboardLights)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KeyboardLights)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PinType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PinType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OperatingSystem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OperatingSystem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherInfo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherInfo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
