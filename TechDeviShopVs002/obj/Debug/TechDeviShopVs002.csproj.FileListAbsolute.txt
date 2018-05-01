@@ -93,3 +93,5 @@ D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\bin\Microsoft.AI.Web.xml
 D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\obj\Debug\TechDeviShopVs002.csproj.CopyComplete
 D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\obj\Debug\TechDeviShopVs002.dll
 D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\obj\Debug\TechDeviShopVs002.pdb
+D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\bin\CKFinder.dll
+D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\bin\CKFinder.pdb

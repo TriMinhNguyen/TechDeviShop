@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TechDeviShopVs002.DAL;
 
 namespace TechDeviShopVs002.Controllers
 {
@@ -25,6 +26,13 @@ namespace TechDeviShopVs002.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult MainMenu()
+        {
+            var model = new MenuDAL().ListByGroupId(1);
+            return PartialView(model);
         }
     }
 }
