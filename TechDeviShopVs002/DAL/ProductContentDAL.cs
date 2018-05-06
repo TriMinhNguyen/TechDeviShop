@@ -17,18 +17,18 @@ namespace TechDeviShopVs002.DAL
 
         public List<ProductContent> ListALl()
         {
-            return db.ProductContent.Where(x => x.Status == true).ToList();
+            return db.ProductContents.Where(x => x.Status == true).ToList();
         }
 
         public ProductContent GetByProductName(string _prcName)
         {
-            return db.ProductContent.SingleOrDefault(x => x.ProductName == _prcName);
+            return db.ProductContents.SingleOrDefault(x => x.ProductName == _prcName);
         }
 
         public int Insert(ProductContent entity)
         {
             entity.CreateDate = DateTime.Now;
-            db.ProductContent.Add(entity);
+            db.ProductContents.Add(entity);
             db.SaveChanges();
             return entity.ProductContentID;
         }
@@ -37,7 +37,7 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _prc = db.ProductContent.Find(entity.ProductContentID);
+                var _prc = db.ProductContents.Find(entity.ProductContentID);
                 _prc.ProductName = entity.ProductName;
                 _prc.MetaTitle = entity.MetaTitle;
                 _prc.Description = entity.Description;
@@ -67,15 +67,15 @@ namespace TechDeviShopVs002.DAL
 
         public ProductContent ViewDetail(int? id)
         {
-            return db.ProductContent.Find(id);
+            return db.ProductContents.Find(id);
         }
 
         public bool Delete(int id)
         {
             try
             {
-                var _prc = db.ProductContent.Find(id);
-                db.ProductContent.Remove(_prc);
+                var _prc = db.ProductContents.Find(id);
+                db.ProductContents.Remove(_prc);
                 db.SaveChanges();
                 return true;
             }

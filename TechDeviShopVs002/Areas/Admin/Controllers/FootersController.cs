@@ -18,11 +18,11 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Footers
         public ActionResult Index()
         {
-            return View(db.Footer.ToList());
+            return View(db.Footers.ToList());
         }
 
         // GET: Admin/Footers/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -47,20 +47,28 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FooterID,Content,Status")] Footer footer)
+        public ActionResult Create([Bind(Include = "FooterID,Content,DisplayOrder,IsActive")] Footer footer)
         {
             if (ModelState.IsValid)
             {
-                db.Footer.Add(footer);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var _dal = new FooterDAL();
+
+                int id = _dal.Insert(footer);
+                if (id > 0)
+                {
+                    return RedirectToAction("Index", "Footers");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm Footer ko thành công");
+                }
             }
 
             return View(footer);
         }
 
         // GET: Admin/Footers/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -79,13 +87,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FooterID,Content,Status")] Footer footer)
+        public ActionResult Edit([Bind(Include = "FooterID,Content,DisplayOrder,IsActive")] Footer footer)
         {
             if (ModelState.IsValid)
             {
-                var dao = new FooterDAL();
+                var _dal = new FooterDAL();
 
-                var _result = dao.Update(footer);
+                var _result = _dal.Update(footer);
                 if (_result)
                 {
                     return RedirectToAction("Index", "Footers");
@@ -99,7 +107,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         }
 
         // GET: Admin/Footers/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -116,7 +124,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // POST: Admin/Footers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             new FooterDAL().Delete(id);
             return RedirectToAction("Index");

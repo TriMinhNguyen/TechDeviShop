@@ -6,7 +6,7 @@
 }
 
 @section header{
-    Index
+    Danh sách slide
 }
 
 <p>
@@ -20,12 +20,12 @@
         <th>
             @Html.DisplayNameFor(model => model.DisplayOrder)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Link)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
@@ -39,7 +39,7 @@
             @Html.DisplayNameFor(model => model.ModifiedBy)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.IsActive)
         </th>
         <th></th>
     </tr>
@@ -53,12 +53,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DisplayOrder)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Link)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
@@ -72,7 +72,7 @@
                 @Html.DisplayFor(modelItem => item.ModifiedBy)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.SlideID }) |

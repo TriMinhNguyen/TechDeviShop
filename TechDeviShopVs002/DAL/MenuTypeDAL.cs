@@ -14,20 +14,15 @@ namespace TechDeviShopVs002.DAL
         {
             db = new TechDeviShopDBContext();
         }
-
-        public List<MenuType> ListByGroupId(int groupID)
-        {
-            return db.MenuType.Where(x => x.MenuTypeID == groupID).ToList();
-        }
-
+                
         public List<MenuType> ListALl()
         {
-            return db.MenuType.ToList();
+            return db.MenuTypes.ToList();
         }
 
         public int Insert(MenuType entity)
         {
-            db.MenuType.Add(entity);
+            db.MenuTypes.Add(entity);
             db.SaveChanges();
             return entity.MenuTypeID;
         }
@@ -36,7 +31,7 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _menutype = db.MenuType.Find(entity.MenuTypeID);
+                var _menutype = db.MenuTypes.Find(entity.MenuTypeID);
                 _menutype.Name = entity.Name;
                 db.SaveChanges();
                 return true;
@@ -49,15 +44,15 @@ namespace TechDeviShopVs002.DAL
 
         public MenuType ViewDetail(int? id)
         {
-            return db.MenuType.Find(id);
+            return db.MenuTypes.Find(id);
         }
 
         public bool Delete(int id)
         {
             try
             {
-                var _menutype = db.MenuType.Find(id);
-                db.MenuType.Remove(_menutype);
+                var _menutype = db.MenuTypes.Find(id);
+                db.MenuTypes.Remove(_menutype);
                 db.SaveChanges();
                 return true;
             }

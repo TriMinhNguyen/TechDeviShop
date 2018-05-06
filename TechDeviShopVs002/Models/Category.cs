@@ -6,17 +6,11 @@ namespace TechDeviShopVs002.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Category")]
     public partial class Category
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
-        {
-            Product = new HashSet<Product>();
-        }
-
         public int CategoryID { get; set; }
 
+        [Required]
         [StringLength(250)]
         public string CategoryName { get; set; }
 
@@ -46,11 +40,8 @@ namespace TechDeviShopVs002.Models
         [StringLength(250)]
         public string MetalDescriptions { get; set; }
 
-        public bool? Status { get; set; }
+        public bool? IsActive { get; set; }
 
         public bool? ShowOnHome { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Product { get; set; }
     }
 }

@@ -47,20 +47,20 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerID,CustomerName,CustomerGender,CustomerBirthday,CustomerAddress,CustomerEmail,CustomerPhone,OrtherDetail")] Customers customer)
+        public ActionResult Create([Bind(Include = "CustomerID,CustomerName,CustomerGender,CustomerBirthday,CustomerPhone,CustomerEmail,CustomerAddress,CustomerCity,CustomerDistrict,PostCost,OrtherDetail,IsActive")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                var dao = new CustomerDAL();
+                var _dal = new CustomerDAL();
 
-                int id = dao.Insert(customer);
+                int id = _dal.Insert(customer);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "Customers");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm khach hang ko thành công");
+                    ModelState.AddModelError("", "Thêm khách hàng ko thành công");
                 }
             }
 
@@ -87,20 +87,20 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerID,CustomerName,CustomerGender,CustomerBirthday,CustomerAddress,CustomerEmail,CustomerPhone,OrtherDetail")] Customers customer)
+        public ActionResult Edit([Bind(Include = "CustomerID,CustomerName,CustomerGender,CustomerBirthday,CustomerPhone,CustomerEmail,CustomerAddress,CustomerCity,CustomerDistrict,PostCost,OrtherDetail,IsActive")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                var dao = new CustomerDAL();
+                var _dal = new CustomerDAL();
 
-                var _result = dao.Update(customer);
+                var _result = _dal.Update(customer);
                 if (_result)
                 {
                     return RedirectToAction("Index", "Customers");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Cập nhật khach hang ko thành công");
+                    ModelState.AddModelError("", "Cập nhật khách hàng ko thành công");
                 }
             }
             return View(customer);

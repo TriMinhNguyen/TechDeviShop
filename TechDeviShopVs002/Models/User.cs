@@ -9,12 +9,6 @@ namespace TechDeviShopVs002.Models
     [Table("User")]
     public partial class User
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
-        {
-            Comments = new HashSet<Comments>();
-        }
-
         public int UserID { get; set; }
 
         [Required]
@@ -24,6 +18,8 @@ namespace TechDeviShopVs002.Models
         [Required]
         [StringLength(32)]
         public string Password { get; set; }
+
+        public int? CustomerID { get; set; }
 
         [StringLength(250)]
         public string Name { get; set; }
@@ -45,13 +41,12 @@ namespace TechDeviShopVs002.Models
 
         public DateTime? ModifiedDate { get; set; }
 
-        public int RoleID { get; set; }
+        public byte? RoleID { get; set; }
 
-        public bool Status { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comments> Comments { get; set; }
+        public bool? IsActive { get; set; }
 
         public virtual Role Role { get; set; }
+
+        public virtual Customer Customer { get; set; }
     }
 }

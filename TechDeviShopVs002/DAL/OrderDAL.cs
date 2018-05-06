@@ -15,12 +15,12 @@ namespace TechDeviShopVs002.DAL
             db = new TechDeviShopDBContext();
         }
         
-        public List<Orders> ListALl()
+        public List<Order> ListALl()
         {
             return db.Orders.ToList();
         }
         
-        public int Insert(Orders entity)
+        public int Insert(Order entity)
         {
             entity.CreateDate = DateTime.Now;
             db.Orders.Add(entity);
@@ -28,17 +28,17 @@ namespace TechDeviShopVs002.DAL
             return entity.OrderID;
         }
 
-        public bool Update(Orders entity)
+        public bool Update(Order entity)
         {
             try
             {
                 var _order = db.Orders.Find(entity.OrderID);
+                _order.UserID = entity.UserID;
                 _order.CustomerID = entity.CustomerID;
                 _order.ShipperID = entity.ShipperID;
                 _order.ShippingMethodID = entity.ShippingMethodID;
+                _order.OrderStatusID = entity.OrderStatusID;
                 _order.ShippingCost = entity.ShippingCost;
-                _order.SubTotal = entity.SubTotal;
-                _order.TotalPrice = entity.TotalPrice;
                 _order.CusName = entity.CusName;
                 _order.CusPhone = entity.CusPhone;
                 _order.CusEmail = entity.CusEmail;
@@ -48,10 +48,9 @@ namespace TechDeviShopVs002.DAL
                 _order.Address = entity.Address;
                 _order.ShippingPostalCode = entity.ShippingPostalCode;
                 _order.OrtherNote = entity.OrtherNote;
-                _order.CreateDate = entity.CreateDate;
                 _order.ShippedDate = entity.ShippedDate;
-                _order.TransactionID = entity.TransactionID;
-                _order.TrackingID = entity.TrackingID;
+                _order.RequiredDate = entity.RequiredDate;
+                _order.IsActive = entity.IsActive;
 
                 db.SaveChanges();
                 return true;
@@ -62,7 +61,7 @@ namespace TechDeviShopVs002.DAL
             }
         }
 
-        public Orders ViewDetail(int? id)
+        public Order ViewDetail(int? id)
         {
             return db.Orders.Find(id);
         }

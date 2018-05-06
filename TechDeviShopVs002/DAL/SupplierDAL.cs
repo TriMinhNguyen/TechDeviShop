@@ -15,7 +15,7 @@ namespace TechDeviShopVs002.DAL
             db = new TechDeviShopDBContext();
         }
 
-        public int Insert(Suppliers entity)
+        public int Insert(Supplier entity)
         {
             entity.CreateDate = DateTime.Now;
             db.Suppliers.Add(entity);
@@ -23,7 +23,7 @@ namespace TechDeviShopVs002.DAL
             return entity.SupplierID;
         }
 
-        public bool Update(Suppliers entity)
+        public bool Update(Supplier entity)
         {
             try
             {
@@ -33,8 +33,9 @@ namespace TechDeviShopVs002.DAL
                 _supplier.EmailSupport = entity.EmailSupport;
                 _supplier.PhoneNumber = entity.PhoneNumber;
                 _supplier.Detail = entity.Detail;
-                _supplier.CreateDate = entity.CreateDate;
-                _supplier.CreateBy = entity.CreateBy;
+                _supplier.ModifiedDate = DateTime.Now;
+                _supplier.ModifiedBy = entity.ModifiedBy;
+                _supplier.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;
             }
@@ -44,12 +45,12 @@ namespace TechDeviShopVs002.DAL
             }
         }
 
-        public Suppliers GetByUserName(string supplierName)
+        public Supplier GetByUserName(string supplierName)
         {
             return db.Suppliers.SingleOrDefault(x => x.SupplierName == supplierName);
         }
 
-        public Suppliers ViewDetail(int? id)
+        public Supplier ViewDetail(int? id)
         {
             return db.Suppliers.Find(id);
         }

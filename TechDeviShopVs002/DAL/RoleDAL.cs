@@ -17,12 +17,12 @@ namespace TechDeviShopVs002.DAL
         
         public List<Role> ListALl()
         {
-            return db.Role.ToList();
+            return db.Roles.ToList();
         }
         
         public int Insert(Role entity)
         {
-            db.Role.Add(entity);
+            db.Roles.Add(entity);
             db.SaveChanges();
             return entity.RoleID;
         }
@@ -31,8 +31,9 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _role = db.Role.Find(entity.RoleID);
+                var _role = db.Roles.Find(entity.RoleID);
                 _role.RoleName = entity.RoleName;
+                _role.Description = entity.Description;
                 db.SaveChanges();
                 return true;
             }
@@ -44,15 +45,15 @@ namespace TechDeviShopVs002.DAL
 
         public Role ViewDetail(int? id)
         {
-            return db.Role.Find(id);
+            return db.Roles.Find(id);
         }
 
         public bool Delete(int id)
         {
             try
             {
-                var _role = db.Role.Find(id);
-                db.Role.Remove(_role);
+                var _role = db.Roles.Find(id);
+                db.Roles.Remove(_role);
                 db.SaveChanges();
                 return true;
             }

@@ -17,7 +17,8 @@ namespace TechDeviShopVs002.DAL
 
         public int Insert(User entity)
         {
-            db.User.Add(entity);
+            entity.CreateDate = DateTime.Now;
+            db.Users.Add(entity);
             db.SaveChanges();
             return entity.UserID;
         }
@@ -26,20 +27,21 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var user = db.User.Find(entity.UserID);
+                var user = db.Users.Find(entity.UserID);
                 //if(!string.IsNullOrEmpty(entity.Password))
                 //{
                 //    user.Password = entity.Password;
                 //}
+                user.CustomerID = entity.CustomerID;
                 user.Name = entity.Name;
+                user.Gender = entity.Gender;
+                user.Birthday = entity.Birthday;
                 user.Address = entity.Address;
                 user.Email = entity.Email;
-                user.Birthday = entity.Birthday;
-                user.Gender = entity.Gender;
                 user.Phone = entity.Phone;
-                user.RoleID = entity.RoleID;
-                user.Status = entity.Status;
                 user.ModifiedDate = DateTime.Now;
+                user.RoleID = entity.RoleID;
+                user.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;
             }
@@ -51,24 +53,24 @@ namespace TechDeviShopVs002.DAL
 
         public User GetByUserName(string userName)
         {
-            return db.User.SingleOrDefault(x => x.UserName == userName);
+            return db.Users.SingleOrDefault(x => x.UserName == userName);
         }
 
         public User ViewDetail(int? id)
         {
-            return db.User.Find(id);
+            return db.Users.Find(id);
         }
 
         public int Login(string userName, string passWord)
         {
-            var result = db.User.SingleOrDefault(x => x.UserName == userName);
+            var result = db.Users.SingleOrDefault(x => x.UserName == userName);
             if (result == null)
             {
                 return 0;   //"Tài khoản không tồn tại.";
             }
             else
             {
-                if (result.Status == false)
+                if (result.IsActive == false)
                 {
                     return -1;  //"Tài khoản đang bị khóa.";
                 }
@@ -90,8 +92,8 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var user = db.User.Find(id);
-                db.User.Remove(user);
+                var user = db.Users.Find(id);
+                db.Users.Remove(user);
                 db.SaveChanges();
                 return true;
             }

@@ -23,9 +23,12 @@
         <th>
             @Html.DisplayNameFor(model => model.ParentID)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.DisplayOrder)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SeoTitle)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
@@ -38,8 +41,14 @@
         <th>
             @Html.DisplayNameFor(model => model.ModifiedBy)
         </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.MetalKeywords)
+        </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.MetalDescriptions)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ShowOnHome)
@@ -59,9 +68,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ParentID)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.DisplayOrder)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeoTitle)
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
@@ -74,8 +86,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ModifiedBy)
             </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.MetalKeywords)
+            </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.MetalDescriptions)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ShowOnHome)

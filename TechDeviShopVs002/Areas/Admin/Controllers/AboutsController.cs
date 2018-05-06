@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Abouts
         public ActionResult Index()
         {
-            return View(db.About.ToList());
+            return View(db.Abouts.ToList());
         }
 
         // GET: Admin/Abouts/Details/5
@@ -47,13 +47,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AboutID,AboutName,MetaTitle,Description,Image,Detail,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,Status,TopHot,ViewCount,Tag")] About about)
+        public ActionResult Create([Bind(Include = "AboutID,AboutName,MetaTitle,Description,Image,Detail,MetalKeywords,MetalDescriptions,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] About about)
         {
             if (ModelState.IsValid)
             {
-                var dao = new AboutDAL();
+                var _dal = new AboutDAL();
 
-                int id = dao.Insert(about);
+                int id = _dal.Insert(about);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "Abouts");
@@ -87,13 +87,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AboutID,AboutName,MetaTitle,Description,Image,Detail,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,Status,TopHot,ViewCount,Tag")] About about)
+        public ActionResult Edit([Bind(Include = "AboutID,AboutName,MetaTitle,Description,Image,Detail,MetalKeywords,MetalDescriptions,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] About about)
         {
             if (ModelState.IsValid)
             {
-                var dao = new AboutDAL();
+                var _dal = new AboutDAL();
 
-                var _result = dao.Update(about);
+                var _result = _dal.Update(about);
                 if (_result)
                 {
                     return RedirectToAction("Index", "Abouts");

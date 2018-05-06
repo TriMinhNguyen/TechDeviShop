@@ -9,12 +9,6 @@ namespace TechDeviShopVs002.Models
     [Table("ProductContent")]
     public partial class ProductContent
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProductContent()
-        {
-            Tag1 = new HashSet<Tag>();
-        }
-
         public int ProductContentID { get; set; }
 
         [StringLength(250)]
@@ -31,7 +25,7 @@ namespace TechDeviShopVs002.Models
 
         public int? CategoryID { get; set; }
 
-        [Column(TypeName = "ntext")]
+        [StringLength(500)]
         public string Detail { get; set; }
 
         public int? Warranty { get; set; }
@@ -60,8 +54,5 @@ namespace TechDeviShopVs002.Models
 
         [StringLength(500)]
         public string Tag { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tag> Tag1 { get; set; }
     }
 }

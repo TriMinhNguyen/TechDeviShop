@@ -32,6 +32,6 @@ namespace TechDeviShopVs002.Models
         [StringLength(50)]
         public string ModifiedBy { get; set; }
 
-        public bool? Status { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

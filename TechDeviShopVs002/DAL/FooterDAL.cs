@@ -17,12 +17,12 @@ namespace TechDeviShopVs002.DAL
 
         public Footer GetFooter()
         {
-            return db.Footer.SingleOrDefault(x => x.Status == true);
+            return db.Footers.SingleOrDefault(x => x.IsActive == true);
         }
 
-        public string Insert(Footer entity)
+        public int Insert(Footer entity)
         {
-            db.Footer.Add(entity);
+            db.Footers.Add(entity);
             db.SaveChanges();
             return entity.FooterID;
         }
@@ -31,9 +31,10 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _footer = db.Footer.Find(entity.FooterID);
+                var _footer = db.Footers.Find(entity.FooterID);
                 _footer.Content = entity.Content;
-                _footer.Status = entity.Status;
+                _footer.DisplayOrder = entity.DisplayOrder;
+                _footer.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;
             }
@@ -43,17 +44,17 @@ namespace TechDeviShopVs002.DAL
             }
         }
 
-        public Footer ViewDetail(string id)
+        public Footer ViewDetail(int? id)
         {
-            return db.Footer.Find(id);
+            return db.Footers.Find(id);
         }
 
-        public bool Delete(string id)
+        public bool Delete(int id)
         {
             try
             {
-                var _footer = db.Footer.Find(id);
-                db.Footer.Remove(_footer);
+                var _footer = db.Footers.Find(id);
+                db.Footers.Remove(_footer);
                 db.SaveChanges();
                 return true;
             }

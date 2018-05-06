@@ -6,8 +6,9 @@
 }
 
 @section header{
-    Index
+    Danh sách Footer
 }
+
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,7 +19,10 @@
             @Html.DisplayNameFor(model => model.Content)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.DisplayOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
         </th>
         <th></th>
     </tr>
@@ -30,7 +34,10 @@
                 @Html.DisplayFor(modelItem => item.Content)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.DisplayOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.FooterID }) |

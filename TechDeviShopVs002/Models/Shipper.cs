@@ -11,6 +11,7 @@ namespace TechDeviShopVs002.Models
     {
         public int ShipperID { get; set; }
 
+        [Required]
         [StringLength(250)]
         public string Name { get; set; }
 
@@ -20,11 +21,22 @@ namespace TechDeviShopVs002.Models
         [StringLength(50)]
         public string Phone { get; set; }
 
-        [Column(TypeName = "ntext")]
-        public string CusReviews { get; set; }
+        [StringLength(20)]
+        public string Fax { get; set; }
+
+        [StringLength(500)]
+        public string Address { get; set; }
 
         public DateTime? CreateDate { get; set; }
 
-        public bool? Status { get; set; }
+        [StringLength(50)]
+        public string CreateBy { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
+
+        [StringLength(50)]
+        public string ModifiedBy { get; set; }
+
+        public bool? IsActive { get; set; }
     }
 }

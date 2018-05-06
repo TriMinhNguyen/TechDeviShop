@@ -15,14 +15,14 @@ namespace TechDeviShopVs002.DAL
             db = new TechDeviShopDBContext();
         }
 
-        public int Insert(Customers entity)
+        public int Insert(Customer entity)
         {
             db.Customers.Add(entity);
             db.SaveChanges();
             return entity.CustomerID;
         }
 
-        public bool Update(Customers entity)
+        public bool Update(Customer entity)
         {
             try
             {
@@ -30,10 +30,14 @@ namespace TechDeviShopVs002.DAL
                 _cus.CustomerName = entity.CustomerName;
                 _cus.CustomerGender = entity.CustomerGender;
                 _cus.CustomerBirthday = entity.CustomerBirthday;
-                _cus.CustomerAddress = entity.CustomerAddress;
-                _cus.CustomerEmail = entity.CustomerEmail;
                 _cus.CustomerPhone = entity.CustomerPhone;
+                _cus.CustomerEmail = entity.CustomerEmail;
+                _cus.CustomerAddress = entity.CustomerAddress;
+                _cus.CustomerCity = entity.CustomerCity;
+                _cus.CustomerDistrict = entity.CustomerDistrict;
+                _cus.PostCost = entity.PostCost;
                 _cus.OrtherDetail = entity.OrtherDetail;
+                _cus.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;
             }
@@ -43,12 +47,12 @@ namespace TechDeviShopVs002.DAL
             }
         }
 
-        public Customers GetByCusName(string _cusName)
+        public Customer GetByCusName(string _cusName)
         {
             return db.Customers.SingleOrDefault(x => x.CustomerName == _cusName);
         }
 
-        public Customers ViewDetail(int? id)
+        public Customer ViewDetail(int? id)
         {
             return db.Customers.Find(id);
         }

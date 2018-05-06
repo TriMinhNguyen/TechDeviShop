@@ -17,13 +17,13 @@ namespace TechDeviShopVs002.DAL
 
         public List<Shipper> ListALl()
         {
-            return db.Shipper.Where(x => x.Status == true).ToList();
+            return db.Shippers.Where(x => x.IsActive == true).ToList();
         }
 
         public int Insert(Shipper entity)
         {
             entity.CreateDate = DateTime.Now;
-            db.Shipper.Add(entity);
+            db.Shippers.Add(entity);
             db.SaveChanges();
             return entity.ShipperID;
         }
@@ -32,13 +32,15 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _shipper = db.Shipper.Find(entity.ShipperID);
+                var _shipper = db.Shippers.Find(entity.ShipperID);
                 _shipper.Name = entity.Name;
                 _shipper.Email = entity.Email;
                 _shipper.Phone = entity.Phone;
-                _shipper.CusReviews = entity.CusReviews;
-                _shipper.CreateDate = entity.CreateDate;
-                _shipper.Status = entity.Status;
+                _shipper.Fax = entity.Fax;
+                _shipper.Address = entity.Address;
+                _shipper.ModifiedDate = DateTime.Now;
+                _shipper.ModifiedBy = entity.ModifiedBy;
+                _shipper.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;
             }
@@ -50,15 +52,15 @@ namespace TechDeviShopVs002.DAL
 
         public Shipper ViewDetail(int? id)
         {
-            return db.Shipper.Find(id);
+            return db.Shippers.Find(id);
         }
 
         public bool Delete(int id)
         {
             try
             {
-                var _shipper = db.Shipper.Find(id);
-                db.Shipper.Remove(_shipper);
+                var _shipper = db.Shippers.Find(id);
+                db.Shippers.Remove(_shipper);
                 db.SaveChanges();
                 return true;
             }

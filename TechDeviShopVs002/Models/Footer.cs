@@ -9,12 +9,12 @@ namespace TechDeviShopVs002.Models
     [Table("Footer")]
     public partial class Footer
     {
-        [StringLength(50)]
-        public string FooterID { get; set; }
+        public int FooterID { get; set; }
 
-        [Column(TypeName = "ntext")]
         public string Content { get; set; }
 
-        public bool? Status { get; set; }
+        public int? DisplayOrder { get; set; }
+
+        public bool? IsActive { get; set; }
     }
 }

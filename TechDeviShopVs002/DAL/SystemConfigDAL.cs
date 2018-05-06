@@ -15,9 +15,9 @@ namespace TechDeviShopVs002.DAL
             db = new TechDeviShopDBContext();
         }
 
-        public string Insert(SystemConfig entity)
+        public int Insert(SystemConfig entity)
         {
-            db.SystemConfig.Add(entity);
+            db.SystemConfigs.Add(entity);
             db.SaveChanges();
             return entity.SystemConfigID;
         }
@@ -26,11 +26,11 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _sys = db.SystemConfig.Find(entity.SystemConfigID);
+                var _sys = db.SystemConfigs.Find(entity.SystemConfigID);
                 _sys.Name = entity.Name;
                 _sys.Type = entity.Type;
                 _sys.Value = entity.Value;
-                _sys.Status = entity.Status;
+                _sys.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;
             }
@@ -42,15 +42,15 @@ namespace TechDeviShopVs002.DAL
 
         public SystemConfig ViewDetail(int? id)
         {
-            return db.SystemConfig.Find(id);
+            return db.SystemConfigs.Find(id);
         }
 
         public bool Delete(int id)
         {
             try
             {
-                var _sys = db.SystemConfig.Find(id);
-                db.SystemConfig.Remove(_sys);
+                var _sys = db.SystemConfigs.Find(id);
+                db.SystemConfigs.Remove(_sys);
                 db.SaveChanges();
                 return true;
             }

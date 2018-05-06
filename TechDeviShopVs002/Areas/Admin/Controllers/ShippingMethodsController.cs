@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/ShippingMethods
         public ActionResult Index()
         {
-            return View(db.ShippingMethod.ToList());
+            return View(db.ShippingMethods.ToList());
         }
 
         // GET: Admin/ShippingMethods/Details/5
@@ -51,9 +51,9 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var _shipM = new ShippingMethodDAL();
+                var _dal = new ShippingMethodDAL();
 
-                int id = _shipM.Insert(shippingMethod);
+                int id = _dal.Insert(shippingMethod);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "ShippingMethods");
@@ -91,8 +91,8 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dao = new ShippingMethodDAL();
-                var _result = dao.Update(shippingMethod);
+                var _dal = new ShippingMethodDAL();
+                var _result = _dal.Update(shippingMethod);
                 if (_result)
                 {
                     return RedirectToAction("Index", "ShippingMethods");
@@ -125,7 +125,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            new CategoryDAL().Delete(id);
+            new ShippingMethodDAL().Delete(id);
             return RedirectToAction("Index");
         }
 

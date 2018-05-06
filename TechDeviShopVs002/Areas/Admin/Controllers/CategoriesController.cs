@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Categories
         public ActionResult Index()
         {
-            return View(db.Category.ToList());
+            return View(db.Categories.ToList());
         }
 
         // GET: Admin/Categories/Details/5
@@ -28,7 +28,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
             var category = new CategoryDAL().ViewDetail(id);
             if (category == null)
             {
@@ -48,13 +47,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,CategoryName,MetaTitle,ParentID,DisplayOrder,SeoTitle,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,Status,ShowOnHome")] Category category)
+        public ActionResult Create([Bind(Include = "CategoryID,CategoryName,MetaTitle,ParentID,DisplayOrder,SeoTitle,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,IsActive,ShowOnHome")] Category category)
         {
             if (ModelState.IsValid)
             {
-                var _Cate = new CategoryDAL();
-                
-                int id = _Cate.Insert(category);
+                var _dal = new CategoryDAL();
+
+                int id = _dal.Insert(category);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "Categories");
@@ -88,12 +87,12 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,MetaTitle,ParentID,DisplayOrder,SeoTitle,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,Status,ShowOnHome")] Category category)
+        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,MetaTitle,ParentID,DisplayOrder,SeoTitle,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,IsActive,ShowOnHome")] Category category)
         {
             if (ModelState.IsValid)
             {
-                var dao = new CategoryDAL();
-                var _result = dao.Update(category);
+                var _dal = new CategoryDAL();
+                var _result = _dal.Update(category);
                 if (_result)
                 {
                     return RedirectToAction("Index", "Categories");

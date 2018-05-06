@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Orders
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.ShippingMethod);
+            var orders = db.Orders.Include(o => o.Customer).Include(o => o.OrderStatus).Include(o => o.Shipper).Include(o => o.ShippingMethod).Include(o => o.User);
             return View(orders.ToList());
         }
 
@@ -40,7 +40,11 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Orders/Create
         public ActionResult Create()
         {
-            ViewBag.ShippingMethodID = new SelectList(db.ShippingMethod, "ShippingMethodID", "Title");
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "CustomerName");
+            ViewBag.OrderStatusID = new SelectList(db.OrderStatus, "OrderStatusID", "OrderStatusName");
+            ViewBag.ShipperID = new SelectList(db.Shippers, "ShipperID", "Name");
+            ViewBag.ShippingMethodID = new SelectList(db.ShippingMethods, "ShippingMethodID", "Title");
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName");
             return View();
         }
 
@@ -49,24 +53,28 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderID,CustomerID,ShipperID,ShippingMethodID,ShippingCost,SubTotal,TotalPrice,CusName,CusPhone,CusEmail,Company,City,District,Address,ShippingPostalCode,OrtherNote,CreateDate,ShippedDate,TransactionID,TrackingID")] Orders order)
+        public ActionResult Create([Bind(Include = "OrderID,UserID,CustomerID,ShipperID,ShippingMethodID,OrderStatusID,ShippingCost,CusName,CusPhone,CusEmail,Company,City,District,Address,ShippingPostalCode,OrtherNote,OrderDate,ShippedDate,RequiredDate,CreateDate,CreateBy,IsActive")] Order order)
         {
             if (ModelState.IsValid)
             {
-                var dao = new OrderDAL();
+                var _dal = new OrderDAL();
 
-                int id = dao.Insert(order);
+                int id = _dal.Insert(order);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "Orders");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm Hoa don ko thành công");
+                    ModelState.AddModelError("", "Thêm Hóa đơn ko thành công");
                 }
             }
 
-            ViewBag.ShippingMethodID = new SelectList(db.ShippingMethod, "ShippingMethodID", "Title", order.ShippingMethodID);
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "CustomerName", order.CustomerID);
+            ViewBag.OrderStatusID = new SelectList(db.OrderStatus, "OrderStatusID", "OrderStatusName", order.OrderStatusID);
+            ViewBag.ShipperID = new SelectList(db.Shippers, "ShipperID", "Name", order.ShipperID);
+            ViewBag.ShippingMethodID = new SelectList(db.ShippingMethods, "ShippingMethodID", "Title", order.ShippingMethodID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", order.UserID);
             return View(order);
         }
 
@@ -82,7 +90,11 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ShippingMethodID = new SelectList(db.ShippingMethod, "ShippingMethodID", "Title", order.ShippingMethodID);
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "CustomerName", order.CustomerID);
+            ViewBag.OrderStatusID = new SelectList(db.OrderStatus, "OrderStatusID", "OrderStatusName", order.OrderStatusID);
+            ViewBag.ShipperID = new SelectList(db.Shippers, "ShipperID", "Name", order.ShipperID);
+            ViewBag.ShippingMethodID = new SelectList(db.ShippingMethods, "ShippingMethodID", "Title", order.ShippingMethodID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", order.UserID);
             return View(order);
         }
 
@@ -91,23 +103,27 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderID,CustomerID,ShipperID,ShippingMethodID,ShippingCost,SubTotal,TotalPrice,CusName,CusPhone,CusEmail,Company,City,District,Address,ShippingPostalCode,OrtherNote,CreateDate,ShippedDate,TransactionID,TrackingID")] Orders order)
+        public ActionResult Edit([Bind(Include = "OrderID,UserID,CustomerID,ShipperID,ShippingMethodID,OrderStatusID,ShippingCost,CusName,CusPhone,CusEmail,Company,City,District,Address,ShippingPostalCode,OrtherNote,OrderDate,ShippedDate,RequiredDate,CreateDate,CreateBy,IsActive")] Order order)
         {
             if (ModelState.IsValid)
             {
-                var dao = new OrderDAL();
+                var _dal = new OrderDAL();
 
-                var _result = dao.Update(order);
+                var _result = _dal.Update(order);
                 if (_result)
                 {
                     return RedirectToAction("Index", "Orders");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Cập nhật Hoa don ko thành công");
+                    ModelState.AddModelError("", "Cập nhật hóa đơn ko thành công");
                 }
             }
-            ViewBag.ShippingMethodID = new SelectList(db.ShippingMethod, "ShippingMethodID", "Title", order.ShippingMethodID);
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "CustomerName", order.CustomerID);
+            ViewBag.OrderStatusID = new SelectList(db.OrderStatus, "OrderStatusID", "OrderStatusName", order.OrderStatusID);
+            ViewBag.ShipperID = new SelectList(db.Shippers, "ShipperID", "Name", order.ShipperID);
+            ViewBag.ShippingMethodID = new SelectList(db.ShippingMethods, "ShippingMethodID", "Title", order.ShippingMethodID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", order.UserID);
             return View(order);
         }
 

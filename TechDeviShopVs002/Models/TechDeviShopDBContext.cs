@@ -12,28 +12,33 @@ namespace TechDeviShopVs002.Models
         {
         }
 
-        public virtual DbSet<About> About { get; set; }
-        public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<Comments> Comments { get; set; }
-        public virtual DbSet<Customers> Customers { get; set; }
-        public virtual DbSet<Feedback> Feedback { get; set; }
-        public virtual DbSet<Footer> Footer { get; set; }
-        public virtual DbSet<Menu> Menu { get; set; }
-        public virtual DbSet<MenuType> MenuType { get; set; }
-        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
-        public virtual DbSet<Orders> Orders { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<ProductContent> ProductContent { get; set; }
-        public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<Shipper> Shipper { get; set; }
-        public virtual DbSet<ShippingMethod> ShippingMethod { get; set; }
-        public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
-        public virtual DbSet<ShoppingCartDetails> ShoppingCartDetails { get; set; }
-        public virtual DbSet<Slide> Slide { get; set; }
-        public virtual DbSet<Suppliers> Suppliers { get; set; }
-        public virtual DbSet<SystemConfig> SystemConfig { get; set; }
-        public virtual DbSet<Tag> Tag { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<About> Abouts { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<ContentTag> ContentTags { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<Footer> Footers { get; set; }
+        public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<MenuType> MenuTypes { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderStatu> OrderStatus { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public virtual DbSet<PaymentStatu> PaymentStatus { get; set; }
+        public virtual DbSet<ProductContent> ProductContents { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Shipper> Shippers { get; set; }
+        public virtual DbSet<ShippingMethod> ShippingMethods { get; set; }
+        public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public virtual DbSet<ShoppingCartDetail> ShoppingCartDetails { get; set; }
+        public virtual DbSet<Slide> Slides { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<SystemConfig> SystemConfigs { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -45,25 +50,29 @@ namespace TechDeviShopVs002.Models
                 .Property(e => e.MetaTitle)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Footer>()
-                .Property(e => e.FooterID)
+            modelBuilder.Entity<OrderDetail>()
+                .Property(e => e.ProductCode)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<OrderDetails>()
+            modelBuilder.Entity<OrderDetail>()
                 .Property(e => e.UnitPrice)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<Orders>()
+            modelBuilder.Entity<OrderDetail>()
+                .Property(e => e.PromotionPrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Order>()
                 .Property(e => e.ShippingCost)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<Orders>()
-                .Property(e => e.SubTotal)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Orders>()
+            modelBuilder.Entity<Payment>()
                 .Property(e => e.TotalPrice)
                 .HasPrecision(18, 0);
+
+            modelBuilder.Entity<ProductContent>()
+                .Property(e => e.MetaTitle)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.ProductCode)
@@ -81,54 +90,24 @@ namespace TechDeviShopVs002.Models
                 .Property(e => e.PromotionPrice)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<ProductContent>()
-                .Property(e => e.MetaTitle)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ProductContent>()
-                .HasMany(e => e.Tag1)
-                .WithMany(e => e.ProductContent)
-                .Map(m => m.ToTable("ContentTag").MapLeftKey("ProductContentID").MapRightKey("TagID"));
-
-            modelBuilder.Entity<Role>()
-                .HasMany(e => e.User)
-                .WithRequired(e => e.Role)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<ShippingMethod>()
                 .Property(e => e.Price)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<ShoppingCart>()
-                .Property(e => e.ShippingCost)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<ShoppingCart>()
-                .Property(e => e.SubTotal)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<ShoppingCart>()
-                .Property(e => e.TotalPrice)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<ShoppingCartDetails>()
+            modelBuilder.Entity<ShoppingCartDetail>()
                 .Property(e => e.UnitPrice)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<Suppliers>()
+            modelBuilder.Entity<ShoppingCartDetail>()
+                .Property(e => e.PromotionPrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Supplier>()
                 .Property(e => e.MetaTitle)
                 .IsUnicode(false);
 
             modelBuilder.Entity<SystemConfig>()
-                .Property(e => e.SystemConfigID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<SystemConfig>()
                 .Property(e => e.Type)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Tag>()
-                .Property(e => e.TagID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()

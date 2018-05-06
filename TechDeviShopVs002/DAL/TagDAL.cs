@@ -15,9 +15,9 @@ namespace TechDeviShopVs002.DAL
             db = new TechDeviShopDBContext();
         }
 
-        public string Insert(Tag entity)
+        public int Insert(Tag entity)
         {
-            db.Tag.Add(entity);
+            db.Tags.Add(entity);
             db.SaveChanges();
             return entity.TagID;
         }
@@ -26,7 +26,7 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _tag = db.Tag.Find(entity.TagID);
+                var _tag = db.Tags.Find(entity.TagID);
                 _tag.Name = entity.Name;
                 db.SaveChanges();
                 return true;
@@ -39,15 +39,15 @@ namespace TechDeviShopVs002.DAL
 
         public Tag ViewDetail(int? id)
         {
-            return db.Tag.Find(id);
+            return db.Tags.Find(id);
         }
 
         public bool Delete(int id)
         {
             try
             {
-                var _tag = db.Tag.Find(id);
-                db.Tag.Remove(_tag);
+                var _tag = db.Tags.Find(id);
+                db.Tags.Remove(_tag);
                 db.SaveChanges();
                 return true;
             }

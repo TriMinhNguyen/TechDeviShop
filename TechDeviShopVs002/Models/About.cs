@@ -11,6 +11,7 @@ namespace TechDeviShopVs002.Models
     {
         public int AboutID { get; set; }
 
+        [Required]
         [StringLength(250)]
         public string AboutName { get; set; }
 
@@ -23,8 +24,14 @@ namespace TechDeviShopVs002.Models
         [StringLength(250)]
         public string Image { get; set; }
 
-        [Column(TypeName = "ntext")]
+        [StringLength(500)]
         public string Detail { get; set; }
+
+        [StringLength(250)]
+        public string MetalKeywords { get; set; }
+
+        [StringLength(250)]
+        public string MetalDescriptions { get; set; }
 
         public DateTime? CreateDate { get; set; }
 
@@ -36,19 +43,6 @@ namespace TechDeviShopVs002.Models
         [StringLength(50)]
         public string ModifiedBy { get; set; }
 
-        [StringLength(250)]
-        public string MetalKeywords { get; set; }
-
-        [StringLength(250)]
-        public string MetalDescriptions { get; set; }
-
-        public bool? Status { get; set; }
-
-        public DateTime? TopHot { get; set; }
-
-        public int? ViewCount { get; set; }
-
-        [StringLength(500)]
-        public string Tag { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

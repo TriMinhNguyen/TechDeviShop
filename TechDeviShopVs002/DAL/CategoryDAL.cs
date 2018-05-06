@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.DAL
         public int Insert(Category entity)
         {
             entity.CreateDate = DateTime.Now;
-            db.Category.Add(entity);
+            db.Categories.Add(entity);
             db.SaveChanges();
             return entity.CategoryID;
         }
@@ -27,20 +27,18 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _Cate = db.Category.Find(entity.CategoryID);
+                var _Cate = db.Categories.Find(entity.CategoryID);
                 _Cate.CategoryName = entity.CategoryName;
-                _Cate.CreateBy = entity.CreateBy;
-                _Cate.CreateDate = entity.CreateDate;
+                _Cate.MetaTitle = entity.MetaTitle;
+                _Cate.ParentID = entity.ParentID;
                 _Cate.DisplayOrder = entity.DisplayOrder;
+                _Cate.SeoTitle = entity.SeoTitle;
+                _Cate.ModifiedDate = DateTime.Now;
+                _Cate.ModifiedBy = entity.ModifiedBy;
                 _Cate.MetalDescriptions = entity.MetalDescriptions;
                 _Cate.MetalKeywords = entity.MetalKeywords;
-                _Cate.MetaTitle = entity.MetaTitle;
-                _Cate.ModifiedBy = entity.ModifiedBy;
-                _Cate.ModifiedDate = DateTime.Now;
-                _Cate.ParentID = entity.ParentID;
-                _Cate.SeoTitle = entity.SeoTitle;
+                _Cate.IsActive = entity.IsActive;
                 _Cate.ShowOnHome = entity.ShowOnHome;
-                _Cate.Status = entity.Status;
                 db.SaveChanges();
                 return true;
             }
@@ -52,20 +50,20 @@ namespace TechDeviShopVs002.DAL
 
         public Category GetByCategoryName(string _categoryName)
         {
-            return db.Category.SingleOrDefault(x => x.CategoryName == _categoryName);
+            return db.Categories.SingleOrDefault(x => x.CategoryName == _categoryName);
         }
 
         public Category ViewDetail(int? id)
         {
-            return db.Category.Find(id);
+            return db.Categories.Find(id);
         }
         
         public bool Delete(int id)
         {
             try
             {
-                var _Cate = db.Category.Find(id);
-                db.Category.Remove(_Cate);
+                var _Cate = db.Categories.Find(id);
+                db.Categories.Remove(_Cate);
                 db.SaveChanges();
                 return true;
             }

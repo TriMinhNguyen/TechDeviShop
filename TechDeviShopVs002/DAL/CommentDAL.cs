@@ -15,7 +15,7 @@ namespace TechDeviShopVs002.DAL
             db = new TechDeviShopDBContext();
         }
 
-        public int Insert(Comments entity)
+        public int Insert(Comment entity)
         {
             entity.CreateDate = DateTime.Now;
             db.Comments.Add(entity);
@@ -23,7 +23,7 @@ namespace TechDeviShopVs002.DAL
             return entity.CommentID;
         }
 
-        public bool Update(Comments entity)
+        public bool Update(Comment entity)
         {
             try
             {
@@ -32,6 +32,10 @@ namespace TechDeviShopVs002.DAL
                 _comment.ProductID = entity.ProductID;
                 _comment.CommentContent = entity.CommentContent;
                 _comment.CreateDate = entity.CreateDate;
+                _comment.CreateBy = entity.CreateBy;
+                _comment.ModifiedDate = entity.ModifiedDate;
+                _comment.ModifiedBy = entity.ModifiedBy;
+                _comment.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;
             }
@@ -41,7 +45,7 @@ namespace TechDeviShopVs002.DAL
             }
         }
 
-        public Comments ViewDetail(int? id)
+        public Comment ViewDetail(int? id)
         {
             return db.Comments.Find(id);
         }

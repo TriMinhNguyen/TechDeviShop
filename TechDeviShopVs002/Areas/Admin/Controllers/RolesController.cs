@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Roles
         public ActionResult Index()
         {
-            return View(db.Role.ToList());
+            return View(db.Roles.ToList());
         }
 
         // GET: Admin/Roles/Details/5
@@ -47,7 +47,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RoleID,RoleName")] Role role)
+        public ActionResult Create([Bind(Include = "RoleID,RoleName,Description")] Role role)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm phan quyen ko thành công");
+                    ModelState.AddModelError("", "Thêm phân quyền ko thành công");
                 }
             }
 
@@ -87,7 +87,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RoleID,RoleName")] Role role)
+        public ActionResult Edit([Bind(Include = "RoleID,RoleName,Description")] Role role)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Cập nhật phan quyen ko thành công");
+                    ModelState.AddModelError("", "Cập nhật phân quyền ko thành công");
                 }
             }
             return View(role);

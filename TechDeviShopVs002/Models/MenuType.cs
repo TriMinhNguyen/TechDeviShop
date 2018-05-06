@@ -9,18 +9,10 @@ namespace TechDeviShopVs002.Models
     [Table("MenuType")]
     public partial class MenuType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MenuType()
-        {
-            Menu = new HashSet<Menu>();
-        }
-
         public int MenuTypeID { get; set; }
 
+        [Required]
         [StringLength(250)]
         public string Name { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Menu> Menu { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Products
         public ActionResult Index()
         {
-            var products = db.Product.Include(p => p.Category).Include(p => p.Suppliers);
+            var products = db.Products.Include(p => p.Category).Include(p => p.Suppliers);
             return View(products.ToList());
         }
 
@@ -40,7 +40,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Products/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Category, "CategoryID", "CategoryName");
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "SupplierName");
             return View();
         }
@@ -50,13 +50,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,ProductName,ProductCode,MetaTitle,Description,Image,MoreImage,Price,PromotionPrice,IncludeVAT,Quantity,SupplierID,CategoryID,Warranty,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,Status,TopHot,ViewCount,CpuChip,CpuType,CpuSpeed,CpuMaxSpeed,BusSpeed,Ram,RamType,BusRamSpeed,MaxRam,HardDrive,Size,Weight,Color,Material,ScreenSize,Resolution,ScreenTechnology,TouchScreen,GraphicsCard,Sound,ConnectionPort,WirelessConnection,MemoryCardSlot,OpticalDiskDrive,Webcam,KeyboardLights,PinType,Pin,OperatingSystem,OtherInfo")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,ProductName,ProductCode,MetaTitle,Description,Image,MoreImage,Price,PromotionPrice,IncludeVAT,Quantity,SupplierID,CategoryID,Warranty,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,IsActive,TopHot,ViewCount,CpuChip,CpuType,CpuSpeed,CpuMaxSpeed,BusSpeed,Ram,RamType,BusRamSpeed,MaxRam,HardDrive,Size,Weight,Color,Material,ScreenSize,Resolution,ScreenTechnology,TouchScreen,GraphicsCard,Sound,ConnectionPort,WirelessConnection,MemoryCardSlot,OpticalDiskDrive,Webcam,KeyboardLights,PinType,Pin,OperatingSystem,OtherInfo")] Product product)
         {
             if (ModelState.IsValid)
             {
-                var dao = new ProductDAL();
+                var _dal = new ProductDAL();
 
-                int id = dao.Insert(product);
+                int id = _dal.Insert(product);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "Products");
@@ -66,8 +66,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Thêm san pham ko thành công");
                 }
             }
-
-            ViewBag.CategoryID = new SelectList(db.Category, "CategoryID", "CategoryName", product.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "SupplierName", product.SupplierID);
             return View(product);
         }
@@ -84,7 +83,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Category, "CategoryID", "CategoryName", product.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "SupplierName", product.SupplierID);
             return View(product);
         }
@@ -94,13 +93,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,ProductCode,MetaTitle,Description,Image,MoreImage,Price,PromotionPrice,IncludeVAT,Quantity,SupplierID,CategoryID,Warranty,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,Status,TopHot,ViewCount,CpuChip,CpuType,CpuSpeed,CpuMaxSpeed,BusSpeed,Ram,RamType,BusRamSpeed,MaxRam,HardDrive,Size,Weight,Color,Material,ScreenSize,Resolution,ScreenTechnology,TouchScreen,GraphicsCard,Sound,ConnectionPort,WirelessConnection,MemoryCardSlot,OpticalDiskDrive,Webcam,KeyboardLights,PinType,Pin,OperatingSystem,OtherInfo")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,ProductName,ProductCode,MetaTitle,Description,Image,MoreImage,Price,PromotionPrice,IncludeVAT,Quantity,SupplierID,CategoryID,Warranty,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,IsActive,TopHot,ViewCount,CpuChip,CpuType,CpuSpeed,CpuMaxSpeed,BusSpeed,Ram,RamType,BusRamSpeed,MaxRam,HardDrive,Size,Weight,Color,Material,ScreenSize,Resolution,ScreenTechnology,TouchScreen,GraphicsCard,Sound,ConnectionPort,WirelessConnection,MemoryCardSlot,OpticalDiskDrive,Webcam,KeyboardLights,PinType,Pin,OperatingSystem,OtherInfo")] Product product)
         {
             if (ModelState.IsValid)
             {
-                var dao = new ProductDAL();
+                var _dal = new ProductDAL();
 
-                var _result = dao.Update(product);
+                var _result = _dal.Update(product);
                 if (_result)
                 {
                     return RedirectToAction("Index", "Products");
@@ -110,7 +109,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Cập nhật san pham ko thành công");
                 }
             }
-            ViewBag.CategoryID = new SelectList(db.Category, "CategoryID", "CategoryName", product.CategoryID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "SupplierName", product.SupplierID);
             return View(product);
         }

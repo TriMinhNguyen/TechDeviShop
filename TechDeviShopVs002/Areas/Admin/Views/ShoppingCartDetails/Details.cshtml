@@ -1,4 +1,4 @@
-﻿@model TechDeviShopVs002.Models.ShoppingCartDetails
+﻿@model TechDeviShopVs002.Models.ShoppingCartDetail
 
 @{
     ViewBag.Title = "Details";
@@ -6,7 +6,7 @@
 }
 
 @section header{
-    Details
+    Thông tin chi tiết giỏ hàng
 }
 
 <div>
@@ -14,11 +14,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ShoppingCart.ShoppingCartID)
+            @Html.DisplayNameFor(model => model.ShoppingCartID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ShoppingCart.ShoppingCartID)
+            @Html.DisplayFor(model => model.ShoppingCartID)
         </dd>
 
         <dt>
@@ -30,11 +30,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.ProductName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.ProductName)
         </dd>
 
         <dt>
@@ -54,11 +54,43 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.PromotionPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PromotionPrice)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.CreateDate)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
         </dd>
 
     </dl>

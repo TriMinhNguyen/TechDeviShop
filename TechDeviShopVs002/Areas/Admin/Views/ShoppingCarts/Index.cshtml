@@ -6,7 +6,7 @@
 }
 
 @section header{
-    Index
+    Danh sách giỏ hàng
 }
 
 <p>
@@ -15,19 +15,28 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ShippingMethod.Title)
+            @Html.DisplayNameFor(model => model.ShoppingDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ShippingCost)
+            @Html.DisplayNameFor(model => model.ExpireDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SubTotal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalPrice)
-        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
         </th>
         <th></th>
     </tr>
@@ -36,19 +45,28 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ShippingMethod.Title)
+                @Html.DisplayFor(modelItem => item.ShoppingDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ShippingCost)
+                @Html.DisplayFor(modelItem => item.ExpireDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ShoppingCartID }) |

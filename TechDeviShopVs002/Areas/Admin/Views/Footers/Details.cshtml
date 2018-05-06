@@ -6,8 +6,9 @@
 }
 
 @section header{
-    Details
+    Chi tiết thông tin Footer
 }
+
 
 <div>
     <h4>Footer</h4>
@@ -22,11 +23,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.DisplayOrder)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.DisplayOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
         </dd>
 
     </dl>

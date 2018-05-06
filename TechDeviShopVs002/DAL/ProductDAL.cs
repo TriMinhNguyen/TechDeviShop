@@ -17,18 +17,23 @@ namespace TechDeviShopVs002.DAL
         
         public List<Product> ListALl()
         {
-            return db.Product.Where(x => x.Status == true).ToList();
+            return db.Products.Where(x => x.IsActive == true).ToList();
+        }
+
+        public List<Product> ListALlVsNotActive()
+        {
+            return db.Products.ToList();
         }
 
         public Product GetByProductName(string _productName)
         {
-            return db.Product.SingleOrDefault(x => x.ProductName == _productName);
+            return db.Products.SingleOrDefault(x => x.ProductName == _productName);
         }
 
         public int Insert(Product entity)
         {
             entity.CreateDate = DateTime.Now;
-            db.Product.Add(entity);
+            db.Products.Add(entity);
             db.SaveChanges();
             return entity.ProductID;
         }
@@ -37,7 +42,7 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _product = db.Product.Find(entity.ProductID);
+                var _product = db.Products.Find(entity.ProductID);
                 _product.ProductName = entity.ProductName;
                 _product.ProductCode = entity.ProductCode;
                 _product.MetaTitle = entity.MetaTitle;
@@ -51,13 +56,11 @@ namespace TechDeviShopVs002.DAL
                 _product.SupplierID = entity.SupplierID;
                 _product.CategoryID = entity.CategoryID;
                 _product.Warranty = entity.Warranty;
-                _product.CreateDate = entity.CreateDate;
-                _product.CreateBy = entity.CreateBy;
                 _product.ModifiedDate = entity.ModifiedDate;
                 _product.ModifiedBy = entity.ModifiedBy;
                 _product.MetalKeywords = entity.MetalKeywords;
                 _product.MetalDescriptions = entity.MetalDescriptions;
-                _product.Status = entity.Status;
+                _product.IsActive = entity.IsActive;
                 _product.TopHot = entity.TopHot;
                 _product.ViewCount = entity.ViewCount;
 
@@ -72,15 +75,15 @@ namespace TechDeviShopVs002.DAL
 
         public Product ViewDetail(int? id)
         {
-            return db.Product.Find(id);
+            return db.Products.Find(id);
         }
 
         public bool Delete(int id)
         {
             try
             {
-                var _product = db.Product.Find(id);
-                db.Product.Remove(_product);
+                var _product = db.Products.Find(id);
+                db.Products.Remove(_product);
                 db.SaveChanges();
                 return true;
             }

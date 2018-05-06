@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/ProductContents
         public ActionResult Index()
         {
-            return View(db.ProductContent.ToList());
+            return View(db.ProductContents.ToList());
         }
 
         // GET: Admin/ProductContents/Details/5
@@ -51,9 +51,9 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var _Cate = new ProductContentDAL();
+                var _dal = new ProductContentDAL();
 
-                int id = _Cate.Insert(productContent);
+                int id = _dal.Insert(productContent);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "ProductContents");
@@ -91,8 +91,8 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dao = new ProductContentDAL();
-                var _result = dao.Update(productContent);
+                var _dal = new ProductContentDAL();
+                var _result = _dal.Update(productContent);
                 if (_result)
                 {
                     return RedirectToAction("Index", "ProductContents");

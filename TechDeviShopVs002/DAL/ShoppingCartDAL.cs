@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.DAL
         public int Insert(ShoppingCart entity)
         {
             entity.CreateDate = DateTime.Now;
-            db.ShoppingCart.Add(entity);
+            db.ShoppingCarts.Add(entity);
             db.SaveChanges();
             return entity.ShoppingCartID;
         }
@@ -27,12 +27,13 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _shoppingCart = db.ShoppingCart.Find(entity.ShoppingCartID);
-                _shoppingCart.ShippingMethodID = entity.ShippingMethodID;
-                _shoppingCart.ShippingCost = entity.ShippingCost;
-                _shoppingCart.SubTotal = entity.SubTotal;
-                _shoppingCart.TotalPrice = entity.TotalPrice;
-                _shoppingCart.CreateDate = entity.CreateDate;
+                var _shoppingCart = db.ShoppingCarts.Find(entity.ShoppingCartID);
+                _shoppingCart.ShoppingDate = entity.ShoppingDate;
+                _shoppingCart.ExpireDate = entity.ExpireDate;
+                _shoppingCart.Note = entity.Note;
+                _shoppingCart.ModifiedDate = DateTime.Now;
+                _shoppingCart.ModifiedBy = entity.ModifiedBy;
+                _shoppingCart.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;
             }
@@ -44,15 +45,15 @@ namespace TechDeviShopVs002.DAL
 
         public ShoppingCart ViewDetail(int? id)
         {
-            return db.ShoppingCart.Find(id);
+            return db.ShoppingCarts.Find(id);
         }
 
         public bool Delete(int id)
         {
             try
             {
-                var _shoppingCart = db.ShoppingCart.Find(id);
-                db.ShoppingCart.Remove(_shoppingCart);
+                var _shoppingCart = db.ShoppingCarts.Find(id);
+                db.ShoppingCarts.Remove(_shoppingCart);
                 db.SaveChanges();
                 return true;
             }

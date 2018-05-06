@@ -9,9 +9,9 @@ namespace TechDeviShopVs002.Models
     [Table("SystemConfig")]
     public partial class SystemConfig
     {
-        [StringLength(50)]
-        public string SystemConfigID { get; set; }
+        public int SystemConfigID { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string Name { get; set; }
 
@@ -21,6 +21,6 @@ namespace TechDeviShopVs002.Models
         [StringLength(250)]
         public string Value { get; set; }
 
-        public bool? Status { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

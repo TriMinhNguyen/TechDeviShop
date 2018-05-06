@@ -6,10 +6,10 @@
 }
 
 @section header{
-    Create
+    Tạo Product Content
 }
 
-@section jsFooter{
+@section jsPluginCK{
     <script src="~/Assets/admin/plugins/ckfinder/ckfinder.js"></script>
     <script src="~/Assets/admin/plugins/ckeditor/ckeditor.js"></script>
     <script type="text/javascript">
@@ -81,7 +81,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control"}, id = "txtDetail" })
+                @Html.TextAreaFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control" }, id = "txtDetail" })
                 @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -187,3 +187,4 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+

@@ -15,7 +15,7 @@ namespace TechDeviShopVs002.DAL
             db = new TechDeviShopDBContext();
         }
 
-        public int Insert(ShoppingCartDetails entity)
+        public int Insert(ShoppingCartDetail entity)
         {
             entity.CreateDate = DateTime.Now;
             db.ShoppingCartDetails.Add(entity);
@@ -23,17 +23,19 @@ namespace TechDeviShopVs002.DAL
             return entity.ShoppingCartDetailID;
         }
 
-        public bool Update(ShoppingCartDetails entity)
+        public bool Update(ShoppingCartDetail entity)
         {
             try
             {
                 var _scd = db.ShoppingCartDetails.Find(entity.ShoppingCartDetailID);
                 _scd.ShoppingCartID = entity.ShoppingCartID;
                 _scd.ProductID = entity.ProductID;
-                _scd.Title = entity.Title;
+                _scd.ProductName = entity.ProductName;
                 _scd.UnitPrice = entity.UnitPrice;
                 _scd.Quantity = entity.Quantity;
-                _scd.CreateDate = entity.CreateDate;
+                _scd.PromotionPrice = entity.PromotionPrice;
+                _scd.ModifiedDate = DateTime.Now;
+                _scd.ModifiedBy = entity.ModifiedBy;
                 db.SaveChanges();
                 return true;
             }
@@ -43,7 +45,7 @@ namespace TechDeviShopVs002.DAL
             }
         }
 
-        public ShoppingCartDetails ViewDetail(int? id)
+        public ShoppingCartDetail ViewDetail(int? id)
         {
             return db.ShoppingCartDetails.Find(id);
         }

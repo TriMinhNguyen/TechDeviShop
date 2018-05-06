@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.DAL
         public int Insert(About entity)
         {
             entity.CreateDate = DateTime.Now;
-            db.About.Add(entity);
+            db.Abouts.Add(entity);
             db.SaveChanges();
             return entity.AboutID;
         }
@@ -27,22 +27,19 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _about = db.About.Find(entity.AboutID);
+                var _about = db.Abouts.Find(entity.AboutID);
                 _about.AboutName = entity.AboutName;
                 _about.MetaTitle = entity.MetaTitle;
                 _about.Description = entity.Description;
                 _about.Image = entity.Image;
                 _about.Detail = entity.Detail;
+                _about.MetalKeywords = entity.MetalKeywords;
+                _about.MetalDescriptions = entity.MetalDescriptions;
                 _about.CreateDate = entity.CreateDate;
                 _about.CreateBy = entity.CreateBy;
                 _about.ModifiedDate = entity.ModifiedDate;
                 _about.ModifiedBy = entity.ModifiedBy;
-                _about.MetalKeywords = entity.MetalKeywords;
-                _about.MetalDescriptions = entity.MetalDescriptions;
-                _about.Status = entity.Status;
-                _about.TopHot = entity.TopHot;
-                _about.ViewCount = entity.ViewCount;
-                _about.Tag = entity.Tag;
+                _about.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;
             }
@@ -54,15 +51,15 @@ namespace TechDeviShopVs002.DAL
 
         public About ViewDetail(int? id)
         {
-            return db.About.Find(id);
+            return db.Abouts.Find(id);
         }
 
         public bool Delete(int id)
         {
             try
             {
-                var _about = db.About.Find(id);
-                db.About.Remove(_about);
+                var _about = db.Abouts.Find(id);
+                db.Abouts.Remove(_about);
                 db.SaveChanges();
                 return true;
             }

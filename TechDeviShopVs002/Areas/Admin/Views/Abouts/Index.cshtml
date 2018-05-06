@@ -6,7 +6,7 @@
 }
 
 @section header{
-    Index
+    Danh sách About
 }
 
 <p>
@@ -23,12 +23,18 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Image)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Detail)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MetalKeywords)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MetalDescriptions)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
@@ -42,22 +48,7 @@
             @Html.DisplayNameFor(model => model.ModifiedBy)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MetalKeywords)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MetalDescriptions)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TopHot)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ViewCount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tag)
+            @Html.DisplayNameFor(model => model.IsActive)
         </th>
         <th></th>
     </tr>
@@ -74,12 +65,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Image)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Detail)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MetalKeywords)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MetalDescriptions)
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
@@ -93,22 +90,7 @@
                 @Html.DisplayFor(modelItem => item.ModifiedBy)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MetalKeywords)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetalDescriptions)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TopHot)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ViewCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tag)
+                @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.AboutID }) |

@@ -6,8 +6,9 @@
 }
 
 @section header{
-    Delete
+    Xóa Footer
 }
+
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
@@ -23,11 +24,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.DisplayOrder)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.DisplayOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
         </dd>
 
     </dl>

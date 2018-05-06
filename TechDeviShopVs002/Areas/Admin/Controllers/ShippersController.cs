@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Shippers
         public ActionResult Index()
         {
-            return View(db.Shipper.ToList());
+            return View(db.Shippers.ToList());
         }
 
         // GET: Admin/Shippers/Details/5
@@ -47,13 +47,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ShipperID,Name,Email,Phone,CusReviews,CreateDate,Status")] Shipper shipper)
+        public ActionResult Create([Bind(Include = "ShipperID,Name,Email,Phone,Fax,Address,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Shipper shipper)
         {
             if (ModelState.IsValid)
             {
-                var _ship = new ShipperDAL();
+                var _dal = new ShipperDAL();
 
-                int id = _ship.Insert(shipper);
+                int id = _dal.Insert(shipper);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "Shippers");
@@ -87,12 +87,12 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ShipperID,Name,Email,Phone,CusReviews,CreateDate,Status")] Shipper shipper)
+        public ActionResult Edit([Bind(Include = "ShipperID,Name,Email,Phone,Fax,Address,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Shipper shipper)
         {
             if (ModelState.IsValid)
             {
-                var dao = new ShipperDAL();
-                var _result = dao.Update(shipper);
+                var _dal = new ShipperDAL();
+                var _result = _dal.Update(shipper);
                 if (_result)
                 {
                     return RedirectToAction("Index", "Shippers");

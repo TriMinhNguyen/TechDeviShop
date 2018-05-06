@@ -18,8 +18,8 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Menus
         public ActionResult Index()
         {
-            var menus = db.Menu.Include(m => m.MenuType);
-            return View(menus.ToList());
+            var _menus = db.Menus.Include(m => m.MenuType);
+            return View(_menus.ToList());
         }
 
         // GET: Admin/Menus/Details/5
@@ -40,7 +40,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Menus/Create
         public ActionResult Create()
         {
-            ViewBag.MenuTypeID = new SelectList(db.MenuType, "MenuTypeID", "Name");
+            ViewBag.MenuTypeID = new SelectList(db.MenuTypes, "MenuTypeID", "Name");
             return View();
         }
 
@@ -49,13 +49,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MenuID,Text,Link,DisplayOrder,Target,Status,MenuTypeID")] Menu menu)
+        public ActionResult Create([Bind(Include = "MenuID,Text,Link,DisplayOrder,Target,ParentID,MenuTypeID")] Menu menu)
         {
             if (ModelState.IsValid)
             {
-                var dao = new MenuDAL();
+                var _dal = new MenuDAL();
 
-                int id = dao.Insert(menu);
+                int id = _dal.Insert(menu);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "Menus");
@@ -65,8 +65,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Thêm Menu ko thành công");
                 }
             }
-
-            ViewBag.MenuTypeID = new SelectList(db.MenuType, "MenuTypeID", "Name", menu.MenuTypeID);
+            ViewBag.MenuTypeID = new SelectList(db.MenuTypes, "MenuTypeID", "Name", menu.MenuTypeID);
             return View(menu);
         }
 
@@ -82,7 +81,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MenuTypeID = new SelectList(db.MenuType, "MenuTypeID", "Name", menu.MenuTypeID);
+            ViewBag.MenuTypeID = new SelectList(db.MenuTypes, "MenuTypeID", "Name", menu.MenuTypeID);
             return View(menu);
         }
 
@@ -91,13 +90,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MenuID,Text,Link,DisplayOrder,Target,Status,MenuTypeID")] Menu menu)
+        public ActionResult Edit([Bind(Include = "MenuID,Text,Link,DisplayOrder,Target,ParentID,MenuTypeID")] Menu menu)
         {
             if (ModelState.IsValid)
             {
-                var dao = new MenuDAL();
+                var _dal = new MenuDAL();
 
-                var _result = dao.Update(menu);
+                var _result = _dal.Update(menu);
                 if (_result)
                 {
                     return RedirectToAction("Index", "Menus");
@@ -107,7 +106,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Cập nhật Menu ko thành công");
                 }
             }
-            ViewBag.MenuTypeID = new SelectList(db.MenuType, "MenuTypeID", "Name", menu.MenuTypeID);
+            ViewBag.MenuTypeID = new SelectList(db.MenuTypes, "MenuTypeID", "Name", menu.MenuTypeID);
             return View(menu);
         }
 

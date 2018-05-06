@@ -18,8 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/ShoppingCarts
         public ActionResult Index()
         {
-            var shoppingCarts = db.ShoppingCart.Include(s => s.ShippingMethod);
-            return View(shoppingCarts.ToList());
+            return View(db.ShoppingCarts.ToList());
         }
 
         // GET: Admin/ShoppingCarts/Details/5
@@ -40,7 +39,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/ShoppingCarts/Create
         public ActionResult Create()
         {
-            ViewBag.ShippingMethodID = new SelectList(db.ShippingMethod, "ShippingMethodID", "Title");
             return View();
         }
 
@@ -49,13 +47,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ShoppingCartID,ShippingMethodID,ShippingCost,SubTotal,TotalPrice,CreateDate")] ShoppingCart shoppingCart)
+        public ActionResult Create([Bind(Include = "ShoppingCartID,ShoppingDate,ExpireDate,Note,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] ShoppingCart shoppingCart)
         {
             if (ModelState.IsValid)
             {
-                var _shoppingCart = new ShoppingCartDAL();
+                var _dal = new ShoppingCartDAL();
 
-                int id = _shoppingCart.Insert(shoppingCart);
+                int id = _dal.Insert(shoppingCart);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "ShoppingCarts");
@@ -66,7 +64,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 }
             }
 
-            ViewBag.ShippingMethodID = new SelectList(db.ShippingMethod, "ShippingMethodID", "Title", shoppingCart.ShippingMethodID);
             return View(shoppingCart);
         }
 
@@ -82,7 +79,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ShippingMethodID = new SelectList(db.ShippingMethod, "ShippingMethodID", "Title", shoppingCart.ShippingMethodID);
             return View(shoppingCart);
         }
 
@@ -91,12 +87,12 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ShoppingCartID,ShippingMethodID,ShippingCost,SubTotal,TotalPrice,CreateDate")] ShoppingCart shoppingCart)
+        public ActionResult Edit([Bind(Include = "ShoppingCartID,ShoppingDate,ExpireDate,Note,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] ShoppingCart shoppingCart)
         {
             if (ModelState.IsValid)
             {
-                var dao = new ShoppingCartDAL();
-                var _result = dao.Update(shoppingCart);
+                var _dal = new ShoppingCartDAL();
+                var _result = _dal.Update(shoppingCart);
                 if (_result)
                 {
                     return RedirectToAction("Index", "ShoppingCarts");
@@ -106,7 +102,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Cập nhật giỏ hàng ko thành công");
                 }
             }
-            ViewBag.ShippingMethodID = new SelectList(db.ShippingMethod, "ShippingMethodID", "Title", shoppingCart.ShippingMethodID);
             return View(shoppingCart);
         }
 

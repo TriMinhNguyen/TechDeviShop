@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.DAL
         public int Insert(ShippingMethod entity)
         {
             entity.CreateDate = DateTime.Now;
-            db.ShippingMethod.Add(entity);
+            db.ShippingMethods.Add(entity);
             db.SaveChanges();
             return entity.ShippingMethodID;
         }
@@ -27,10 +27,9 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _shippingMethod = db.ShippingMethod.Find(entity.ShippingMethodID);
+                var _shippingMethod = db.ShippingMethods.Find(entity.ShippingMethodID);
                 _shippingMethod.Title = entity.Title;
                 _shippingMethod.Price = entity.Price;
-                _shippingMethod.CreateDate = entity.CreateDate;
                 db.SaveChanges();
                 return true;
             }
@@ -42,15 +41,15 @@ namespace TechDeviShopVs002.DAL
 
         public ShippingMethod ViewDetail(int? id)
         {
-            return db.ShippingMethod.Find(id);
+            return db.ShippingMethods.Find(id);
         }
 
         public bool Delete(int id)
         {
             try
             {
-                var _shippingMethod = db.ShippingMethod.Find(id);
-                db.ShippingMethod.Remove(_shippingMethod);
+                var _shippingMethod = db.ShippingMethods.Find(id);
+                db.ShippingMethods.Remove(_shippingMethod);
                 db.SaveChanges();
                 return true;
             }

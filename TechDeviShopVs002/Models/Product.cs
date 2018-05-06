@@ -6,11 +6,11 @@ namespace TechDeviShopVs002.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Product")]
     public partial class Product
     {
         public int ProductID { get; set; }
 
+        [Required]
         [StringLength(250)]
         public string ProductName { get; set; }
 
@@ -59,7 +59,7 @@ namespace TechDeviShopVs002.Models
         [StringLength(250)]
         public string MetalDescriptions { get; set; }
 
-        public bool? Status { get; set; }
+        public bool? IsActive { get; set; }
 
         public DateTime? TopHot { get; set; }
 
@@ -157,6 +157,6 @@ namespace TechDeviShopVs002.Models
 
         public virtual Category Category { get; set; }
 
-        public virtual Suppliers Suppliers { get; set; }
+        public virtual Supplier Suppliers { get; set; }
     }
 }

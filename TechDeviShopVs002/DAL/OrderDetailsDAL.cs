@@ -15,28 +15,34 @@ namespace TechDeviShopVs002.DAL
             db = new TechDeviShopDBContext();
         }
 
-        public List<OrderDetails> ListALl()
+        public List<OrderDetail> ListALl()
         {
             return db.OrderDetails.ToList();
         }
         
-        public int Insert(OrderDetails entity)
+        public int Insert(OrderDetail entity)
         {
+            entity.CreateDate = DateTime.Now;
             db.OrderDetails.Add(entity);
             db.SaveChanges();
             return entity.OrderDetailID;
         }
 
-        public bool Update(OrderDetails entity)
+        public bool Update(OrderDetail entity)
         {
             try
             {
                 var _orderDetail = db.OrderDetails.Find(entity.OrderDetailID);
                 _orderDetail.OrderID = entity.OrderID;
                 _orderDetail.ProductID = entity.ProductID;
-                _orderDetail.Title = entity.Title;
+                _orderDetail.ProductName = entity.ProductName;
+                _orderDetail.ProductCode = entity.ProductCode;
                 _orderDetail.UnitPrice = entity.UnitPrice;
                 _orderDetail.Quantity = entity.Quantity;
+                _orderDetail.PromotionPrice = entity.PromotionPrice;
+                _orderDetail.ModifiedDate = DateTime.Now;
+                _orderDetail.ModifiedBy = entity.ModifiedBy;
+                _orderDetail.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;
             }
@@ -46,7 +52,7 @@ namespace TechDeviShopVs002.DAL
             }
         }
 
-        public OrderDetails ViewDetail(int? id)
+        public OrderDetail ViewDetail(int? id)
         {
             return db.OrderDetails.Find(id);
         }

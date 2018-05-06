@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TechDeviShopVs002.Models.Suppliers>
+﻿@model IEnumerable<TechDeviShopVs002.Models.Supplier>
 
 @{
     ViewBag.Title = "Index";
@@ -17,23 +17,32 @@
         <th>
             @Html.DisplayNameFor(model => model.SupplierName)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.MetaTitle)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.EmailSupport)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.PhoneNumber)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Detail)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreateBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
         </th>
         <th></th>
     </tr>
@@ -44,23 +53,32 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SupplierName)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.MetaTitle)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.EmailSupport)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Detail)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreateBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.SupplierID }) |

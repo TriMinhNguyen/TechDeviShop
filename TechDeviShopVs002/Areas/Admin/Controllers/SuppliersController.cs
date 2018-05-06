@@ -47,13 +47,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SupplierID,SupplierName,MetaTitle,EmailSupport,PhoneNumber,Detail,CreateDate,CreateBy")] Suppliers supplier)
+        public ActionResult Create([Bind(Include = "SupplierID,SupplierName,MetaTitle,EmailSupport,PhoneNumber,Detail,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
-                var dal = new SupplierDAL();
-                
-                int id = dal.Insert(supplier);
+                var _dal = new SupplierDAL();
+
+                int id = _dal.Insert(supplier);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "Suppliers");
@@ -87,13 +87,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SupplierID,SupplierName,MetaTitle,EmailSupport,PhoneNumber,Detail,CreateDate,CreateBy")] Suppliers supplier)
+        public ActionResult Edit([Bind(Include = "SupplierID,SupplierName,MetaTitle,EmailSupport,PhoneNumber,Detail,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
-                var dal = new SupplierDAL();
-                
-                var _result = dal.Update(supplier);
+                var _dal = new SupplierDAL();
+
+                var _result = _dal.Update(supplier);
                 if (_result)
                 {
                     return RedirectToAction("Index", "Suppliers");

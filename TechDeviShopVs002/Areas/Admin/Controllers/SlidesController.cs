@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Slides
         public ActionResult Index()
         {
-            return View(db.Slide.ToList());
+            return View(db.Slides.ToList());
         }
 
         // GET: Admin/Slides/Details/5
@@ -47,13 +47,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SlideID,Image,DisplayOrder,Link,Description,CreateDate,CreateBy,ModifiedDate,ModifiedBy,Status")] Slide slide)
+        public ActionResult Create([Bind(Include = "SlideID,Image,DisplayOrder,Link,Description,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Slide slide)
         {
             if (ModelState.IsValid)
             {
-                var _slide = new SlideDAL();
+                var _dal = new SlideDAL();
 
-                int id = _slide.Insert(slide);
+                int id = _dal.Insert(slide);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "Slides");
@@ -87,12 +87,12 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SlideID,Image,DisplayOrder,Link,Description,CreateDate,CreateBy,ModifiedDate,ModifiedBy,Status")] Slide slide)
+        public ActionResult Edit([Bind(Include = "SlideID,Image,DisplayOrder,Link,Description,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Slide slide)
         {
             if (ModelState.IsValid)
             {
-                var dao = new SlideDAL();
-                var _result = dao.Update(slide);
+                var _dal = new SlideDAL();
+                var _result = _dal.Update(slide);
                 if (_result)
                 {
                     return RedirectToAction("Index", "Slides");

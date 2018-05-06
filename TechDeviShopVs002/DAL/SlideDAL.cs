@@ -17,13 +17,13 @@ namespace TechDeviShopVs002.DAL
         
         public List<Slide> ListALl()
         {
-            return db.Slide.Where(x => x.Status == true).ToList();
+            return db.Slides.Where(x => x.IsActive == true).ToList();
         }
         
         public int Insert(Slide entity)
         {
             entity.CreateDate = DateTime.Now;
-            db.Slide.Add(entity);
+            db.Slides.Add(entity);
             db.SaveChanges();
             return entity.SlideID;
         }
@@ -32,7 +32,7 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _slide = db.Slide.Find(entity.SlideID);
+                var _slide = db.Slides.Find(entity.SlideID);
                 _slide.Image = entity.Image;
                 _slide.DisplayOrder = entity.DisplayOrder;
                 _slide.Link = entity.Link;
@@ -41,7 +41,7 @@ namespace TechDeviShopVs002.DAL
                 _slide.CreateBy = entity.CreateBy;
                 _slide.ModifiedDate = entity.ModifiedDate;
                 _slide.ModifiedBy = entity.ModifiedBy;
-                _slide.Status = entity.Status;
+                _slide.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;
             }
@@ -53,15 +53,15 @@ namespace TechDeviShopVs002.DAL
 
         public Slide ViewDetail(int? id)
         {
-            return db.Slide.Find(id);
+            return db.Slides.Find(id);
         }
 
         public bool Delete(int id)
         {
             try
             {
-                var _slide = db.Slide.Find(id);
-                db.Slide.Remove(_slide);
+                var _slide = db.Slides.Find(id);
+                db.Slides.Remove(_slide);
                 db.SaveChanges();
                 return true;
             }

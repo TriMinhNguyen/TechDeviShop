@@ -9,27 +9,25 @@ namespace TechDeviShopVs002.Models
     [Table("ShoppingCart")]
     public partial class ShoppingCart
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ShoppingCart()
-        {
-            ShoppingCartDetails = new HashSet<ShoppingCartDetails>();
-        }
-
         public int ShoppingCartID { get; set; }
 
-        public int? ShippingMethodID { get; set; }
+        public DateTime? ShoppingDate { get; set; }
 
-        public decimal? ShippingCost { get; set; }
+        public DateTime? ExpireDate { get; set; }
 
-        public decimal? SubTotal { get; set; }
-
-        public decimal? TotalPrice { get; set; }
+        [StringLength(250)]
+        public string Note { get; set; }
 
         public DateTime? CreateDate { get; set; }
 
-        public virtual ShippingMethod ShippingMethod { get; set; }
+        [StringLength(50)]
+        public string CreateBy { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShoppingCartDetails> ShoppingCartDetails { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+
+        [StringLength(50)]
+        public string ModifiedBy { get; set; }
+
+        public bool? IsActive { get; set; }
     }
 }

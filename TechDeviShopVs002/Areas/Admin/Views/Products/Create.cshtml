@@ -6,7 +6,32 @@
 }
 
 @section header{
-    Create
+    Tạo sản phẩm
+}
+
+@section jsPluginCK{
+    <script src="~/Assets/admin/plugins/ckfinder/ckfinder.js"></script>
+    <script src="~/Assets/admin/plugins/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
+        $('#btnSeImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.basePath = '/Assets/admin/plugins/ckfinder/';
+            finder.selectActionFunction = function (url) {
+                $('#txtImage').val(url);
+            };
+            finder.popup();
+        })
+        $('#btnSeMoreImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.basePath = '/Assets/admin/plugins/ckfinder/';
+            finder.selectActionFunction = function (url) {
+                $('#txtMoreImage').val(url);
+            };
+            finder.popup();
+        })
+    </script>
 }
 
 @using (Html.BeginForm())
@@ -52,7 +77,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }, id = "txtImage" })
+                <a id="btnSeImage" href="#">Chọn ảnh</a>
                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -60,7 +86,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MoreImage, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MoreImage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.MoreImage, new { htmlAttributes = new { @class = "form-control" }, id = "txtMoreImage" })
+                <a id="btnSeMoreImage" href="#">Chọn ảnh</a>
                 @Html.ValidationMessageFor(model => model.MoreImage, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -172,11 +199,11 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.Status)
-                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IsActive)
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -448,3 +475,5 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+

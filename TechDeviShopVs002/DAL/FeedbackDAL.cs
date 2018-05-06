@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.DAL
         public int Insert(Feedback entity)
         {
             entity.CreateDate = DateTime.Now;
-            db.Feedback.Add(entity);
+            db.Feedbacks.Add(entity);
             db.SaveChanges();
             return entity.FeedbackID;
         }
@@ -27,7 +27,7 @@ namespace TechDeviShopVs002.DAL
         {
             try
             {
-                var _feedback = db.Feedback.Find(entity.FeedbackID);
+                var _feedback = db.Feedbacks.Find(entity.FeedbackID);
                 _feedback.Name = entity.Name;
                 _feedback.Phone = entity.Phone;
                 _feedback.Email = entity.Email;
@@ -46,15 +46,15 @@ namespace TechDeviShopVs002.DAL
 
         public Feedback ViewDetail(int? id)
         {
-            return db.Feedback.Find(id);
+            return db.Feedbacks.Find(id);
         }
 
         public bool Delete(int id)
         {
             try
             {
-                var _feedback = db.Feedback.Find(id);
-                db.Feedback.Remove(_feedback);
+                var _feedback = db.Feedbacks.Find(id);
+                db.Feedbacks.Remove(_feedback);
                 db.SaveChanges();
                 return true;
             }

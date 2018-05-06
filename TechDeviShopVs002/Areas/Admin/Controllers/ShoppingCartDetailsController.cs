@@ -18,8 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/ShoppingCartDetails
         public ActionResult Index()
         {
-            var shoppingCartDetails = db.ShoppingCartDetails.Include(s => s.ShoppingCart);
-            return View(shoppingCartDetails.ToList());
+            return View(db.ShoppingCartDetails.ToList());
         }
 
         // GET: Admin/ShoppingCartDetails/Details/5
@@ -40,7 +39,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/ShoppingCartDetails/Create
         public ActionResult Create()
         {
-            ViewBag.ShoppingCartID = new SelectList(db.ShoppingCart, "ShoppingCartID", "ShoppingCartID");
             return View();
         }
 
@@ -49,13 +47,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ShoppingCartDetailID,ShoppingCartID,ProductID,Title,UnitPrice,Quantity,CreateDate")] ShoppingCartDetails shoppingCartDetail)
+        public ActionResult Create([Bind(Include = "ShoppingCartDetailID,ShoppingCartID,ProductID,ProductName,UnitPrice,Quantity,PromotionPrice,CreateDate,CreateBy,ModifiedDate,ModifiedBy")] ShoppingCartDetail shoppingCartDetail)
         {
             if (ModelState.IsValid)
             {
-                var _SCD = new ShoppingCartDetailDAL();
+                var _dal = new ShoppingCartDetailDAL();
 
-                int id = _SCD.Insert(shoppingCartDetail);
+                int id = _dal.Insert(shoppingCartDetail);
                 if (id > 0)
                 {
                     return RedirectToAction("Index", "ShoppingCartDetails");
@@ -66,7 +64,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 }
             }
 
-            ViewBag.ShoppingCartID = new SelectList(db.ShoppingCart, "ShoppingCartID", "ShoppingCartID", shoppingCartDetail.ShoppingCartID);
             return View(shoppingCartDetail);
         }
 
@@ -82,7 +79,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ShoppingCartID = new SelectList(db.ShoppingCart, "ShoppingCartID", "ShoppingCartID", shoppingCartDetail.ShoppingCartID);
             return View(shoppingCartDetail);
         }
 
@@ -91,12 +87,12 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ShoppingCartDetailID,ShoppingCartID,ProductID,Title,UnitPrice,Quantity,CreateDate")] ShoppingCartDetails shoppingCartDetail)
+        public ActionResult Edit([Bind(Include = "ShoppingCartDetailID,ShoppingCartID,ProductID,ProductName,UnitPrice,Quantity,PromotionPrice,CreateDate,CreateBy,ModifiedDate,ModifiedBy")] ShoppingCartDetail shoppingCartDetail)
         {
             if (ModelState.IsValid)
             {
-                var dao = new ShoppingCartDetailDAL();
-                var _result = dao.Update(shoppingCartDetail);
+                var _dal = new ShoppingCartDetailDAL();
+                var _result = _dal.Update(shoppingCartDetail);
                 if (_result)
                 {
                     return RedirectToAction("Index", "ShoppingCartDetails");
@@ -106,7 +102,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Cập nhật chi tiết giỏ hàng ko thành công");
                 }
             }
-            ViewBag.ShoppingCartID = new SelectList(db.ShoppingCart, "ShoppingCartID", "ShoppingCartID", shoppingCartDetail.ShoppingCartID);
             return View(shoppingCartDetail);
         }
 
