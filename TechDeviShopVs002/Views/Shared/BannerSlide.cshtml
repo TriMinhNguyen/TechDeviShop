@@ -1,0 +1,44 @@
+﻿@model List<TechDeviShopVs002.Models.Slide>
+
+<div class="banner" style="background:none; background-color:black; background-size:1349px 500px;">
+    <div class="container" style="width:1250px; height:500px">
+        <div class="sliderfig" style="width:1220px">
+            <ul id="bannerSlide">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <img src="@item.Link" alt=" " class="img-responsive" style="height:500px; width:1220px"/>
+                    </li>
+                }
+            </ul>
+        </div>
+        <script type="text/javascript">
+            $(window).load(function () {
+                $("#bannerSlide").flexisel({
+                    visibleItems: 1,
+                    animationSpeed: 1000,
+                    autoPlay: true,
+                    autoPlaySpeed: 3000,
+                    pauseOnHover: true,
+                    enableResponsiveBreakpoints: true,
+                    responsiveBreakpoints: {
+                        portrait: {
+                            changePoint: 480,
+                            visibleItems: 1
+                        },
+                        landscape: {
+                            changePoint: 640,
+                            visibleItems: 2
+                        },
+                        tablet: {
+                            changePoint: 768,
+                            visibleItems: 3
+                        }
+                    }
+                });
+
+            });
+        </script>
+        <script type="text/javascript" src="~/Assets/Client/js/jquery.flexisel.js"></script>
+    </div>
+</div>

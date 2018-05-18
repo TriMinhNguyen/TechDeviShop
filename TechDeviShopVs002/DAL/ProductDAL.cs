@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TechDeviShopVs002.Models;
+using TechDeviShopVs002.Models.ViewModel;
 
 namespace TechDeviShopVs002.DAL
 {
@@ -25,9 +26,53 @@ namespace TechDeviShopVs002.DAL
             return db.Products.ToList();
         }
 
+        public List<Product> ListNewProduct(int top)
+        {
+            return db.Products.OrderByDescending(x => x.CreateDate).Take(top).ToList();
+        }
+
+        public List<Product> ListFeatureProduct(int top)
+        {
+            return db.Products.Where(x => x.TopHot != null && x.TopHot > DateTime.Now).OrderByDescending(x => x.CreateDate).Take(top).ToList();
+        }
+
         public Product GetByProductName(string _productName)
         {
             return db.Products.SingleOrDefault(x => x.ProductName == _productName);
+        }
+
+        public List<ProductViewModel> ListByCateID(int? _cateId, ref int totalRecord, int pageIndex = 1, int pageSize = 3)
+        {
+            totalRecord = db.Products.Where(x => x.CategoryID == _cateId && x.IsActive == true).Count();
+            var model = (from a in db.Products
+                         join b in db.Categories
+                         on a.CategoryID equals b.CategoryID
+                         where a.CategoryID == _cateId && a.IsActive == true
+                         select new
+                         {
+                             CateMetaTitle = b.MetaTitle,
+                             CateName = b.CategoryName,
+                             CreatedDate = a.CreateDate,
+                             ID = a.ProductID,
+                             Images = a.Image,
+                             Name = a.ProductName,
+                             MetaTitle = a.MetaTitle,
+                             Price = a.Price,
+                             PromotionPrice = a.PromotionPrice
+                         }).AsEnumerable().Select(x => new ProductViewModel()
+                         {
+                             CateMetaTitle = x.MetaTitle,
+                             CateName = x.Name,
+                             CreateDate = x.CreatedDate,
+                             ProductID = x.ID,
+                             Image = x.Images,
+                             ProductName = x.Name,
+                             MetaTitle = x.MetaTitle,
+                             Price = x.Price,
+                             PromotionPrice = x.PromotionPrice
+                         });
+            model.OrderByDescending(x => x.CreateDate).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            return model.ToList();
         }
 
         public int Insert(Product entity)

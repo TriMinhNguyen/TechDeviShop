@@ -12,7 +12,7 @@ using TechDeviShopVs002.Models;
 
 namespace TechDeviShopVs002.Areas.Admin.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private TechDeviShopDBContext db = new TechDeviShopDBContext();
 

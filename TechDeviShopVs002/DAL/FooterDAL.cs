@@ -17,7 +17,12 @@ namespace TechDeviShopVs002.DAL
 
         public Footer GetFooter()
         {
-            return db.Footers.SingleOrDefault(x => x.IsActive == true);
+            return db.Footers.Where(x => x.IsActive == true).FirstOrDefault(x => x.DisplayOrder == 1);
+        }
+
+        public List<Footer> ListAllActive()
+        {
+            return db.Footers.Where(x => x.IsActive == true).OrderBy(x => x.DisplayOrder).ToList();
         }
 
         public int Insert(Footer entity)

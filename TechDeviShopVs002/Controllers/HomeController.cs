@@ -11,6 +11,9 @@ namespace TechDeviShopVs002.Controllers
     {
         public ActionResult Index()
         {
+            var productDal = new ProductDAL();
+            ViewBag.NewProducts = productDal.ListNewProduct(4);
+            ViewBag.ListFeatureProducts = productDal.ListFeatureProduct(4);
             return View();
         }
 
@@ -32,6 +35,18 @@ namespace TechDeviShopVs002.Controllers
         public ActionResult MainMenu()
         {
             var model = new MenuDAL().ListByGroupId(1);
+            return PartialView(model);
+        }
+
+        public ActionResult BannerSlide()
+        {
+            var model = new SlideDAL().ListALl();
+            return PartialView(model);
+        }
+
+        public ActionResult Footer()
+        {
+            var model = new FooterDAL().GetFooter();
             return PartialView(model);
         }
     }

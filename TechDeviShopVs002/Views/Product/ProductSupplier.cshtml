@@ -1,0 +1,16 @@
+﻿@model List<TechDeviShopVs002.Models.Supplier>
+
+<div class="w3ls_mobiles_grid_left_grid">
+    <h3>Supplier</h3>
+    <div class="w3ls_mobiles_grid_left_grid_sub">
+        <div class="ecommerce_color">
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li><a href="#"><i></i>@item.SupplierName</a></li>
+                    <div class="clearfix"></div>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

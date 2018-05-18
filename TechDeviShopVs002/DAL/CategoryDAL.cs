@@ -53,6 +53,11 @@ namespace TechDeviShopVs002.DAL
             return db.Categories.SingleOrDefault(x => x.CategoryName == _categoryName);
         }
 
+        public List<Category> ListAll()
+        {
+            return db.Categories.Where(x => x.IsActive == true).OrderBy(x => x.DisplayOrder).ToList();
+        }
+        
         public Category ViewDetail(int? id)
         {
             return db.Categories.Find(id);

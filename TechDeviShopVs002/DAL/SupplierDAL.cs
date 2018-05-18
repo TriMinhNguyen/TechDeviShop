@@ -50,6 +50,11 @@ namespace TechDeviShopVs002.DAL
             return db.Suppliers.SingleOrDefault(x => x.SupplierName == supplierName);
         }
 
+        public List<Supplier> ListAll()
+        {
+            return db.Suppliers.Where(x => x.IsActive == true).ToList();
+        }
+
         public Supplier ViewDetail(int? id)
         {
             return db.Suppliers.Find(id);

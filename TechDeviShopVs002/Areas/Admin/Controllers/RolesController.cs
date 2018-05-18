@@ -11,7 +11,7 @@ using TechDeviShopVs002.Models;
 
 namespace TechDeviShopVs002.Areas.Admin.Controllers
 {
-    public class RolesController : Controller
+    public class RolesController : BaseController
     {
         private TechDeviShopDBContext db = new TechDeviShopDBContext();
 

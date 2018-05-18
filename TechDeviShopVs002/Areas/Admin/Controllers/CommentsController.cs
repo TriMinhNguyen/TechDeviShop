@@ -11,7 +11,7 @@ using TechDeviShopVs002.Models;
 
 namespace TechDeviShopVs002.Areas.Admin.Controllers
 {
-    public class CommentsController : Controller
+    public class CommentsController : BaseController
     {
         private TechDeviShopDBContext db = new TechDeviShopDBContext();
 
