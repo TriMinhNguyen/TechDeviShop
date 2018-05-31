@@ -32,5 +32,8 @@ namespace TechDeviShopVs002.Models
 
         [StringLength(50)]
         public string ModifiedBy { get; set; }
+
+        public virtual Product Product { get; set; }
+
     }
 }

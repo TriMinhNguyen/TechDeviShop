@@ -95,3 +95,9 @@ D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\obj\Debug\TechDeviShopVs00
 D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\obj\Debug\TechDeviShopVs002.pdb
 D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\bin\CKFinder.dll
 D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\bin\CKFinder.pdb
+D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\bin\BotDetect.dll
+D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\bin\BotDetect.Web.UI.Mvc.dll
+D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\bin\Facebook.dll
+D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\bin\Facebook.xml
+D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\bin\Common.dll
+D:\TongHop\ASPnet\TechDeviShopVs002\TechDeviShopVs002\bin\Common.pdb

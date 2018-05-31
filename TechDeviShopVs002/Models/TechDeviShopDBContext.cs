@@ -118,5 +118,6 @@ namespace TechDeviShopVs002.Models
                 .Property(e => e.Password)
                 .IsUnicode(false);
         }
+        
     }
 }

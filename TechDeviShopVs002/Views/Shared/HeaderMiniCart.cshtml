@@ -1,0 +1,89 @@
+﻿@model List<TechDeviShopVs002.Models.ViewModel.CartItem>
+
+<div class="modal fade" id="myHeaderCart" tabindex="-1" role="dialog" aria-labelledby="myHeaderCart" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width:450px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Mini Cart</h4>
+            </div>
+            <div class="modal-body modal-body-sub">
+                <div id="w3lssbmincart">
+                    <ul>
+                        @foreach (var item in Model)
+                        {
+                            <li class="sbmincart-item sbmincart-item-changed">
+                                <div class="sbmincart-details-name">
+                                    <a class="sbmincart-name" href="#">@item.Product.ProductName</a>
+                                    <ul class="sbmincart-attributes"></ul>
+                                </div>
+                                <div class="sbmincart-details-quantity">
+                                    <a class="sbmincart-quantity">@item.Quantity</a>
+                                </div>
+                                <div class="sbmincart-details-price">
+                                    <span class="sbmincart-price">@(item.Product.PromotionPrice * item.Quantity)</span>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                    <div class="sbmincart-footer">
+                        <div class="sbmincart-subtotal">
+                            Subtotal: @(Model.Sum(x => x.Product.PromotionPrice * x.Quantity)) VN Đồng
+                        </div>
+                        <a class="btn sbmincart-submit" href="/gio-hang">Xem Giỏ hàng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#myHeaderCart').modal('show');
+</script>
+
+
+
+
+
+
+
+
+
+
+@*<div id="w3lssbmincart">
+        <form method="post" class="" action="products.html" target="">
+            <button type="button" class="sbmincart-closer">x</button>
+            <ul>
+                <li class="sbmincart-item sbmincart-item-changed">
+                    <div class="sbmincart-details-name">
+                        <a class="sbmincart-name" href="http://localhost:55795/">Mobile Phone3</a>
+                        <ul class="sbmincart-attributes"></ul>
+                    </div>
+                    <div class="sbmincart-details-quantity">
+                        <input class="sbmincart-quantity" data-sbmincart-idx="0" name="quantity_1" type="text" pattern="[0-9]*" value="1" autocomplete="off">
+                    </div>
+                    <div class="sbmincart-details-remove">
+                        <button type="button" class="sbmincart-remove" data-sbmincart-idx="0">×</button>
+                    </div>
+                    <div class="sbmincart-details-price">
+                        <span class="sbmincart-price">$245.00</span>
+                    </div>
+                    <input type="hidden" name="w3ls_item_1" value="Mobile Phone3">
+                    <input type="hidden" name="amount_1" value="245">
+                    <input type="hidden" name="shipping_1" value="undefined">
+                    <input type="hidden" name="shipping2_1" value="undefined">
+                </li>
+            </ul>
+            <div class="sbmincart-footer">
+                <div class="sbmincart-subtotal">
+                    Subtotal: $245.00 USD
+                </div>
+                <button class="sbmincart-submit" type="submit" data-sbmincart-alt="undefined">Shop More</button>
+            </div>
+            <input type="hidden" name="cmd" value="_cart">
+            <input type="hidden" name="upload" value="1">
+            <input type="hidden" name="bn" value="sbmincart_AddToCart_WPS_US">
+        </form>
+    </div>*@

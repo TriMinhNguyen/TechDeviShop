@@ -23,6 +23,21 @@ namespace TechDeviShopVs002.DAL
             return entity.UserID;
         }
 
+        public int InsertForFacebook(User entity)
+        {
+            var user = db.Users.SingleOrDefault(x => x.UserName == entity.UserName);
+            if (user == null)
+            {
+                db.Users.Add(entity);
+                db.SaveChanges();
+                return entity.UserID;
+            }
+            else
+            {
+                return user.UserID;
+            }
+        }
+
         public bool Update(User entity)
         {
             try
@@ -101,6 +116,16 @@ namespace TechDeviShopVs002.DAL
             {
                 return false;
             }
+        }
+
+        public bool CheckUserName(string userName)
+        {
+            return db.Users.Count(x => x.UserName == userName) > 0;
+        }
+
+        public bool CheckEmail(string email)
+        {
+            return db.Users.Count(x => x.Email == email) > 0;
         }
     }
 }

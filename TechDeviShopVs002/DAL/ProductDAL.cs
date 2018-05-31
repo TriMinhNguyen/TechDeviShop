@@ -41,6 +41,11 @@ namespace TechDeviShopVs002.DAL
             return db.Products.SingleOrDefault(x => x.ProductName == _productName);
         }
 
+        public List<Product> ListCateID(int id)
+        {
+            return db.Products.Where(x => x.CategoryID == id && x.IsActive == true).ToList();
+        }
+
         public List<ProductViewModel> ListByCateID(int? _cateId, ref int totalRecord, int pageIndex = 1, int pageSize = 3)
         {
             totalRecord = db.Products.Where(x => x.CategoryID == _cateId && x.IsActive == true).Count();

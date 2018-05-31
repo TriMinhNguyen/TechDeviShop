@@ -33,6 +33,7 @@ namespace TechDeviShopVs002.Controllers
 
         public ActionResult Category(int? Cateid, int page =1, int pageSize = 1)
         {
+            ViewBag.productSupplier = new SupplierDAL().ListAll();
             var _category = new CategoryDAL().ViewDetail(Cateid);
             ViewBag.Category = _category;
             int totalRecord = 0;
@@ -57,6 +58,7 @@ namespace TechDeviShopVs002.Controllers
         public ActionResult Detail(int id)
         {
             var product = new ProductDAL().ViewDetail(id);
+            
             return View(product);
         }
     }

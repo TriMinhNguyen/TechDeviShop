@@ -20,7 +20,7 @@ namespace TechDeviShopVs002.DAL
             return db.Menus.Where(x => x.MenuTypeID == groupID).OrderBy(x => x.DisplayOrder).ToList();
         }
 
-        public List<Menu> ListALl()
+        public List<Menu> ListALL()
         {
             return db.Menus.ToList();
         }

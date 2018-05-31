@@ -1,0 +1,36 @@
+﻿@model List<TechDeviShopVs002.Models.Menu>
+
+<style>
+    #sethover:hover {
+        background-color: blue;
+    }
+</style>
+
+<div style="height:30px; margin:0">
+    @{
+        var session = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
+    }
+    @if (session == null)
+    {
+        <ul style="list-style-type: none; margin:0; padding: 0; overflow: hidden; background-color:#3c43a4">
+            @foreach (var item in Model)
+            {
+                <li style="float:right; display: inline-block; padding:5px">
+                    <a id="sethover" href="@item.Link" target="@item.Target" style="color:white; text-align:center; text-decoration: none; padding: 10px;">
+                        @item.Text
+                    </a>
+                </li>
+            }
+
+        </ul>
+    }
+    else
+    {
+        <ul style="list-style-type: none; margin:0; padding: 0; overflow: hidden; background-color:#3c43a4">
+            <li style="float:right; display:inline-block; padding: 5px"> @Html.ActionLink("Thoát", "Logout", "User")</li>
+            <li style="float:right; display:inline-block; padding: 5px; color:white">Xin chào: @session.UserName</li>
+        </ul>
+    }
+
+</div>
+<div class="clear"></div>

@@ -1,13 +1,13 @@
 ﻿@model List<TechDeviShopVs002.Models.Slide>
 
-<div class="banner" style="background:none; background-color:black; background-size:1349px 500px;">
+<div class="banner" style="background:none; background-color:black;min-height:500px;">
     <div class="container" style="width:1250px; height:500px">
-        <div class="sliderfig" style="width:1220px">
+        <div class="sliderfig" style="width:1220px; height: 500px; margin:0;">
             <ul id="bannerSlide">
                 @foreach (var item in Model)
                 {
                     <li>
-                        <img src="@item.Link" alt=" " class="img-responsive" style="height:500px; width:1220px"/>
+                        <img src="@item.Link" alt=" " class="img-responsive" style=" width:100%; height: 500px;" />
                     </li>
                 }
             </ul>
