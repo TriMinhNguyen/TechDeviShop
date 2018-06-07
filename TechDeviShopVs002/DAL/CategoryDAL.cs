@@ -34,7 +34,9 @@ namespace TechDeviShopVs002.DAL
                 _Cate.DisplayOrder = entity.DisplayOrder;
                 _Cate.SeoTitle = entity.SeoTitle;
                 _Cate.ModifiedDate = DateTime.Now;
-                _Cate.ModifiedBy = entity.ModifiedBy;
+                _Cate.ModifiedUser = entity.ModifiedUser;
+                _Cate.CreateDate = entity.CreateDate;
+                _Cate.CreateUser = entity.CreateUser;
                 _Cate.MetalDescriptions = entity.MetalDescriptions;
                 _Cate.MetalKeywords = entity.MetalKeywords;
                 _Cate.IsActive = entity.IsActive;

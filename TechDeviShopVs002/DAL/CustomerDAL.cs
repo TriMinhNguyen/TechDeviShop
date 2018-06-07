@@ -22,12 +22,32 @@ namespace TechDeviShopVs002.DAL
             return entity.CustomerID;
         }
 
+        public int InsertForFacebook(Customer entity)
+        {
+            var _cus = db.Customers.SingleOrDefault(x => x.CustomerEmail == entity.CustomerEmail);
+            if (_cus == null)
+            {
+                db.Customers.Add(entity);
+                db.SaveChanges();
+                return entity.CustomerID;
+            }
+            else
+            {
+                return _cus.CustomerID;
+            }
+        }
+
         public bool Update(Customer entity)
         {
             try
             {
                 var _cus = db.Customers.Find(entity.CustomerID);
                 _cus.CustomerName = entity.CustomerName;
+                if (!string.IsNullOrEmpty(entity.Password))
+                {
+                    _cus.Password = entity.Password;
+                }
+                _cus.Avatar = entity.Avatar;
                 _cus.CustomerGender = entity.CustomerGender;
                 _cus.CustomerBirthday = entity.CustomerBirthday;
                 _cus.CustomerPhone = entity.CustomerPhone;
@@ -70,6 +90,38 @@ namespace TechDeviShopVs002.DAL
             {
                 return false;
             }
+        }
+
+        public int Login(string userName, string passWord)
+        {
+            var result = db.Customers.SingleOrDefault(x => x.CustomerEmail == userName);
+            if (result == null)
+            {
+                return 0;   //"Tài khoản không tồn tại.";
+            }
+            else
+            {
+                if (result.IsActive == false)
+                {
+                    return -1;  //"Tài khoản đang bị khóa.";
+                }
+                else
+                {
+                    if (result.Password == passWord)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return -2;
+                    }
+                }
+            }
+        }
+
+        public bool CheckEmail(string email)
+        {
+            return db.Users.Count(x => x.Email == email) > 0;
         }
     }
 }

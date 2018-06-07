@@ -47,11 +47,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ShoppingCartID,ShoppingDate,ExpireDate,Note,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] ShoppingCart shoppingCart)
+        public ActionResult Create([Bind(Include = "ShoppingCartID,ShoppingDate,ExpireDate,Note,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] ShoppingCart shoppingCart)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new ShoppingCartDAL();
+
+                shoppingCart.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(shoppingCart);
                 if (id > 0)
@@ -87,11 +90,15 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ShoppingCartID,ShoppingDate,ExpireDate,Note,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] ShoppingCart shoppingCart)
+        public ActionResult Edit([Bind(Include = "ShoppingCartID,ShoppingDate,ExpireDate,Note,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] ShoppingCart shoppingCart)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new ShoppingCartDAL();
+
+                shoppingCart.ModifiedUser = UserSession.UserID;
+
                 var _result = _dal.Update(shoppingCart);
                 if (_result)
                 {

@@ -34,7 +34,9 @@ namespace TechDeviShopVs002.DAL
                 _supplier.PhoneNumber = entity.PhoneNumber;
                 _supplier.Detail = entity.Detail;
                 _supplier.ModifiedDate = DateTime.Now;
-                _supplier.ModifiedBy = entity.ModifiedBy;
+                _supplier.ModifiedUser = entity.ModifiedUser;
+                _supplier.CreateDate = entity.CreateDate;
+                _supplier.CreateUser = entity.CreateUser;
                 _supplier.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;
@@ -45,7 +47,7 @@ namespace TechDeviShopVs002.DAL
             }
         }
 
-        public Supplier GetByUserName(string supplierName)
+        public Supplier GetBySupplierName(string supplierName)
         {
             return db.Suppliers.SingleOrDefault(x => x.SupplierName == supplierName);
         }

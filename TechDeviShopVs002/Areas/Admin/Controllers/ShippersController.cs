@@ -47,11 +47,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ShipperID,Name,Email,Phone,Fax,Address,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Shipper shipper)
+        public ActionResult Create([Bind(Include = "ShipperID,Name,Email,Phone,Fax,Address,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] Shipper shipper)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new ShipperDAL();
+
+                shipper.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(shipper);
                 if (id > 0)
@@ -87,11 +90,15 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ShipperID,Name,Email,Phone,Fax,Address,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Shipper shipper)
+        public ActionResult Edit([Bind(Include = "ShipperID,Name,Email,Phone,Fax,Address,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] Shipper shipper)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new ShipperDAL();
+
+                shipper.ModifiedUser = UserSession.UserID;
+
                 var _result = _dal.Update(shipper);
                 if (_result)
                 {

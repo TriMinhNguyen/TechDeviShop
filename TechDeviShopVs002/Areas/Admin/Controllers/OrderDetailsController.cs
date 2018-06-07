@@ -53,11 +53,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderDetailID,OrderID,ProductID,ProductName,ProductCode,UnitPrice,Quantity,PromotionPrice,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] OrderDetail orderDetail)
+        public ActionResult Create([Bind(Include = "OrderDetailID,OrderID,ProductID,ProductName,ProductCode,UnitPrice,Quantity,PromotionPrice,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] OrderDetail orderDetail)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new OrderDetailsDAL();
+
+                orderDetail.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(orderDetail);
                 if (id > 0)
@@ -102,11 +105,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderDetailID,OrderID,ProductID,ProductName,ProductCode,UnitPrice,Quantity,PromotionPrice,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] OrderDetail orderDetail)
+        public ActionResult Edit([Bind(Include = "OrderDetailID,OrderID,ProductID,ProductName,ProductCode,UnitPrice,Quantity,PromotionPrice,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] OrderDetail orderDetail)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new OrderDetailsDAL();
+
+                orderDetail.ModifiedUser = UserSession.UserID;
 
                 var _result = _dal.Update(orderDetail);
                 if (_result)

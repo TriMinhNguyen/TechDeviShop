@@ -47,11 +47,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AboutID,AboutName,MetaTitle,Description,Image,Detail,MetalKeywords,MetalDescriptions,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] About about)
+        public ActionResult Create([Bind(Include = "AboutID,AboutName,MetaTitle,Description,Image,Detail,MetalKeywords,MetalDescriptions,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] About about)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new AboutDAL();
+
+                about.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(about);
                 if (id > 0)
@@ -87,11 +90,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AboutID,AboutName,MetaTitle,Description,Image,Detail,MetalKeywords,MetalDescriptions,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] About about)
+        public ActionResult Edit([Bind(Include = "AboutID,AboutName,MetaTitle,Description,Image,Detail,MetalKeywords,MetalDescriptions,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] About about)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new AboutDAL();
+
+                about.ModifiedUser = UserSession.UserID;
 
                 var _result = _dal.Update(about);
                 if (_result)

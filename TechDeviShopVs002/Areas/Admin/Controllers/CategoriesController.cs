@@ -47,11 +47,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,CategoryName,MetaTitle,ParentID,DisplayOrder,SeoTitle,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,IsActive,ShowOnHome")] Category category)
+        public ActionResult Create([Bind(Include = "CategoryID,CategoryName,MetaTitle,ParentID,DisplayOrder,SeoTitle,CreateDate,CreateUser,ModifiedDate,ModifiedUser,MetalKeywords,MetalDescriptions,IsActive,ShowOnHome")] Category category)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new CategoryDAL();
+
+                category.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(category);
                 if (id > 0)
@@ -87,11 +90,15 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,MetaTitle,ParentID,DisplayOrder,SeoTitle,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,IsActive,ShowOnHome")] Category category)
+        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,MetaTitle,ParentID,DisplayOrder,SeoTitle,CreateDate,CreateUser,ModifiedDate,ModifiedUser,MetalKeywords,MetalDescriptions,IsActive,ShowOnHome")] Category category)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new CategoryDAL();
+
+                category.ModifiedUser = UserSession.UserID;
+
                 var _result = _dal.Update(category);
                 if (_result)
                 {

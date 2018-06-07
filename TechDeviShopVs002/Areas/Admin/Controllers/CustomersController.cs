@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using TechDeviShopVs002.Common;
 using TechDeviShopVs002.DAL;
 using TechDeviShopVs002.Models;
 
@@ -47,11 +48,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerID,CustomerName,CustomerGender,CustomerBirthday,CustomerPhone,CustomerEmail,CustomerAddress,CustomerCity,CustomerDistrict,PostCost,OrtherDetail,IsActive")] Customer customer)
+        public ActionResult Create([Bind(Include = "CustomerID,CustomerEmail,Password,CustomerName,Avatar,CustomerGender,CustomerBirthday,CustomerPhone,CustomerAddress,CustomerCity,CustomerDistrict,PostCost,OrtherDetail,IsActive")] Customer customer)
         {
             if (ModelState.IsValid)
             {
                 var _dal = new CustomerDAL();
+
+                var encryptedMd5Pas = Encryptor.MD5Hash(customer.Password);
+                customer.Password = encryptedMd5Pas;
 
                 int id = _dal.Insert(customer);
                 if (id > 0)
@@ -87,11 +91,17 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerID,CustomerName,CustomerGender,CustomerBirthday,CustomerPhone,CustomerEmail,CustomerAddress,CustomerCity,CustomerDistrict,PostCost,OrtherDetail,IsActive")] Customer customer)
+        public ActionResult Edit([Bind(Include = "CustomerID,CustomerEmail,Password,CustomerName,Avatar,CustomerGender,CustomerBirthday,CustomerPhone,CustomerAddress,CustomerCity,CustomerDistrict,PostCost,OrtherDetail,IsActive")] Customer customer)
         {
             if (ModelState.IsValid)
             {
                 var _dal = new CustomerDAL();
+
+                if (!string.IsNullOrEmpty(customer.Password))
+                {
+                    var encryptedMd5Pas = Encryptor.MD5Hash(customer.Password);
+                    customer.Password = encryptedMd5Pas;
+                }
 
                 var _result = _dal.Update(customer);
                 if (_result)

@@ -47,11 +47,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SupplierID,SupplierName,MetaTitle,EmailSupport,PhoneNumber,Detail,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Supplier supplier)
+        public ActionResult Create([Bind(Include = "SupplierID,SupplierName,MetaTitle,EmailSupport,PhoneNumber,Detail,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] Supplier supplier)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new SupplierDAL();
+
+                supplier.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(supplier);
                 if (id > 0)
@@ -87,11 +90,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SupplierID,SupplierName,MetaTitle,EmailSupport,PhoneNumber,Detail,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Supplier supplier)
+        public ActionResult Edit([Bind(Include = "SupplierID,SupplierName,MetaTitle,EmailSupport,PhoneNumber,Detail,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] Supplier supplier)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new SupplierDAL();
+
+                supplier.ModifiedUser = UserSession.UserID;
 
                 var _result = _dal.Update(supplier);
                 if (_result)

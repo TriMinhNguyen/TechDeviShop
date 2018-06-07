@@ -32,9 +32,9 @@ namespace TechDeviShopVs002.DAL
                 _comment.ProductID = entity.ProductID;
                 _comment.CommentContent = entity.CommentContent;
                 _comment.CreateDate = entity.CreateDate;
-                _comment.CreateBy = entity.CreateBy;
-                _comment.ModifiedDate = entity.ModifiedDate;
-                _comment.ModifiedBy = entity.ModifiedBy;
+                _comment.CreateUser = entity.CreateUser;
+                _comment.ModifiedDate = DateTime.Now;
+                _comment.ModifiedUser = entity.ModifiedUser;
                 _comment.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;

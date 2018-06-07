@@ -47,11 +47,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ShoppingCartDetailID,ShoppingCartID,ProductID,ProductName,UnitPrice,Quantity,PromotionPrice,CreateDate,CreateBy,ModifiedDate,ModifiedBy")] ShoppingCartDetail shoppingCartDetail)
+        public ActionResult Create([Bind(Include = "ShoppingCartDetailID,ShoppingCartID,ProductID,ProductName,UnitPrice,Quantity,PromotionPrice,CreateDate,CreateUser,ModifiedDate,ModifiedUser")] ShoppingCartDetail shoppingCartDetail)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new ShoppingCartDetailDAL();
+
+                shoppingCartDetail.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(shoppingCartDetail);
                 if (id > 0)
@@ -87,11 +90,15 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ShoppingCartDetailID,ShoppingCartID,ProductID,ProductName,UnitPrice,Quantity,PromotionPrice,CreateDate,CreateBy,ModifiedDate,ModifiedBy")] ShoppingCartDetail shoppingCartDetail)
+        public ActionResult Edit([Bind(Include = "ShoppingCartDetailID,ShoppingCartID,ProductID,ProductName,UnitPrice,Quantity,PromotionPrice,CreateDate,CreateUser,ModifiedDate,ModifiedUser")] ShoppingCartDetail shoppingCartDetail)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new ShoppingCartDetailDAL();
+
+                shoppingCartDetail.ModifiedUser = UserSession.UserID;
+
                 var _result = _dal.Update(shoppingCartDetail);
                 if (_result)
                 {

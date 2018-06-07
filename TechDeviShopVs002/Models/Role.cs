@@ -1,4 +1,4 @@
-namespace TechDeviShopVs002.Models
+﻿namespace TechDeviShopVs002.Models
 {
     using System;
     using System.Collections.Generic;
@@ -9,13 +9,16 @@ namespace TechDeviShopVs002.Models
     [Table("Role")]
     public partial class Role
     {
+        [Display(Name = "Mã phân quyền")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public byte RoleID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn phải nhập tên phân quyền")]
+        [Display(Name = "Tên phân quyền")]
         [StringLength(250)]
         public string RoleName { get; set; }
 
+        [Display(Name = "Miêu tả")]
         [StringLength(500)]
         public string Description { get; set; }
     }

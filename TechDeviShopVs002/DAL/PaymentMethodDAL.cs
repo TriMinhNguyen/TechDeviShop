@@ -36,7 +36,9 @@ namespace TechDeviShopVs002.DAL
                 _paymentMethod.Name = entity.Name;
                 _paymentMethod.Note = entity.Note;
                 _paymentMethod.ModifiedDate = DateTime.Now;
-                _paymentMethod.ModifiedBy = entity.ModifiedBy;
+                _paymentMethod.ModifiedUser = entity.ModifiedUser;
+                _paymentMethod.CreateDate = entity.CreateDate;
+                _paymentMethod.CreateUser = entity.CreateUser;
                 _paymentMethod.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;

@@ -35,13 +35,11 @@ namespace TechDeviShopVs002.Models
 
         public DateTime? CreateDate { get; set; }
 
-        [StringLength(50)]
-        public string CreateBy { get; set; }
+        public int? CreateUser { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
 
-        [StringLength(50)]
-        public string ModifiedBy { get; set; }
+        public int? ModifiedUser { get; set; }
 
         public bool? IsActive { get; set; }
     }

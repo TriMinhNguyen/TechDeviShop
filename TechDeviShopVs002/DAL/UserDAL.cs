@@ -28,6 +28,7 @@ namespace TechDeviShopVs002.DAL
             var user = db.Users.SingleOrDefault(x => x.UserName == entity.UserName);
             if (user == null)
             {
+                entity.CreateDate = DateTime.Now;
                 db.Users.Add(entity);
                 db.SaveChanges();
                 return entity.UserID;
@@ -43,17 +44,17 @@ namespace TechDeviShopVs002.DAL
             try
             {
                 var user = db.Users.Find(entity.UserID);
-                //if(!string.IsNullOrEmpty(entity.Password))
-                //{
-                //    user.Password = entity.Password;
-                //}
-                user.CustomerID = entity.CustomerID;
+                if (!string.IsNullOrEmpty(entity.Password))
+                {
+                    user.Password = entity.Password;
+                }
                 user.Name = entity.Name;
                 user.Gender = entity.Gender;
                 user.Birthday = entity.Birthday;
                 user.Address = entity.Address;
                 user.Email = entity.Email;
                 user.Phone = entity.Phone;
+                user.Avatar = entity.Avatar;
                 user.ModifiedDate = DateTime.Now;
                 user.RoleID = entity.RoleID;
                 user.IsActive = entity.IsActive;

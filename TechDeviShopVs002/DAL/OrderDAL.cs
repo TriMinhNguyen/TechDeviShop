@@ -51,6 +51,10 @@ namespace TechDeviShopVs002.DAL
                 _order.ShippedDate = entity.ShippedDate;
                 _order.RequiredDate = entity.RequiredDate;
                 _order.IsActive = entity.IsActive;
+                _order.CreateDate = entity.CreateDate;
+                _order.CreateUser = entity.CreateUser;
+                _order.ModifiedDate = DateTime.Now;
+                _order.ModifiedUser = entity.ModifiedUser;
 
                 db.SaveChanges();
                 return true;

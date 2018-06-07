@@ -47,11 +47,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SlideID,Image,DisplayOrder,Link,Description,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Slide slide)
+        public ActionResult Create([Bind(Include = "SlideID,Image,DisplayOrder,Link,Description,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] Slide slide)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new SlideDAL();
+
+                slide.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(slide);
                 if (id > 0)
@@ -87,11 +90,15 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SlideID,Image,DisplayOrder,Link,Description,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Slide slide)
+        public ActionResult Edit([Bind(Include = "SlideID,Image,DisplayOrder,Link,Description,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] Slide slide)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new SlideDAL();
+
+                slide.ModifiedUser = UserSession.UserID;
+
                 var _result = _dal.Update(slide);
                 if (_result)
                 {

@@ -1,4 +1,4 @@
-namespace TechDeviShopVs002.Models
+﻿namespace TechDeviShopVs002.Models
 {
     using System;
     using System.Collections.Generic;
@@ -9,12 +9,16 @@ namespace TechDeviShopVs002.Models
     [Table("Footer")]
     public partial class Footer
     {
+        [Display(Name = "Mã footer")]
         public int FooterID { get; set; }
 
+        [Display(Name = "Nội dung")]
         public string Content { get; set; }
 
+        [Display(Name = "Thứ tự hiển thị")]
         public int? DisplayOrder { get; set; }
 
+        [Display(Name = "Kích hoạt")]
         public bool? IsActive { get; set; }
     }
 }

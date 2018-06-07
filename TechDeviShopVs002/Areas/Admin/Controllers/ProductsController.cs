@@ -50,11 +50,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,ProductName,ProductCode,MetaTitle,Description,Image,MoreImage,Price,PromotionPrice,IncludeVAT,Quantity,SupplierID,CategoryID,Warranty,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,IsActive,TopHot,ViewCount,CpuChip,CpuType,CpuSpeed,CpuMaxSpeed,BusSpeed,Ram,RamType,BusRamSpeed,MaxRam,HardDrive,Size,Weight,Color,Material,ScreenSize,Resolution,ScreenTechnology,TouchScreen,GraphicsCard,Sound,ConnectionPort,WirelessConnection,MemoryCardSlot,OpticalDiskDrive,Webcam,KeyboardLights,PinType,Pin,OperatingSystem,OtherInfo")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,ProductName,ProductCode,MetaTitle,Description,Image,MoreImage,Price,PromotionPrice,IncludeVAT,Quantity,SupplierID,CategoryID,Warranty,CreateDate,CreateUser,ModifiedDate,ModifiedUser,MetalKeywords,MetalDescriptions,IsActive,TopHot,ViewCount,CpuChip,CpuType,CpuSpeed,CpuMaxSpeed,BusSpeed,Ram,RamType,BusRamSpeed,MaxRam,HardDrive,Size,Weight,Color,Material,ScreenSize,Resolution,ScreenTechnology,TouchScreen,GraphicsCard,Sound,ConnectionPort,WirelessConnection,MemoryCardSlot,OpticalDiskDrive,Webcam,KeyboardLights,PinType,Pin,OperatingSystem,OtherInfo")] Product product)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new ProductDAL();
+
+                product.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(product);
                 if (id > 0)
@@ -93,11 +96,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,ProductCode,MetaTitle,Description,Image,MoreImage,Price,PromotionPrice,IncludeVAT,Quantity,SupplierID,CategoryID,Warranty,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetalKeywords,MetalDescriptions,IsActive,TopHot,ViewCount,CpuChip,CpuType,CpuSpeed,CpuMaxSpeed,BusSpeed,Ram,RamType,BusRamSpeed,MaxRam,HardDrive,Size,Weight,Color,Material,ScreenSize,Resolution,ScreenTechnology,TouchScreen,GraphicsCard,Sound,ConnectionPort,WirelessConnection,MemoryCardSlot,OpticalDiskDrive,Webcam,KeyboardLights,PinType,Pin,OperatingSystem,OtherInfo")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,ProductName,ProductCode,MetaTitle,Description,Image,MoreImage,Price,PromotionPrice,IncludeVAT,Quantity,SupplierID,CategoryID,Warranty,CreateDate,CreateUser,ModifiedDate,ModifiedUser,MetalKeywords,MetalDescriptions,IsActive,TopHot,ViewCount,CpuChip,CpuType,CpuSpeed,CpuMaxSpeed,BusSpeed,Ram,RamType,BusRamSpeed,MaxRam,HardDrive,Size,Weight,Color,Material,ScreenSize,Resolution,ScreenTechnology,TouchScreen,GraphicsCard,Sound,ConnectionPort,WirelessConnection,MemoryCardSlot,OpticalDiskDrive,Webcam,KeyboardLights,PinType,Pin,OperatingSystem,OtherInfo")] Product product)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new ProductDAL();
+
+                product.ModifiedUser = UserSession.UserID;
 
                 var _result = _dal.Update(product);
                 if (_result)

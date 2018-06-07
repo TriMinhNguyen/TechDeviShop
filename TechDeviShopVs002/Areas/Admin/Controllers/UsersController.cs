@@ -19,7 +19,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Users
         public ActionResult Index()
         {
-            var users = db.Users.Include(u => u.Role).Include(u => u.Customer);
+            var users = db.Users.Include(u => u.Role);
             return View(users.ToList());
         }
 
@@ -43,7 +43,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName");
-            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "CustomerName");
             return View();
         }
 
@@ -52,7 +51,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,UserName,Password,CustomerID,Name,Gender,Birthday,Address,Email,Phone,CreateDate,ModifiedDate,RoleID,IsActive")] User user)
+        public ActionResult Create([Bind(Include = "UserID,UserName,Password,Name,Gender,Birthday,Address,Email,Phone,Avatar,CreateDate,ModifiedDate,RoleID,IsActive")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +72,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             }
 
             ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", user.RoleID);
-            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "CustomerName", user.CustomerID);
             return View(user);
         }
 
@@ -90,7 +88,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", user.RoleID);
-            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "CustomerName", user.CustomerID);
+            
             return View(user);
         }
 
@@ -99,16 +97,16 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,UserName,Password,CustomerID,Name,Gender,Birthday,Address,Email,Phone,CreateDate,ModifiedDate,RoleID,IsActive")] User user)
+        public ActionResult Edit([Bind(Include = "UserID,UserName,Password,Name,Gender,Birthday,Address,Email,Phone,Avatar,CreateDate,ModifiedDate,RoleID,IsActive")] User user)
         {
             if (ModelState.IsValid)
             {
                 var _dal = new UserDAL();
-                //if(!string.IsNullOrEmpty(user.Password))
-                //{
-                //    var encryptedMd5Pas = Encryptor.MD5Hash(user.Password);
-                //    user.Password = encryptedMd5Pas;
-                //}
+                if (!string.IsNullOrEmpty(user.Password))
+                {
+                    var encryptedMd5Pas = Encryptor.MD5Hash(user.Password);
+                    user.Password = encryptedMd5Pas;
+                }
 
                 var _result = _dal.Update(user);
                 if (_result)
@@ -121,7 +119,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 }
             }
             ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", user.RoleID);
-            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "CustomerName", user.CustomerID);
+            
             return View(user);
         }
 

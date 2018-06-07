@@ -36,7 +36,9 @@ namespace TechDeviShopVs002.DAL
                 _paystatus.Name = entity.Name;
                 _paystatus.Note = entity.Note;
                 _paystatus.ModifiedDate = DateTime.Now;
-                _paystatus.ModifiedBy = entity.ModifiedBy;
+                _paystatus.ModifiedUser = entity.ModifiedUser;
+                _paystatus.CreateDate = entity.CreateDate;
+                _paystatus.CreateUser = entity.CreateUser;
                 _paystatus.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;

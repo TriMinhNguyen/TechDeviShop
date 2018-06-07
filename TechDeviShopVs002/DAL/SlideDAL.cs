@@ -38,9 +38,9 @@ namespace TechDeviShopVs002.DAL
                 _slide.Link = entity.Link;
                 _slide.Description = entity.Description;
                 _slide.CreateDate = entity.CreateDate;
-                _slide.CreateBy = entity.CreateBy;
-                _slide.ModifiedDate = entity.ModifiedDate;
-                _slide.ModifiedBy = entity.ModifiedBy;
+                _slide.CreateUser = entity.CreateUser;
+                _slide.ModifiedDate = DateTime.Now;
+                _slide.ModifiedUser = entity.ModifiedUser;
                 _slide.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;

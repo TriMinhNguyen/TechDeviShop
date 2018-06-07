@@ -41,7 +41,9 @@ namespace TechDeviShopVs002.DAL
                 _orderDetail.Quantity = entity.Quantity;
                 _orderDetail.PromotionPrice = entity.PromotionPrice;
                 _orderDetail.ModifiedDate = DateTime.Now;
-                _orderDetail.ModifiedBy = entity.ModifiedBy;
+                _orderDetail.ModifiedUser = entity.ModifiedUser;
+                _orderDetail.CreateDate = entity.CreateDate;
+                _orderDetail.CreateUser = entity.CreateUser;
                 _orderDetail.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;

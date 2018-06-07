@@ -170,7 +170,7 @@ namespace TechDeviShopVs002.Controllers
                 new MailHelper().SendMail(email, "Đơn hàng mới từ OnlineShop", content);
                 new MailHelper().SendMail(toEmail, "Đơn hàng mới từ OnlineShop", content);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //ghi log
                 return Redirect("/loi-thanh-toan");

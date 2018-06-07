@@ -47,11 +47,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderStatusID,OrderStatusName,Description,DisplayOrder,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] OrderStatu orderStatu)
+        public ActionResult Create([Bind(Include = "OrderStatusID,OrderStatusName,Description,DisplayOrder,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] OrderStatu orderStatu)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new OrderStatusDAL();
+
+                orderStatu.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(orderStatu);
                 if (id > 0)
@@ -87,11 +90,15 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderStatusID,OrderStatusName,Description,DisplayOrder,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] OrderStatu orderStatu)
+        public ActionResult Edit([Bind(Include = "OrderStatusID,OrderStatusName,Description,DisplayOrder,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] OrderStatu orderStatu)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new OrderStatusDAL();
+
+                orderStatu.ModifiedUser = UserSession.UserID;
+
                 var _result = _dal.Update(orderStatu);
                 if (_result)
                 {

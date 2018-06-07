@@ -37,7 +37,9 @@ namespace TechDeviShopVs002.DAL
                 _orderStatus.Description = entity.Description;
                 _orderStatus.DisplayOrder = entity.DisplayOrder;
                 _orderStatus.ModifiedDate = DateTime.Now;
-                _orderStatus.ModifiedBy = entity.ModifiedBy;
+                _orderStatus.ModifiedUser = entity.ModifiedUser;
+                _orderStatus.CreateDate = entity.CreateDate;
+                _orderStatus.CreateUser = entity.CreateUser;
                 _orderStatus.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;

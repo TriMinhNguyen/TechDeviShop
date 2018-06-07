@@ -30,6 +30,8 @@ namespace TechDeviShopVs002.DAL
                 var _shippingMethod = db.ShippingMethods.Find(entity.ShippingMethodID);
                 _shippingMethod.Title = entity.Title;
                 _shippingMethod.Price = entity.Price;
+                _shippingMethod.CreateDate = entity.CreateDate;
+                _shippingMethod.ModifiedDate = DateTime.Now;
                 db.SaveChanges();
                 return true;
             }

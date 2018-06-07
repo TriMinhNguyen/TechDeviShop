@@ -40,7 +40,9 @@ namespace TechDeviShopVs002.DAL
                 _payment.TotalPrice = entity.TotalPrice;
                 _payment.Note = entity.Note;
                 _payment.ModifiedDate = DateTime.Now;
-                _payment.ModifiedBy = entity.ModifiedBy;
+                _payment.ModifiedUser = entity.ModifiedUser;
+                _payment.CreateDate = entity.CreateDate;
+                _payment.CreateUser = entity.CreateUser;
                 _payment.TransactionID = entity.TransactionID;
                 _payment.TrackingID = entity.TrackingID;
                 _payment.IsActive = entity.IsActive;

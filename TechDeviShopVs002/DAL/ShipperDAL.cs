@@ -38,8 +38,10 @@ namespace TechDeviShopVs002.DAL
                 _shipper.Phone = entity.Phone;
                 _shipper.Fax = entity.Fax;
                 _shipper.Address = entity.Address;
+                _shipper.CreateDate = entity.CreateDate;
+                _shipper.CreateUser = entity.CreateUser;
                 _shipper.ModifiedDate = DateTime.Now;
-                _shipper.ModifiedBy = entity.ModifiedBy;
+                _shipper.ModifiedUser = entity.ModifiedUser;
                 _shipper.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;

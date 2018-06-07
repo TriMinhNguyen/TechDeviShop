@@ -69,6 +69,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -165,6 +171,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AboutsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ArticleCategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ArticleImagesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ArticlesController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CommentsController.cs" />
@@ -180,7 +189,6 @@
     <Compile Include="Areas\Admin\Controllers\PaymentMethodsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PaymentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PaymentStatusController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ProductContentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ShippersController.cs" />
@@ -189,7 +197,6 @@
     <Compile Include="Areas\Admin\Controllers\ShoppingCartsController.cs" />
     <Compile Include="Areas\Admin\Controllers\SlidesController.cs" />
     <Compile Include="Areas\Admin\Controllers\SuppliersController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SystemConfigsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Common\CommonConstants.cs" />
@@ -200,10 +207,12 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\AboutDAL.cs" />
+    <Compile Include="DAL\ArticleCategoryDAL.cs" />
+    <Compile Include="DAL\ArticleDAL.cs" />
+    <Compile Include="DAL\ArticleImageDAL.cs" />
     <Compile Include="DAL\CategoryDAL.cs" />
     <Compile Include="DAL\CommentDAL.cs" />
     <Compile Include="DAL\CustomerDAL.cs" />
-    <Compile Include="DAL\FeedbackDAL.cs" />
     <Compile Include="DAL\FooterDAL.cs" />
     <Compile Include="DAL\MenuDAL.cs" />
     <Compile Include="DAL\MenuTypeDAL.cs" />
@@ -213,7 +222,6 @@
     <Compile Include="DAL\PaymentDAL.cs" />
     <Compile Include="DAL\PaymentMethodDAL.cs" />
     <Compile Include="DAL\PaymentStatusDAL.cs" />
-    <Compile Include="DAL\ProductContentDAL.cs" />
     <Compile Include="DAL\ProductDAL.cs" />
     <Compile Include="DAL\RoleDAL.cs" />
     <Compile Include="DAL\ShipperDAL.cs" />
@@ -222,18 +230,17 @@
     <Compile Include="DAL\ShoppingCartDetailDAL.cs" />
     <Compile Include="DAL\SlideDAL.cs" />
     <Compile Include="DAL\SupplierDAL.cs" />
-    <Compile Include="DAL\SystemConfigDAL.cs" />
-    <Compile Include="DAL\TagDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\About.cs" />
+    <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\ArticleCategory.cs" />
+    <Compile Include="Models\ArticleImage.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\ContentTag.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Footer.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\MenuType.cs" />
@@ -244,7 +251,6 @@
     <Compile Include="Models\PaymentMethod.cs" />
     <Compile Include="Models\PaymentStatu.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\ProductContent.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Shipper.cs" />
     <Compile Include="Models\ShippingMethod.cs" />
@@ -252,13 +258,13 @@
     <Compile Include="Models\ShoppingCartDetail.cs" />
     <Compile Include="Models\Slide.cs" />
     <Compile Include="Models\Supplier.cs" />
-    <Compile Include="Models\SystemConfig.cs" />
-    <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\TechDeviShopDBContext.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewModel\CartItem.cs" />
+    <Compile Include="Models\ViewModel\DistrictModel.cs" />
     <Compile Include="Models\ViewModel\LoginModel.cs" />
     <Compile Include="Models\ViewModel\ProductViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProvinceModel.cs" />
     <Compile Include="Models\ViewModel\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1424,6 +1430,7 @@
     <Content Include="Assets\Client\css\jquery.countdown.css" />
     <Content Include="Assets\Client\css\popuo-box.css" />
     <Content Include="Assets\Client\css\style.css" />
+    <Content Include="Assets\Client\Data\Provinces_Data.xml" />
     <Content Include="Assets\Client\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\Client\images\1.jpg" />
     <Content Include="Assets\Client\images\10.jpg" />
@@ -1517,6 +1524,7 @@
     <Content Include="Assets\Client\images\tb5.jpg" />
     <Content Include="Assets\Client\js\bootstrap-3.1.1.min.js" />
     <Content Include="Assets\Client\js\Controller\cartController.js" />
+    <Content Include="Assets\Client\js\Controller\userController.js" />
     <Content Include="Assets\Client\js\easyResponsiveTabs.js" />
     <Content Include="Assets\Client\js\imagezoom.js" />
     <Content Include="Assets\Client\js\jquery.countdown.js" />
@@ -1530,6 +1538,7 @@
     <Content Include="Assets\Client\template\neworder.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1661,11 +1670,6 @@
     <Content Include="Areas\Admin\Views\Slides\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Slides\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Slides\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\SystemConfigs\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\SystemConfigs\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\SystemConfigs\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\SystemConfigs\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\SystemConfigs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Suppliers\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Suppliers\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Suppliers\Details.cshtml" />
@@ -1736,11 +1740,21 @@
     <Content Include="Areas\Admin\Views\Comments\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Comments\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Comments\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductContents\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductContents\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductContents\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductContents\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductContents\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ArticleCategories\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ArticleCategories\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ArticleCategories\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ArticleCategories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ArticleCategories\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ArticleImages\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ArticleImages\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ArticleImages\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ArticleImages\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ArticleImages\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Articles\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Articles\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Articles\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Articles\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Articles\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

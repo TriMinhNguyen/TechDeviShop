@@ -53,11 +53,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderID,UserID,CustomerID,ShipperID,ShippingMethodID,OrderStatusID,ShippingCost,CusName,CusPhone,CusEmail,Company,City,District,Address,ShippingPostalCode,OrtherNote,OrderDate,ShippedDate,RequiredDate,CreateDate,CreateBy,IsActive")] Order order)
+        public ActionResult Create([Bind(Include = "OrderID,UserID,CustomerID,ShipperID,ShippingMethodID,OrderStatusID,ShippingCost,CusName,CusPhone,CusEmail,Company,City,District,Address,ShippingPostalCode,OrtherNote,OrderDate,ShippedDate,RequiredDate,CreateDate,CreateUser,IsActive")] Order order)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new OrderDAL();
+
+                order.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(order);
                 if (id > 0)
@@ -103,11 +106,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderID,UserID,CustomerID,ShipperID,ShippingMethodID,OrderStatusID,ShippingCost,CusName,CusPhone,CusEmail,Company,City,District,Address,ShippingPostalCode,OrtherNote,OrderDate,ShippedDate,RequiredDate,CreateDate,CreateBy,IsActive")] Order order)
+        public ActionResult Edit([Bind(Include = "OrderID,UserID,CustomerID,ShipperID,ShippingMethodID,OrderStatusID,ShippingCost,CusName,CusPhone,CusEmail,Company,City,District,Address,ShippingPostalCode,OrtherNote,OrderDate,ShippedDate,RequiredDate,CreateDate,CreateUser,IsActive")] Order order)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new OrderDAL();
+
+                order.ModifiedUser = UserSession.UserID;
 
                 var _result = _dal.Update(order);
                 if (_result)

@@ -50,11 +50,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CommentID,UserID,ProductID,CommentContent,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Comment comment)
+        public ActionResult Create([Bind(Include = "CommentID,UserID,ProductID,CommentContent,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] Comment comment)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new CommentDAL();
+
+                comment.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(comment);
                 if (id > 0)
@@ -94,11 +97,15 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CommentID,UserID,ProductID,CommentContent,CreateDate,CreateBy,ModifiedDate,ModifiedBy,IsActive")] Comment comment)
+        public ActionResult Edit([Bind(Include = "CommentID,UserID,ProductID,CommentContent,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] Comment comment)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new CommentDAL();
+
+                comment.ModifiedUser = UserSession.UserID;
+
                 var _result = _dal.Update(comment);
                 if (_result)
                 {

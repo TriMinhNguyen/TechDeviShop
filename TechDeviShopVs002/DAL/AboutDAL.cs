@@ -36,9 +36,9 @@ namespace TechDeviShopVs002.DAL
                 _about.MetalKeywords = entity.MetalKeywords;
                 _about.MetalDescriptions = entity.MetalDescriptions;
                 _about.CreateDate = entity.CreateDate;
-                _about.CreateBy = entity.CreateBy;
-                _about.ModifiedDate = entity.ModifiedDate;
-                _about.ModifiedBy = entity.ModifiedBy;
+                _about.CreateUser = entity.CreateUser;
+                _about.ModifiedDate = DateTime.Now;
+                _about.ModifiedUser = entity.ModifiedUser;
                 _about.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;

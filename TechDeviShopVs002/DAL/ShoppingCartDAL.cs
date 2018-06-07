@@ -32,7 +32,9 @@ namespace TechDeviShopVs002.DAL
                 _shoppingCart.ExpireDate = entity.ExpireDate;
                 _shoppingCart.Note = entity.Note;
                 _shoppingCart.ModifiedDate = DateTime.Now;
-                _shoppingCart.ModifiedBy = entity.ModifiedBy;
+                _shoppingCart.ModifiedUser = entity.ModifiedUser;
+                _shoppingCart.CreateDate = entity.CreateDate;
+                _shoppingCart.CreateUser = entity.CreateUser;
                 _shoppingCart.IsActive = entity.IsActive;
                 db.SaveChanges();
                 return true;

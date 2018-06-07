@@ -35,7 +35,9 @@ namespace TechDeviShopVs002.DAL
                 _scd.Quantity = entity.Quantity;
                 _scd.PromotionPrice = entity.PromotionPrice;
                 _scd.ModifiedDate = DateTime.Now;
-                _scd.ModifiedBy = entity.ModifiedBy;
+                _scd.ModifiedUser = entity.ModifiedUser;
+                _scd.CreateDate = entity.CreateDate;
+                _scd.CreateUser = entity.CreateUser;
                 db.SaveChanges();
                 return true;
             }

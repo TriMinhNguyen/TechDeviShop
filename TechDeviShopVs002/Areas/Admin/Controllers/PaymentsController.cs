@@ -50,11 +50,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PaymentID,OrderID,PaymentMethodID,PaymentStatusID,PaymentDate,TotalPrice,Note,CreateDate,CreateBy,ModifiedDate,ModifiedBy,TransactionID,TrackingID,IsActive")] Payment payment)
+        public ActionResult Create([Bind(Include = "PaymentID,OrderID,PaymentMethodID,PaymentStatusID,PaymentDate,TotalPrice,Note,CreateDate,CreateUser,ModifiedDate,ModifiedUser,TransactionID,TrackingID,IsActive")] Payment payment)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new PaymentDAL();
+
+                payment.CreateUser = UserSession.UserID;
 
                 int id = _dal.Insert(payment);
                 if (id > 0)
@@ -93,11 +96,14 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PaymentID,OrderID,PaymentMethodID,PaymentStatusID,PaymentDate,TotalPrice,Note,CreateDate,CreateBy,ModifiedDate,ModifiedBy,TransactionID,TrackingID,IsActive")] Payment payment)
+        public ActionResult Edit([Bind(Include = "PaymentID,OrderID,PaymentMethodID,PaymentStatusID,PaymentDate,TotalPrice,Note,CreateDate,CreateUser,ModifiedDate,ModifiedUser,TransactionID,TrackingID,IsActive")] Payment payment)
         {
+            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
             {
                 var _dal = new PaymentDAL();
+
+                payment.ModifiedUser = UserSession.UserID;
 
                 var _result = _dal.Update(payment);
                 if (_result)
