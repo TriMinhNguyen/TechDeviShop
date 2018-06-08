@@ -72,7 +72,7 @@
         public string MetalKeywords { get; set; }
 
         [Display(Name = "Thẻ miêu tả SEO")]
-        [StringLength(250)]
+        [StringLength(500)]
         public string MetalDescriptions { get; set; }
 
         [Display(Name = "Kích hoạt")]

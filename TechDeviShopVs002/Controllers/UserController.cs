@@ -80,19 +80,18 @@ namespace TechDeviShopVs002.Controllers
                 string middlename = me.middle_name;
                 string lastname = me.last_name;
 
-                var user = new User();
-                user.Email = email;
-                user.UserName = email;
-                user.IsActive = true;
-                user.Name = firstname + " " + middlename + " " + lastname;
-                user.CreateDate = DateTime.Now;
-                var resultInsert = new UserDAL().InsertForFacebook(user);
+                var _cus = new Customer();
+                _cus.CustomerEmail = email;
+                _cus.IsActive = true;
+                _cus.CustomerName = firstname + " " + middlename + " " + lastname;
+                var resultInsert = new CustomerDAL().InsertForFacebook(_cus);
                 if (resultInsert > 0)
                 {
-                    var userSession = new UserLogin();
-                    userSession.UserName = user.UserName;
-                    userSession.UserID = user.UserID;
-                    Session.Add(CommonConstants.USER_SESSION, userSession);
+                    var cusUserSession = new CusUserLogin();
+                    cusUserSession.CustomerEmail = _cus.CustomerEmail;
+                    cusUserSession.CustomerName = _cus.CustomerName;
+                    cusUserSession.CustomerID = _cus.CustomerID;
+                    Session.Add(CommonConstants.CusUserSession, cusUserSession);
                 }
             }
             return Redirect("/");
@@ -100,7 +99,7 @@ namespace TechDeviShopVs002.Controllers
 
         public ActionResult Logout()
         {
-            Session[CommonConstants.USER_SESSION] = null;
+            Session[CommonConstants.CusUserSession] = null;
             return Redirect("/");
         }
 
@@ -109,15 +108,16 @@ namespace TechDeviShopVs002.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dal = new UserDAL();
+                var dal = new CustomerDAL();
                 var result = dal.Login(model.UserName, Encryptor.MD5Hash(model.Password));
                 if (result == 1)
                 {
-                    var user = dal.GetByUserName(model.UserName);
-                    var userSession = new UserLogin();
-                    userSession.UserName = user.UserName;
-                    userSession.UserID = user.UserID;
-                    Session.Add(CommonConstants.USER_SESSION, userSession);
+                    var _cusUser = dal.GetByEmail(model.UserName);
+                    var cusUserSession = new CusUserLogin();
+                    cusUserSession.CustomerEmail = _cusUser.CustomerEmail;
+                    cusUserSession.CustomerName = _cusUser.CustomerName;
+                    cusUserSession.CustomerID = _cusUser.CustomerID;
+                    Session.Add(CommonConstants.CusUserSession, cusUserSession);
                     return Redirect("/");
                 }
                 else if (result == 0)
@@ -146,35 +146,34 @@ namespace TechDeviShopVs002.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dao = new UserDAL();
-                if (dao.CheckUserName(model.UserName))
-                {
-                    ModelState.AddModelError("", "Tên đăng nhập đã tồn tại");
-                }
-                else if (dao.CheckEmail(model.Email))
+                var dal = new CustomerDAL();
+                if (dal.CheckEmail(model.Email))
                 {
                     ModelState.AddModelError("", "Email đã tồn tại");
                 }
                 else
                 {
-                    var user = new User();
-                    user.Name = model.Name;
-                    user.Password = Encryptor.MD5Hash(model.Password);
-                    user.Phone = model.Phone;
-                    user.Email = model.Email;
-                    user.Address = model.Address;
-                    user.CreateDate = DateTime.Now;
-                    user.IsActive = true;
-                    //if (!string.IsNullOrEmpty(model.ProvinceID))
-                    //{
-                    //    user.ProvinceID = int.Parse(model.ProvinceID);
-                    //}
-                    //if (!string.IsNullOrEmpty(model.DistrictID))
-                    //{
-                    //    user.DistrictID = int.Parse(model.DistrictID);
-                    //}
+                    var _cusUser = new Customer();
+                    _cusUser.CustomerName = model.Name;
+                    _cusUser.Password = Encryptor.MD5Hash(model.Password);
+                    _cusUser.CustomerPhone = model.Phone;
+                    _cusUser.CustomerEmail = model.Email;
+                    _cusUser.CustomerAddress = model.Address;
+                    _cusUser.CustomerGender = model.Gender;
+                    _cusUser.CustomerBirthday = model.Birthday;
+                    _cusUser.IsActive = true;
+                    if (!string.IsNullOrEmpty(model.ProvinceID))
+                    {
+                        //_cusUser.CustomerCity = int.Parse(model.ProvinceID);
+                        _cusUser.CustomerCity = model.ProvinceID;
+                    }
+                    if (!string.IsNullOrEmpty(model.DistrictID))
+                    {
+                        //_cusUser.CustomerDistrict = int.Parse(model.DistrictID);
+                        _cusUser.CustomerDistrict = model.DistrictID;
+                    }
 
-                    var result = dao.Insert(user);
+                    var result = dal.Insert(_cusUser);
                     if (result > 0)
                     {
                         ViewBag.Success = "Đăng ký thành công";

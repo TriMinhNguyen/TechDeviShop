@@ -13,6 +13,13 @@ namespace TechDeviShopVs002
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("{*botdetect}", new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
+            
+            routes.MapRoute(
+                name: "About",
+                url: "gioi-thieu",
+                defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional },
+                namespaces: new[] { "TechDeviShopVs002.Controllers" }
+            );
 
             routes.MapRoute(
                 name: "Product Category",
@@ -32,6 +39,27 @@ namespace TechDeviShopVs002
                 name: "Product Detail",
                 url: "chi-tiet/{metatitle}-{id}",
                 defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional },
+                namespaces: new[] { "TechDeviShopVs002.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Article",
+                url: "tin-tuc",
+                defaults: new { controller = "Article", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "TechDeviShopVs002.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Article Category",
+                url: "tin-tuc/{metatitle}-{id}",
+                defaults: new { controller = "Article", action = "ArticleCategory", id = UrlParameter.Optional },
+                namespaces: new[] { "TechDeviShopVs002.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Article Detail",
+                url: "tin-tuc/chi-tiet/{metatitle}-{id}",
+                defaults: new { controller = "Article", action = "Details", id = UrlParameter.Optional },
                 namespaces: new[] { "TechDeviShopVs002.Controllers" }
             );
 
@@ -74,6 +102,13 @@ namespace TechDeviShopVs002
                 name: "Register",
                 url: "dang-ky",
                 defaults: new { controller = "User", action = "Register", id = UrlParameter.Optional },
+                namespaces: new[] { "TechDeviShopVs002.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Profile",
+                url: "ho-so",
+                defaults: new { controller = "Profile", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "TechDeviShopVs002.Controllers" }
             );
 

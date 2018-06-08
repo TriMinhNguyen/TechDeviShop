@@ -11,10 +11,9 @@ namespace TechDeviShopVs002.Models.ViewModel
         [Key]
         public int UserID { set; get; }
 
-        [Display(Name = "Tên đăng nhập")]
-        [Required(ErrorMessage = "Yêu cầu nhập tên đăng nhập")]
-
-        public string UserName { set; get; }
+        [Required(ErrorMessage = "Yêu cầu nhập email")]
+        [Display(Name = "Email")]
+        public string Email { set; get; }
 
         [Display(Name = "Mật khẩu")]
         [StringLength(20, MinimumLength = 6, ErrorMessage = "Độ dài mật khẩu ít nhất 6 ký tự.")]
@@ -37,11 +36,7 @@ namespace TechDeviShopVs002.Models.ViewModel
 
         [Display(Name = "Địa chỉ")]
         public string Address { set; get; }
-
-        [Required(ErrorMessage = "Yêu cầu nhập email")]
-        [Display(Name = "Email")]
-        public string Email { set; get; }
-
+        
         [Display(Name = "Điện thoại")]
         public string Phone { set; get; }
 

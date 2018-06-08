@@ -25,6 +25,7 @@
 
         var editor = CKEDITOR.replace('txtDetail', {
             customConfig: '/Assets/admin/plugins/ckeditor/config.js',
+            htmlEncodeOutput: true,
         })
     </script>
 }
@@ -34,8 +35,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>ArticleCategory</h4>
-        <hr />
+        
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ArticleCategoryID)
 

@@ -1,0 +1,53 @@
+﻿@model List<TechDeviShopVs002.Models.Article>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listArticleCategory = (List<TechDeviShopVs002.Models.ArticleCategory>)ViewBag.articleCategory;
+}
+
+<link href="~/Assets/Client/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/Assets/Client/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/Assets/Client/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files -->
+<!-- font-awesome icons -->
+<link href="~/Assets/Client/css/font-awesome.css" rel="stylesheet">
+<!-- //font-awesome icons -->
+<!-- js -->
+<script src="~/Assets/Client/js/jquery.min.js"></script>
+<!-- //js -->
+<!-- web fonts -->
+<link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<!-- //web fonts -->
+<!-- for bootstrap working -->
+<script type="text/javascript" src="~/Assets/Client/js/bootstrap-3.1.1.min.js"></script>
+<script src="~/Assets/admin/plugins/ckeditor/ckeditor.js"></script>
+
+
+
+<div class="mobiles" style="padding-top:40px;padding-bottom:40px">
+    <div class="container">
+        <div class="w3ls_mobiles_grids">
+            <div class="col-md-9">
+                @foreach (var item in Model)
+                {
+                    var linkArticle = "/tin-tuc/chi-tiet/" + item.MetaTitle + "-" + item.ArticleID;
+                    <div class="container" style="height:200px">
+                        <div class="col-md-3" style="background-color:lightgray">
+                            <img src="@item.Image" alt="@item.Title" class="img-responsive" style="width:350px;height:200px;margin:0;padding:0" />
+                        </div>
+                        <div class="col-md-5" style="height:200px;background-color:lightgray;">
+                            <h3><a href="@linkArticle">@item.Title</a></h3>
+                            <p style="margin:0; padding:5px; text-align:justify">@item.MetalDescriptions</p>
+                            <h5><a>Ngày đăng: @item.ApprovedDate</a></h5>
+                        </div>
+                    </div>
+                }
+                <div class="clearfix"> </div>
+            </div>
+            <div class="col-md-3 w3ls_mobiles_grid_right">
+                @{ Html.RenderAction("ArticleCategory", "Article");}
+            </div>
+        </div>
+    </div>
+</div>

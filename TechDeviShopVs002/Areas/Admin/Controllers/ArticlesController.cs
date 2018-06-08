@@ -57,7 +57,11 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 var _dal = new ArticleDAL();
 
                 article.CreateUser = UserSession.UserID;
-
+                if(article.Approved == true)
+                {
+                    article.ApprovedUser = UserSession.UserID;
+                    article.ApprovedDate = DateTime.Now;
+                }
                 int id = _dal.Insert(article);
                 if (id > 0)
                 {
@@ -102,6 +106,12 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 var _dal = new ArticleDAL();
 
                 article.ModifiedUser = UserSession.UserID;
+
+                if (article.Approved == true && article.ApprovedUser == null)
+                {
+                    article.ApprovedUser = UserSession.UserID;
+                    article.ApprovedDate = DateTime.Now;
+                }
 
                 var _result = _dal.Update(article);
                 if (_result)

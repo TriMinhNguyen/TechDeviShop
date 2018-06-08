@@ -72,6 +72,11 @@ namespace TechDeviShopVs002.DAL
             return db.Customers.SingleOrDefault(x => x.CustomerName == _cusName);
         }
 
+        public Customer GetByEmail(string email)
+        {
+            return db.Customers.SingleOrDefault(x => x.CustomerEmail == email);
+        }
+
         public Customer ViewDetail(int? id)
         {
             return db.Customers.Find(id);
@@ -121,7 +126,7 @@ namespace TechDeviShopVs002.DAL
 
         public bool CheckEmail(string email)
         {
-            return db.Users.Count(x => x.Email == email) > 0;
+            return db.Customers.Count(x => x.CustomerEmail == email) > 0;
         }
     }
 }

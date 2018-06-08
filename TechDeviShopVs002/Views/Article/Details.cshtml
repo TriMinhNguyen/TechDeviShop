@@ -1,0 +1,62 @@
+﻿@model TechDeviShopVs002.Models.Article
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/Assets/Client/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/Assets/Client/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="~/Assets/Client/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files -->
+<!-- font-awesome icons -->
+<link href="~/Assets/Client/css/font-awesome.css" rel="stylesheet">
+<!-- //font-awesome icons -->
+<!-- js -->
+<script src="~/Assets/Client/js/jquery.min.js"></script>
+<!-- //js -->
+<!-- web fonts -->
+<link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<!-- //web fonts -->
+<!-- for bootstrap working -->
+<script type="text/javascript" src="~/Assets/Client/js/bootstrap-3.1.1.min.js"></script>
+<script src="~/Assets/admin/plugins/ckeditor/ckeditor.js"></script>
+<!-- //for bootstrap working -->
+
+<div class="single" style="padding:0; background-color:rgb(240,240,240)">
+    <div class="container">
+        <div class="w3ls_mobiles_grids">
+            <div class="col-md-9" style="border-style:solid ;border-color:black; border-width:0.5px; background-color:white; padding:0">
+                <div class="breadcrumb_dress">
+                    <div class="container">
+                        <ul style="float:left">
+                            <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a> <i>></i></li>
+                            <li><a href="/tin-tuc">Tin tức</a> <i>></i></li>
+                            <li>@Model.Title</li>
+                        </ul>
+                    </div>
+                </div>
+                <ul style="padding:20px; list-style-type:none">
+                    <li><h1>@Model.Title</h1></li>
+                    <li><a>TechDeviShop| @Model.ApprovedDate</a>
+                    <li><a>ViewCount: @Model.ViewCount| Vote:@Model.Votes</a></li>
+                    <li style="border-bottom: 0.5px solid lightblue;"></li>
+                </ul>
+                <div style="padding:20px; padding-left:50px">
+                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(@Model.ArticleContent))
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="w3ls_mobiles_grid_right">
+                    @{ Html.RenderAction("ArticleCategory", "Article");}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

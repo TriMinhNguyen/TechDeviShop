@@ -44,11 +44,11 @@
             <div class="col-md-6">
                 @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
                 {
-                    var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
+                    var session = (TechDeviShopVs002.Common.CusUserLogin)Session[TechDeviShopVs002.Common.CommonConstants.CusUserSession];
 
                     <div class="form-group">
                         <label>Người nhận</label>
-                        <input name="shipName" class="form-control" />
+                        <input name="shipName" class="form-control"  value="@session.CustomerName"/>
                     </div>
                     <div class="form-group">
                         <label>Điện thoại</label>
@@ -60,10 +60,10 @@
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input name="email" class="form-control" />
+                        <input name="email" class="form-control" value="@session.CustomerEmail"/>
                     </div>
 
-                    if (UserSession == null)
+                    if (session == null)
                     {
                         <button type="submit" class="btn" disabled> Gửi đơn hàng </button>
                         <a class="alert-danger">Bạn cần đăng nhập tài khoản trước</a>

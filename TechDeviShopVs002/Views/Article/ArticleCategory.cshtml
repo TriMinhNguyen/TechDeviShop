@@ -1,0 +1,48 @@
+﻿@model List<TechDeviShopVs002.Models.ArticleCategory>
+
+<div class="w3ls_mobiles_grid_left_grid" >
+    <div class="w3ls_mobiles_grid_left_grid_sub" style="padding:10px; background-color:white">
+        <a>Chuyên đề bài viết</a>
+    </div>
+    <div class="w3ls_mobiles_grid_left_grid_sub" style="padding-left:10px;padding-right:0; padding-top:5px;background-color:white">
+        @foreach (var item in Model.Where(x => x.ParentID == 0 || x.ParentID == null))
+        {
+            var url = "/tin-tuc/" + item.MetaTitle + "-" + item;
+            var child = Model.Where(x => x.ParentID == item.ArticleCategoryID);
+            if (child.Count() <= 0)
+            {
+                <ul class="panel_bottom" style="padding:0em 0 0 0em">
+                    <li><a href="@url">@item.ArticleCategoryName</a></li>
+                </ul>
+            }
+            if (child.Count() > 0)
+            {
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title asd">
+                                <a class="pa_italic" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>@item.ArticleCategoryName
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body panel_text">
+                                <ul>
+                                    @foreach (var itemChild in child)
+                                    {
+                                        <li><a href="@url">@itemChild.ArticleCategoryName</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+
+
+

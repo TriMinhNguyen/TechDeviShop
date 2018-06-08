@@ -8,7 +8,7 @@
 
 <div style="height:30px; margin:0">
     @{
-        var session = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
+        var session = (TechDeviShopVs002.Common.CusUserLogin)Session[TechDeviShopVs002.Common.CommonConstants.CusUserSession];
     }
     @if (session == null)
     {
@@ -26,10 +26,20 @@
     }
     else
     {
-        <ul style="list-style-type: none; margin:0; padding: 0; overflow: hidden; background-color:#3c43a4">
-            <li style="float:right; display:inline-block; padding: 5px"> @Html.ActionLink("Thoát", "Logout", "User")</li>
-            <li style="float:right; display:inline-block; padding: 5px; color:white">Xin chào: @session.UserName</li>
-        </ul>
+        <div class="nav" style="margin:0; padding:0; background-color:#3c43a4; min-height:30px">
+            <div class="dropdown" style="margin:0; padding:0; float:right">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" style="color:white; margin-left:51px">
+                    <span class="fa fa-user fa-fw"></span>
+                    @session.CustomerName
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" style="position:absolute;">
+                    <li><a href="/ho-so/"><i class="fa fa-user fa-fw"></i> Hồ sơ người dùng</a></li>
+                    <li class="divider"></li>
+                    <li><a href="@Url.Action("Logout", "User")"><i class="fa fa-sign-out fa-fw"></i> Thoát</a></li>
+                </ul>
+            </div>
+        </div>
     }
 
 </div>
