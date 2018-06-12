@@ -10,10 +10,7 @@
     {
         [Display(Name = "Mã ĐH")]
         public int OrderID { get; set; }
-
-        [Display(Name = "Mã tài khoản")]
-        public int UserID { get; set; }
-
+        
         [Display(Name = "Mã khách hàng")]
         public int CustomerID { get; set; }
 
@@ -88,8 +85,6 @@
 
         [Display(Name = "Kích hoạt")]
         public bool? IsActive { get; set; }
-
-        public virtual User User { get; set; }
 
         public virtual Customer Customer { get; set; }
 

@@ -29,11 +29,11 @@
             @Html.DisplayFor(model => model.UserName)
         </dd>
 
-        <dt>
+        <dt hidden>
             @Html.DisplayNameFor(model => model.Password)
         </dt>
 
-        <dd>
+        <dd hidden>
             @Html.DisplayFor(model => model.Password)
         </dd>
 
@@ -50,7 +50,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Gender)
+            @*@Html.DisplayFor(model => model.Gender)*@
+            @Html.Encode(Model.Gender == true ? "Nam" : "Nữ")
         </dd>
 
         <dt>
@@ -116,8 +117,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Thoát", "Index")
         </div>
     }
 </div>

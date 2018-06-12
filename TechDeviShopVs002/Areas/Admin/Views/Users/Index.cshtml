@@ -1,5 +1,6 @@
-﻿@model IEnumerable<TechDeviShopVs002.Models.User>
-
+﻿@model PagedList.IPagedList<TechDeviShopVs002.Models.User>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -10,94 +11,105 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới tài khoản", "Create")
+    @using (Html.BeginForm("Index", "Users", FormMethod.Get))
+    {
+        <a>
+            Nhập nội dung tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Tìm kiếm" />
+        </a>
+    }
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Role.RoleName)
+        <th style="width:200px">
+            Tên phân quyền
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
+        <th style="width:200px">
+            Tên tài khoản
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Birthday)
+                @Html.DisplayNameFor(model => model.Password)
+            </th>*@
+        <th style="width:200px">
+            Tên người dùng
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
+        <th style="width:100px">
+            Giới tính
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
+        @*<th>
+                @Html.DisplayNameFor(model => model.Birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>*@
+        <th style="width:100px">
+            Kích hoạt
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach(var item in Model)
     {
         <tr>
-            <td>
+            <td style="width:200px">
                 @Html.DisplayFor(modelItem => item.Role.RoleName)
             </td>
-            <td>
+            <td style="width:200px">
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>*@
-            <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>*@
+            <td style="width:200px">
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
+            <td style="width:100px">
+                @Html.DisplayFor(modelItem => item.Gender, new List<SelectListItem> { new SelectListItem { Text = "Nam", Value = "True" }, new SelectListItem { Text = "Nữ", Value = "False" } })
+                @*@Html.DropDownListFor(modelItem => item.Gender, new List<SelectListItem> { new SelectListItem { Text = "Nam", Value = "True" }, new SelectListItem { Text = "Nữ", Value = "False" } })*@
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.Birthday)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedDate)
-            </td>
-            <td>
+                    @Html.DisplayFor(modelItem => item.Birthday)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedDate)
+                </td>*@
+            <td style="width:100px">
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                @Html.ActionLink("Sửa", "Edit", new { id = item.UserID }) |
+                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.UserID }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.UserID })
             </td>
         </tr>
     }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))

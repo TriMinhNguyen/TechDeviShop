@@ -28,13 +28,13 @@
             @Html.DisplayFor(model => model.UserName)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.Password)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Password)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -49,7 +49,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Gender)
+            @*@Html.DisplayFor(model => model.Gender)*@
+            @Html.Encode(Model.Gender == true?"Nam":"Nữ")
         </dd>
 
         <dt>
@@ -111,6 +112,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.UserID }) |
+    @Html.ActionLink("Thoát", "Index")
 </p>

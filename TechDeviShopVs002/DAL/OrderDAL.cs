@@ -33,7 +33,6 @@ namespace TechDeviShopVs002.DAL
             try
             {
                 var _order = db.Orders.Find(entity.OrderID);
-                _order.UserID = entity.UserID;
                 _order.CustomerID = entity.CustomerID;
                 _order.ShipperID = entity.ShipperID;
                 _order.ShippingMethodID = entity.ShippingMethodID;

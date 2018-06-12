@@ -9,6 +9,7 @@ using System.Web.Script.Serialization;
 using System.Configuration;
 using TechDeviShopVs002.Models.ViewModel;
 using Common;
+using TechDeviShopVs002.Common;
 
 namespace TechDeviShopVs002.Controllers
 {
@@ -67,21 +68,36 @@ namespace TechDeviShopVs002.Controllers
         }
         public ActionResult AddItem(int productId, int quantity)
         {
+            var CusUserSession = (CusUserLogin)Session[CommonConstants.CusUserSession];
             var product = new ProductDAL().ViewDetail(productId);
             var cart = Session[CartSession];
-            if (cart != null)
-            {
-                var list = (List<CartItem>)cart;
-                if (list.Exists(x => x.Product.ProductID == productId))
-                {
 
-                    foreach (var item in list)
+            if (CusUserSession == null)
+            {
+                if (cart != null)
+                {
+                    var list = (List<CartItem>)cart;
+                    if (list.Exists(x => x.Product.ProductID == productId))
                     {
-                        if (item.Product.ProductID == productId)
+
+                        foreach (var item in list)
                         {
-                            item.Quantity += quantity;
+                            if (item.Product.ProductID == productId)
+                            {
+                                item.Quantity += quantity;
+                            }
                         }
                     }
+                    else
+                    {
+                        //tạo mới đối tượng cart item
+                        var item = new CartItem();
+                        item.Product = product;
+                        item.Quantity = quantity;
+                        list.Add(item);
+                    }
+                    //Gán vào session
+                    Session[CartSession] = list;
                 }
                 else
                 {
@@ -89,22 +105,99 @@ namespace TechDeviShopVs002.Controllers
                     var item = new CartItem();
                     item.Product = product;
                     item.Quantity = quantity;
+                    var list = new List<CartItem>();
                     list.Add(item);
+                    //Gán vào session
+                    Session[CartSession] = list;
                 }
-                //Gán vào session
-                Session[CartSession] = list;
             }
-            else
+            else //cusUserSession != null;
             {
-                //tạo mới đối tượng cart item
-                var item = new CartItem();
-                item.Product = product;
-                item.Quantity = quantity;
-                var list = new List<CartItem>();
-                list.Add(item);
-                //Gán vào session
-                Session[CartSession] = list;
+                if (cart != null)
+                {
+                    var list = (List<CartItem>)cart;
+                    
+                    var _dal = new ShoppingCartDetailDAL();
+                    
+                    int _scID = 0;
+                    foreach (var item in list)
+                    {
+                        _scID = item.ShoppingCartID;
+                    }
+                    if (list.Exists(x => x.Product.ProductID == productId))
+                    {
+                        foreach (var item in list)
+                        {
+                            if (item.Product.ProductID == productId)
+                            {
+                                item.Quantity += quantity;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //tạo mới đối tượng cart item
+                        var item = new CartItem();
+                        item.Product = product;
+                        item.Quantity = quantity;
+                        item.ShoppingCartID = _scID;
+                        list.Add(item);
+                    }
+                    var listSCDetail = new ShoppingCartDetailDAL().ListByShoppingCartID(_scID);
+                    if (listSCDetail.Exists(x => x.Product.ProductID == productId))
+                    {
+                        foreach (var item in listSCDetail)
+                        {
+                            if (item.Product.ProductID == productId)
+                            {
+                                item.Quantity += quantity;
+                            }
+                            var _result = _dal.Update(item);
+                        }
+                    }
+                    else
+                    {
+                        //tạo mới shopping cartdetail
+                        var scDetailitem = new ShoppingCartDetail();
+                        scDetailitem.ShoppingCartID = _scID;
+                        scDetailitem.ProductID = product.ProductID;
+                        scDetailitem.ProductName = product.ProductName;
+                        scDetailitem.Quantity = quantity;
+                        scDetailitem.UnitPrice = product.Price;
+                        scDetailitem.PromotionPrice = product.PromotionPrice;
+                        var _result = _dal.Update(scDetailitem);
+                    }
+                    //Gán vào session
+                    Session[CartSession] = list;
+                }
+                else //cart == null
+                {
+                    //tạo mới giỏ hàng, giỏ hàng chi tiết;
+                    var _shoppingCart = new ShoppingCart();
+                    _shoppingCart.ShoppingDate = DateTime.Now;
+                    _shoppingCart.CreateUser = CusUserSession.CustomerID;
+                    var _shoppingCartDetail = new ShoppingCartDetail();
+                    _shoppingCartDetail.ShoppingCartID = _shoppingCart.ShoppingCartID;
+                    _shoppingCartDetail.ProductID = product.ProductID;
+                    _shoppingCartDetail.ProductName = product.ProductName;
+                    _shoppingCartDetail.Quantity = quantity;
+                    _shoppingCartDetail.UnitPrice = product.Price;
+                    _shoppingCartDetail.PromotionPrice = product.PromotionPrice;
+                    var _scart = new ShoppingCartDAL().Insert(_shoppingCart);
+                    var _scartDetail = new ShoppingCartDetailDAL().Insert(_shoppingCartDetail);
+
+                    //tạo mới đối tượng cart item
+                    var item = new CartItem();
+                    item.Product = product;
+                    item.Quantity = quantity;
+                    item.ShoppingCartID = _shoppingCart.ShoppingCartID;
+                    var list = new List<CartItem>();
+                    list.Add(item);
+                    //Gán vào session
+                    Session[CartSession] = list;
+                }
             }
+
             return RedirectToAction("Index");
         }
         [HttpGet]
@@ -122,42 +215,63 @@ namespace TechDeviShopVs002.Controllers
         [HttpPost]
         public ActionResult Payment(string shipName, string mobile, string address, string email)
         {
-            var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
+            var CusUserSession = (CusUserLogin)Session[TechDeviShopVs002.Common.CommonConstants.CusUserSession];
             
-            var _cus = new Customer();
-            _cus.CustomerName = shipName;
-            _cus.CustomerPhone = mobile;
-            _cus.CustomerEmail = email;
-            _cus.CustomerAddress = address;
-
             var order = new Order();
-            order.UserID = UserSession.UserID;
-            order.CustomerID = _cus.CustomerID;
+            order.CustomerID = CusUserSession.CustomerID;
             order.CreateDate = DateTime.Now;
             order.Address = address;
             order.CusPhone = mobile;
             order.CusName = shipName;
             order.CusEmail = email;
-
+            order.OrderStatusID = 1;
+            order.IsActive = true;
+            
             try
             {
                 var id = new OrderDAL().Insert(order);
                 var cart = (List<CartItem>)Session[CartSession];
-                var detailDal = new TechDeviShopVs002.DAL.OrderDetailsDAL();
+                
                 decimal total = 0;
                 foreach (var item in cart)
                 {
+                    //Create order detail;
                     var orderDetail = new OrderDetail();
                     orderDetail.ProductID = item.Product.ProductID;
                     orderDetail.OrderID = id;
                     orderDetail.UnitPrice = item.Product.Price;
                     orderDetail.PromotionPrice = item.Product.PromotionPrice;
                     orderDetail.Quantity = item.Quantity;
-                    detailDal.Insert(orderDetail);
+                    orderDetail.IsActive = true;
+                    var detailDal = new OrderDetailsDAL().Insert(orderDetail);
 
+                    //Edit Product Quantity
+                    var product = new ProductDAL().ViewDetail(item.Product.ProductID);
+                    if(product.Quantity > 1)
+                    {
+                        product.Quantity = product.Quantity - item.Quantity;
+                    }
+                    var productResult = new ProductDAL().Update(product);
+
+                    //End Shopping Cart
+                    var spcart = new ShoppingCartDAL().ViewDetail(item.ShoppingCartID);
+                    spcart.ExpireDate = DateTime.Now;
+                    var spcartResult = new ShoppingCartDAL().Update(spcart);
+
+                    //calculated total price;
                     total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity);
                 }
-                var _cusdal = new CustomerDAL().Insert(_cus);
+
+                //Create payment;
+                var MyPay = new Payment();
+                MyPay.OrderID = order.OrderID;
+                MyPay.PaymentMethodID = 1;
+                MyPay.PaymentStatusID = 1;
+                MyPay.TotalPrice = total;
+                MyPay.IsActive = true;
+                var MyPayResult = new PaymentDAL().Insert(MyPay);
+
+                
                 string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/Client/template/neworder.html"));
 
                 content = content.Replace("{{CustomerName}}", shipName);

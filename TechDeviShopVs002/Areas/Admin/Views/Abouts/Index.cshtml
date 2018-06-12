@@ -34,7 +34,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MetalDescriptions)
-        </th>*@
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
@@ -46,7 +46,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ModifiedUser)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.IsActive)
         </th>
@@ -55,49 +55,49 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AboutName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetaTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Detail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetalKeywords)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetalDescriptions)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AboutID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.AboutID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.AboutID })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AboutName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetaTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Detail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetalKeywords)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetalDescriptions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedUser)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.AboutID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.AboutID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.AboutID })
+        </td>
+    </tr>
     }
 
 </table>

@@ -45,7 +45,7 @@
         @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
-                @Html.EditorFor(model => model.Gender)
+                @Html.DropDownListFor(model => model.Gender, new List<SelectListItem> { new SelectListItem {Text="Nam", Value="True"}, new SelectListItem { Text="Nữ", Value="False"} })
                 @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -119,13 +119,13 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Thêm mới" class="btn btn-default"/>
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Thoát", "Index")
 </div>
 

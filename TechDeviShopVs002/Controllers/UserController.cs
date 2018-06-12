@@ -84,6 +84,7 @@ namespace TechDeviShopVs002.Controllers
                 _cus.CustomerEmail = email;
                 _cus.IsActive = true;
                 _cus.CustomerName = firstname + " " + middlename + " " + lastname;
+                _cus.Password = "123456";
                 var resultInsert = new CustomerDAL().InsertForFacebook(_cus);
                 if (resultInsert > 0)
                 {

@@ -52,6 +52,11 @@ namespace TechDeviShopVs002.DAL
             return db.ShoppingCartDetails.Find(id);
         }
 
+        public List<ShoppingCartDetail> ListByShoppingCartID(int id)
+        {
+            return db.ShoppingCartDetails.Where(x => x.ShoppingCartID == id).ToList();
+        }
+
         public bool Delete(int id)
         {
             try

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using TechDeviShopVs002.Common;
 using TechDeviShopVs002.DAL;
 using TechDeviShopVs002.Models;
+using PagedList;
 
 namespace TechDeviShopVs002.Areas.Admin.Controllers
 {
@@ -17,10 +18,29 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         private TechDeviShopDBContext db = new TechDeviShopDBContext();
 
         // GET: Admin/Users
-        public ActionResult Index()
+        public ViewResult Index(string currentFilter, string searchString, int? page)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var users = db.Users.Include(u => u.Role);
-            return View(users.ToList());
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(s => s.Name.Contains(searchString)
+                                       || s.UserName.Contains(searchString)).Include(u=>u.Role);
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(users.OrderBy(u=>u.Name).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/Users/Details/5
@@ -63,7 +83,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 int id = _dal.Insert(user);
                 if (id > 0)
                 {
-                    return RedirectToAction("Index", "User");
+                    return RedirectToAction("Index", "Users");
                 }
                 else
                 {
@@ -111,7 +131,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 var _result = _dal.Update(user);
                 if (_result)
                 {
-                    return RedirectToAction("Index", "User");
+                    return RedirectToAction("Index", "Users");
                 }
                 else
                 {

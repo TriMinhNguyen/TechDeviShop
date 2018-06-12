@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Orders
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.Customer).Include(o => o.OrderStatus).Include(o => o.Shipper).Include(o => o.ShippingMethod).Include(o => o.User);
+            var orders = db.Orders.Include(o => o.Customer).Include(o => o.OrderStatus).Include(o => o.Shipper).Include(o => o.ShippingMethod);
             return View(orders.ToList());
         }
 
@@ -44,7 +44,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             ViewBag.OrderStatusID = new SelectList(db.OrderStatus, "OrderStatusID", "OrderStatusName");
             ViewBag.ShipperID = new SelectList(db.Shippers, "ShipperID", "Name");
             ViewBag.ShippingMethodID = new SelectList(db.ShippingMethods, "ShippingMethodID", "Title");
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName");
             return View();
         }
 
@@ -77,7 +76,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             ViewBag.OrderStatusID = new SelectList(db.OrderStatus, "OrderStatusID", "OrderStatusName", order.OrderStatusID);
             ViewBag.ShipperID = new SelectList(db.Shippers, "ShipperID", "Name", order.ShipperID);
             ViewBag.ShippingMethodID = new SelectList(db.ShippingMethods, "ShippingMethodID", "Title", order.ShippingMethodID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", order.UserID);
             return View(order);
         }
 
@@ -97,7 +95,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             ViewBag.OrderStatusID = new SelectList(db.OrderStatus, "OrderStatusID", "OrderStatusName", order.OrderStatusID);
             ViewBag.ShipperID = new SelectList(db.Shippers, "ShipperID", "Name", order.ShipperID);
             ViewBag.ShippingMethodID = new SelectList(db.ShippingMethods, "ShippingMethodID", "Title", order.ShippingMethodID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", order.UserID);
             return View(order);
         }
 
@@ -129,7 +126,6 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             ViewBag.OrderStatusID = new SelectList(db.OrderStatus, "OrderStatusID", "OrderStatusName", order.OrderStatusID);
             ViewBag.ShipperID = new SelectList(db.Shippers, "ShipperID", "Name", order.ShipperID);
             ViewBag.ShippingMethodID = new SelectList(db.ShippingMethods, "ShippingMethodID", "Title", order.ShippingMethodID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", order.UserID);
             return View(order);
         }
 

@@ -41,7 +41,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ArticleContent)
+            @*@Html.DisplayFor(model => model.ArticleContent)*@
+            @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.ArticleContent))
         </dd>
 
         <dt>
@@ -49,7 +50,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Image)
+            @*@Html.DisplayFor(model => model.Image)*@
+            <img src="@(Model.Image)" alt=" " class="img-responsive" style="width:280px;height:180px" />
         </dd>
 
         <dt>

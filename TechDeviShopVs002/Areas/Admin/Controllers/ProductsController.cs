@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TechDeviShopVs002.DAL;
 using TechDeviShopVs002.Models;
+using PagedList;
 
 namespace TechDeviShopVs002.Areas.Admin.Controllers
 {
@@ -16,10 +17,30 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         private TechDeviShopDBContext db = new TechDeviShopDBContext();
 
         // GET: Admin/Products
-        public ActionResult Index()
+        public ViewResult Index(string currentFilter, string searchString, int? page)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var products = db.Products.Include(p => p.Category).Include(p => p.Suppliers);
-            return View(products.ToList());
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.ProductName.Contains(searchString)
+                                       || s.Suppliers.SupplierName.Contains(searchString) 
+                                       || s.Category.CategoryName.Contains(searchString));
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(products.OrderBy(u => u.ProductName).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/Products/Details/5

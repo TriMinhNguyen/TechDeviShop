@@ -1,5 +1,6 @@
-﻿@model IEnumerable<TechDeviShopVs002.Models.Product>
-
+﻿@model PagedList.IPagedList<TechDeviShopVs002.Models.Product>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -10,166 +11,180 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới sản phẩm", "Create")
+    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+    {
+        <a>
+            Nhập nội dung tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Tìm kiếm" />
+        </a>
+    }
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductCode)
+            @*@Html.DisplayNameFor(model => model.ProductName)*@
+            Tên sản phẩm
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.MetaTitle)
-        </th>
+                @Html.DisplayNameFor(model => model.ProductCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetaTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoreImage)
+            </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MoreImage)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.PromotionPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IncludeVAT)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Suppliers.SupplierName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Warranty)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateUser)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedUser)
+            @*@Html.DisplayNameFor(model => model.Price)*@
+            Giá bán
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.MetalKeywords)
+                @Html.DisplayNameFor(model => model.PromotionPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IncludeVAT)
+            </th>*@
+        <th>
+            @*@Html.DisplayNameFor(model => model.Quantity)*@
+            Số lượng
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MetalDescriptions)
-        </th>*@
+            @*@Html.DisplayNameFor(model => model.Suppliers.SupplierName)*@
+            Nhà cung cấp
+        </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsActive)
+            @*@Html.DisplayNameFor(model => model.Category.CategoryName)*@
+            Loại sản phẩm
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Warranty)*@
+            Bảo hành
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.TopHot)
-        </th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetalKeywords)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetalDescriptions)
+            </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.ViewCount)
+            @*@Html.DisplayNameFor(model => model.IsActive)*@
+            Kích hoạt
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CpuChip)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CpuType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CpuSpeed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CpuMaxSpeed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BusSpeed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ram)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RamType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BusRamSpeed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaxRam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HardDrive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Size)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Weight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Color)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Material)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ScreenSize)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Resolution)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ScreenTechnology)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TouchScreen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GraphicsCard)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sound)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ConnectionPort)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WirelessConnection)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MemoryCardSlot)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OpticalDiskDrive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Webcam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KeyboardLights)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PinType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pin)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OperatingSystem)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OtherInfo)
-        </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.TopHot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ViewCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CpuChip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CpuType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CpuSpeed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CpuMaxSpeed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusSpeed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ram)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RamType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BusRamSpeed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxRam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HardDrive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Material)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScreenSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resolution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScreenTechnology)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TouchScreen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GraphicsCard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sound)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConnectionPort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WirelessConnection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemoryCardSlot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OpticalDiskDrive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Webcam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyboardLights)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PinType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OperatingSystem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherInfo)
+            </th>*@
         <th></th>
     </tr>
 
@@ -179,30 +194,30 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductCode)
-            </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.MetaTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MoreImage)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.ProductCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MetaTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MoreImage)
+                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.PromotionPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IncludeVAT)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.PromotionPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IncludeVAT)
+                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
@@ -215,129 +230,132 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Warranty)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedUser)
-            </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.MetalKeywords)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetalDescriptions)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MetalKeywords)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MetalDescriptions)
+                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.TopHot)
-            </td>
+                    @Html.DisplayFor(modelItem => item.TopHot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ViewCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CpuChip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CpuType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CpuSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CpuMaxSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ram)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RamType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusRamSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxRam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HardDrive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Size)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Material)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScreenSize)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resolution)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScreenTechnology)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TouchScreen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GraphicsCard)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sound)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConnectionPort)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WirelessConnection)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemoryCardSlot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpticalDiskDrive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Webcam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KeyboardLights)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PinType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OperatingSystem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OtherInfo)
+                </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.ViewCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CpuChip)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CpuType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CpuSpeed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CpuMaxSpeed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BusSpeed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ram)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RamType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BusRamSpeed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxRam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HardDrive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Material)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScreenSize)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resolution)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScreenTechnology)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TouchScreen)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GraphicsCard)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sound)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConnectionPort)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WirelessConnection)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MemoryCardSlot)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OpticalDiskDrive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Webcam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KeyboardLights)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PinType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OperatingSystem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OtherInfo)
-            </td>*@
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                @Html.ActionLink("Sửa", "Edit", new { id = item.ProductID }) |
+                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.ProductID }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.ProductID })
             </td>
         </tr>
     }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))

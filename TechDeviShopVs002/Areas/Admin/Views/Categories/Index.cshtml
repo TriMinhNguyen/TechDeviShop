@@ -17,18 +17,18 @@
         <th>
             @Html.DisplayNameFor(model => model.CategoryName)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.MetaTitle)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.ParentID)
         </th>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.DisplayOrder)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.SeoTitle)
-        </th>*@
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
@@ -41,7 +41,7 @@
         <th>
             @Html.DisplayNameFor(model => model.ModifiedUser)
         </th>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.MetalKeywords)
         </th>
         <th>
@@ -50,60 +50,60 @@
         <th>
             @Html.DisplayNameFor(model => model.IsActive)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.ShowOnHome)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetaTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParentID)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.DisplayOrder)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SeoTitle)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedUser)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.MetalKeywords)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MetalDescriptions)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShowOnHome)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.MetaTitle)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.ParentID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayOrder)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.SeoTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetalKeywords)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MetalDescriptions)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.ShowOnHome)
+        </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+        </td>
+    </tr>
     }
 
 </table>
