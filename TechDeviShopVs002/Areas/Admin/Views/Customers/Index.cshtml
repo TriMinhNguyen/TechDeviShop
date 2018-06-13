@@ -1,5 +1,6 @@
-﻿@model IEnumerable<TechDeviShopVs002.Models.Customer>
-
+﻿@model PagedList.IPagedList<TechDeviShopVs002.Models.Customer>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -10,94 +11,105 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới khách hàng", "Create")
 </p>
+@using (Html.BeginForm("Index", "Customers", FormMethod.Get))
+{
+    <p>
+        Nhập nội dung tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerName)
+            Tên khách hàng
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerGender)
+            Giới tính
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerBirthday)
+            Ngày sinh
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerPhone)
+            Điện thoại
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerEmail)
+            Email
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.CustomerAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerCity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerDistrict)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostCost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrtherDetail)
+                </th>*@
         <th>
-                @Html.DisplayNameFor(model => model.CustomerAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerCity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerDistrict)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PostCost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrtherDetail)
-            </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
+            Kích hoạt
         </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerGender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerBirthday)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerPhone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerEmail)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-                @Html.DisplayFor(modelItem => item.CustomerAddress)
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CustomerCity)
+                @Html.DisplayFor(modelItem => item.CustomerGender, new List<SelectListItem> { new SelectListItem { Text = "Nam", Value = "True" }, new SelectListItem { Text = "Nữ", Value = "False" } })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CustomerDistrict)
+                @Html.DisplayFor(modelItem => item.CustomerBirthday)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PostCost)
+                @Html.DisplayFor(modelItem => item.CustomerPhone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OrtherDetail)
-            </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.CustomerID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.CustomerID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.CustomerID })
-        </td>
-    </tr>
+                @Html.DisplayFor(modelItem => item.CustomerEmail)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.CustomerAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerCity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerDistrict)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrtherDetail)
+                    </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.CustomerID }) |
+                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.CustomerID }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.CustomerID })
+            </td>
+        </tr>
     }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))

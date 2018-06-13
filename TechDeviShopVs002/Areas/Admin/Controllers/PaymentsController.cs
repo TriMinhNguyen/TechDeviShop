@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,10 +17,29 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         private TechDeviShopDBContext db = new TechDeviShopDBContext();
 
         // GET: Admin/Payments
-        public ActionResult Index()
+        public ViewResult Index(string currentFilter, string searchString, int? page)
         {
-            var _payment = db.Payments.Include(o => o.PaymentMethod).Include(o => o.PaymentStatus);
-            return View(_payment.ToList());
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var payment = db.Payments.Include(p => p.PaymentMethod).Include(p => p.PaymentStatus);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                payment = payment.Where(s => s.PaymentMethod.Name.Contains(searchString)
+                                       || s.PaymentStatus.Name.Contains(searchString));
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(payment.OrderBy(u => u.CreateDate).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/Payments/Details/5

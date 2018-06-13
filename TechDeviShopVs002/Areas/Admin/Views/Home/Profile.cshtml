@@ -1,0 +1,222 @@
+﻿@model TechDeviShopVs002.Models.User
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+
+    .tab {
+        float: left;
+        min-height: 300px;
+    }
+
+    .tabcontent {
+        float: left;
+        min-height: 300px;
+        background-color: white;
+    }
+
+    .myProfile {
+        margin: 0;
+        padding: 30px;
+    }
+
+    .myProfileBody {
+        margin: 0;
+        padding: 0;
+    }
+
+    .myProfileItem {
+        width: 200px;
+        display: inline-block;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        padding-right: 10px;
+        box-sizing: border-box;
+        vertical-align: top;
+        margin-bottom: 40px;
+    }
+
+    .myProfileItemTitle {
+        color: black;
+        font-size: 15px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    .myProfileItemInfo {
+        color: black;
+        font-size: 15px;
+        padding-top: 7px;
+    }
+
+    .myProfileFooter {
+        width: 288px;
+        margin-top: 50px;
+    }
+
+        .myProfileFooter .a {
+            margin-bottom: 20px;
+            display: block;
+        }
+
+    .mybtn {
+        background-color: #1a9cb7;
+        border-color: #1a9cb7;
+        color: #fff;
+        border-style: solid;
+        margin: 0;
+        height: 48px;
+        padding: 0 36px;
+        font-size: 14px;
+        line-height: 46px;
+        border-width: 1px;
+        text-align: center;
+    }
+
+    .myChangePassForm {
+        width: 350px;
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+
+        .myChangePassForm input {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            width: 100%;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            height: 40px;
+            padding: 0 10px 0 10px;
+            margin-bottom: 2px;
+            outline: none;
+        }
+</style>
+
+@section header{
+    Quản lý thông tin cá nhân
+}
+
+<div class="single">
+    <div class="container" style="padding:0; background-color:#eff0f4">
+        <div class="row" style="min-height:50px">
+            <div class="col-xs-3">
+
+            </div>
+            <div class="col-xs-9">
+                <a style="padding:2px; font-size: 30px;">Thông tin</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <ul class="tab" style="list-style-type:none; max-width:190px">
+                    <li><a>Quản lý tài khoản</a></li>
+                    <li class="tablinks btn" onclick="openCity(event, 'ProfileInfo')" id="defaultOpen">Thông tin cá nhân</li>
+                    <li class="tablinks btn" onclick="openCity(event, 'ChangePass')">Đổi mật khẩu</li>
+                </ul>
+            </div>
+            <div class="col-xs-6" style="border: 1px solid #ccc; background-color:white">
+                <div id="ProfileInfo" class="tabcontent">
+                    <div class="myProfile">
+                        <div class="myProfileBody">
+                            <div class="myProfileItem">
+                                <h3 class="myProfileItemTitle">
+                                    <a>Tên</a>
+                                </h3>
+                                <a class="myProfileItemInfo">@Model.Name</a>
+                            </div>
+                            <div class="myProfileItem" style="width:250px">
+                                <h3 class="myProfileItemTitle">
+                                    <a>Địa chỉ Email</a>
+                                </h3>
+                                <a class="myProfileItemInfo">@Model.Email</a>
+                            </div>
+                            <div class="myProfileItem">
+                                <h3 class="myProfileItemTitle">
+                                    <a>Số điện thoại</a>
+                                </h3>
+                                <a class="myProfileItemInfo">@Model.Phone</a>
+                            </div>
+                            <div class="myProfileItem">
+                                <h3 class="myProfileItemTitle">
+                                    <a>Ngày sinh</a>
+                                </h3>
+                                <a class="myProfileItemInfo">@Model.Birthday</a>
+                            </div>
+                            <div class="myProfileItem">
+                                <h3 class="myProfileItemTitle">
+                                    <a>Giới tính</a>
+                                </h3>
+                                <a class="myProfileItemInfo">@Html.Encode(Model.Gender == true ? "Nam" : "Nữ")</a>
+                            </div>
+                            <div class="myProfileItem">
+                                <h3 class="myProfileItemTitle">
+                                    <a>Phân quyền</a>
+                                </h3>
+                                <a class="myProfileItemInfo">@Model.Role.RoleName</a>
+                            </div>
+                        </div>
+                        <div class="myProfileFooter">
+                            <a class="btn btn-default mybtn" href="">Thay đổi thông tin</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ChangePass" class="tabcontent">
+                    <div class="myProfile">
+                        <div class="myProfileBody">
+                            <div class="myChangePassForm">
+                                <label>Mật khẩu hiện tại</label>
+                                <input type="password" placeholder="Vui lòng nhập mật khẩu hiện tại của bạn" />
+                                <b></b>
+                                <span></span>
+                            </div>
+                            <div class="myChangePassForm">
+                                <label>Mật khẩu mới</label>
+                                <input type="password" placeholder="Tối thiểu 6 kí tự bao gồm cả chữ và số" />
+                                <b></b>
+                                <span></span>
+                            </div>
+                            <div class="myChangePassForm">
+                                <label>Nhập lại mật khẩu </label>
+                                <input type="password" placeholder="Nhập lại mật khẩu của bạn" />
+                                <b></b>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="myProfileFooter">
+                            <button type="button" class="btn btn-default mybtn" href="">Thay đổi</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <script>
+                function openCity(evt, cityName) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += " active";
+                }
+
+                // Get the element with id="defaultOpen" and click on it
+                document.getElementById("defaultOpen").click();
+            </script>
+        </div>
+        <br />
+    </div>
+</div>
+
+
+
+

@@ -26,7 +26,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CustomerGender)
+            @*@Html.DisplayFor(model => model.CustomerGender)*@
+            @Html.Encode(Model.CustomerGender == true ? "Nam" : "Nữ")
         </dd>
 
         <dt>
@@ -104,6 +105,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CustomerID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.CustomerID }) |
+    @Html.ActionLink("Thoát", "Index")
 </p>

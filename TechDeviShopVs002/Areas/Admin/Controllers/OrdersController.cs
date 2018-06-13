@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,11 +17,32 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         private TechDeviShopDBContext db = new TechDeviShopDBContext();
 
         // GET: Admin/Orders
-        public ActionResult Index()
+        public ViewResult Index(string currentFilter, string searchString, int? page)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var orders = db.Orders.Include(o => o.Customer).Include(o => o.OrderStatus).Include(o => o.Shipper).Include(o => o.ShippingMethod);
-            return View(orders.ToList());
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                orders = orders.Where(s => s.Customer.CustomerName.Contains(searchString)
+                                       || s.ShippingMethod.Title.Contains(searchString)
+                                       || s.OrderStatus.OrderStatusName.Contains(searchString));
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(orders.OrderBy(u => u.CreateDate).ToPagedList(pageNumber, pageSize));
         }
+
 
         // GET: Admin/Orders/Details/5
         public ActionResult Details(int? id)

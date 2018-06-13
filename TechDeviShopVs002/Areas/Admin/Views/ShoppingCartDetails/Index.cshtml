@@ -1,5 +1,6 @@
-﻿@model IEnumerable<TechDeviShopVs002.Models.ShoppingCartDetail>
-
+﻿@model PagedList.IPagedList<TechDeviShopVs002.Models.ShoppingCartDetail>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -10,40 +11,49 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới giỏ hàng chi tiết", "Create")
 </p>
+@using (Html.BeginForm("Index", "ShoppingCartDetails", FormMethod.Get))
+{
+    <p>
+        Nhập nội dung tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ShoppingCartID)
+            Mã giỏ hàng
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.ProductID)
-        </th>*@
+                @Html.DisplayNameFor(model => model.ProductID)
+            </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.ProductName)
+            Tên sản phẩm
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
+            Giá bán
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Quantity)
+            Số lượng
+        </th>
+        <th>
+            Giá bán khuyến mãi
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.PromotionPrice)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateUser)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedUser)
-        </th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedUser)
+            </th>*@
         <th></th>
     </tr>
 
@@ -54,8 +64,8 @@
                 @Html.DisplayFor(modelItem => item.ShoppingCartID)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.ProductID)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.ProductID)
+                </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.ProductName)
             </td>
@@ -65,27 +75,30 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
-            @*<td>
+            <td>
                 @Html.DisplayFor(modelItem => item.PromotionPrice)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedUser)
+                </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.CreateUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedUser)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ShoppingCartDetailID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ShoppingCartDetailID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ShoppingCartDetailID })
+                @Html.ActionLink("Sửa", "Edit", new { id = item.ShoppingCartDetailID }) |
+                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.ShoppingCartDetailID }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.ShoppingCartDetailID })
             </td>
         </tr>
     }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))

@@ -6,7 +6,7 @@
 }
 
 @section header{
-    Danh sách trạng thái hóa đơn
+    Danh mục trạng thái hóa đơn
 }
 
 <p>
@@ -26,7 +26,7 @@
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.CreateUser)
         </th>
         <th>
@@ -34,7 +34,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ModifiedUser)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.IsActive)
         </th>
@@ -56,7 +56,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.CreateUser)
             </td>
             <td>
@@ -64,7 +64,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ModifiedUser)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>

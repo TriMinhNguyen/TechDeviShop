@@ -1,5 +1,6 @@
-﻿@model IEnumerable<TechDeviShopVs002.Models.Payment>
-
+﻿@model PagedList.IPagedList<TechDeviShopVs002.Models.Payment>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -11,48 +12,57 @@
 
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới thanh toán", "Create")
 </p>
+@using (Html.BeginForm("Index", "Products", FormMethod.Get))
+{
+    <p>
+        Nhập nội dung tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.OrderID)
+            Mã hóa đơn
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PaymentMethod.Name)
+            Phương thức thanh toán
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PaymentStatus.Name)
+            Tình trạng thanh toán
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PaymentDate)
+            Ngày thanh toán
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TotalPrice)
+            Tổng tiền
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.Note)
-            </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateUser)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedUser)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.TransactionID)
+                    @Html.DisplayNameFor(model => model.Note)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TrackingID)
-            </th>*@
+                @Html.DisplayNameFor(model => model.CreateUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedUser)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.TransactionID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TrackingID)
+                </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.IsActive)
+            Kích hoạt
         </th>
         <th></th>
     </tr>
@@ -76,35 +86,38 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             @*<td>
-                    @Html.DisplayFor(modelItem => item.Note)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateUser)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifiedUser)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.TransactionID)
+                        @Html.DisplayFor(modelItem => item.Note)
+                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TrackingID)
-                </td>*@
+                    @Html.DisplayFor(modelItem => item.CreateUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedUser)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.TransactionID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrackingID)
+                    </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.PaymentID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PaymentID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PaymentID })
+                @Html.ActionLink("Sửa", "Edit", new { id = item.PaymentID }) |
+                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.PaymentID }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.PaymentID })
             </td>
         </tr>
     }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))

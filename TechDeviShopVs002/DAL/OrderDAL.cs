@@ -69,6 +69,18 @@ namespace TechDeviShopVs002.DAL
             return db.Orders.Find(id);
         }
 
+        public List<Order> OrderHistory(int id)
+        {
+            var order = db.Orders.Where(x => x.CustomerID == id).ToList();
+            return order;
+        }
+
+        public List<Order> OngoingOrders(int id)
+        {
+            var order = db.Orders.Where(x => x.CustomerID == id && x.OrderStatusID < 4).ToList();
+            return order;
+        }
+
         public bool Delete(int id)
         {
             try

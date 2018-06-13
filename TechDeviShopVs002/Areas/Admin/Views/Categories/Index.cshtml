@@ -1,109 +1,122 @@
-﻿@model IEnumerable<TechDeviShopVs002.Models.Category>
-
+﻿@model PagedList.IPagedList<TechDeviShopVs002.Models.Category>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 @section header{
-    Danh sách Danh mục
+    Danh mục loại sản phẩm
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới danh mục loại sản phẩm", "Create")
 </p>
+@using (Html.BeginForm("Index", "Categories", FormMethod.Get))
+{
+    <p>
+        Nhập nội dung tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CategoryName)
+            Tên danh mục
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.MetaTitle)
-        </th>*@
+                @Html.DisplayNameFor(model => model.MetaTitle)
+            </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.ParentID)
+            Danh mục cha
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DisplayOrder)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.SeoTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateUser)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedUser)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MetalKeywords)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MetalDescriptions)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
+            Thứ tự hiển thị
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.ShowOnHome)
-        </th>*@
+                @Html.DisplayNameFor(model => model.SeoTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetalKeywords)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MetalDescriptions)
+            </th>*@
+        <th>
+            Kích hoạt
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.ShowOnHome)
+            </th>*@
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryName)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.MetaTitle)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.ParentID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DisplayOrder)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.SeoTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateUser)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedUser)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MetalKeywords)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MetalDescriptions)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.ShowOnHome)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.MetaTitle)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayOrder)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.SeoTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifiedUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MetalKeywords)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MetalDescriptions)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ShowOnHome)
+                </td>*@
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.CategoryID }) |
+                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.CategoryID }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.CategoryID })
+            </td>
+        </tr>
     }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))

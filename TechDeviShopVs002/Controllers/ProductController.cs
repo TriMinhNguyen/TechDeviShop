@@ -58,7 +58,7 @@ namespace TechDeviShopVs002.Controllers
         public ActionResult Detail(int id)
         {
             var product = new ProductDAL().ViewDetail(id);
-            
+            ViewBag.Comment = new CommentDAL().ListByProductID(product.ProductID);
             return View(product);
         }
     }

@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = Model.ProductName;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var listComment = (List<TechDeviShopVs002.Models.Comment>)ViewBag.Comment;
 }
 
 
@@ -164,10 +165,10 @@
                 <p><span>@Model.Price</span> <i class="item_price">@Model.PromotionPrice</i> VNĐ</p>
                 <form action="#" method="post">
                     @*<input type="hidden" name="cmd" value="_cart">
-                    <input type="hidden" name="add" value="1">
-                    <input type="hidden" name="w3ls_item" value="@Model.ProductName">
-                    <input type="hidden" name="amount" value="@Model.PromotionPrice">
-                    <button type="submit" class="w3ls-cart">Add to cart</button>*@
+                        <input type="hidden" name="add" value="1">
+                        <input type="hidden" name="w3ls_item" value="@Model.ProductName">
+                        <input type="hidden" name="amount" value="@Model.PromotionPrice">
+                        <button type="submit" class="w3ls-cart">Add to cart</button>*@
                     <a class="btn btn-default" href="/them-gio-hang?productId=@Model.ProductID&quantity=1">Add to cart</a>
                 </form>
             </div>
@@ -368,83 +369,72 @@
                 </div>
 
                 <div class="tab-2 resp-tab-content additional_info_grid" aria-labelledby="tab_Reviews">
-                    <h4>(2) Reviews</h4>
-                    <div class="additional_info_sub_grids">
-                        <div class="col-xs-2 additional_info_sub_grid_left">
-                            <img src="~/Assets/Client/images/t1.png" alt=" " class="img-responsive" />
-                        </div>
-                        <div class="col-xs-10 additional_info_sub_grid_right">
-                            <div class="additional_info_sub_grid_rightl">
-                                <a href="single.html">Laura</a>
-                                <h5>Oct 06, 2016.</h5>
-                                <p>
-                                    Quis autem vel eum iure reprehenderit qui in ea voluptate
-                                    velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
-                                    quo voluptas nulla pariatur.
-                                </p>
-                            </div>
-                            <div class="additional_info_sub_grid_rightr">
-                                <div class="rating">
-                                    <div class="rating-left">
-                                        <img src="~/Assets/Client/images/star-.png" alt=" " class="img-responsive">
+                    <p style="padding-bottom:10px; font-size:26px">Reviews comment</p>
+                    <div style="border-style:solid; border-width:1px; min-height:300px">
+                        @if (listComment != null)
+                        {
+                            foreach (var item in listComment)
+                            {
+                                <div class="additional_info_sub_grids">
+                                    <div class="col-xs-2 additional_info_sub_grid_left">
+                                        <img src="@item.User.Avatar" alt=" " class="img-responsive" />
                                     </div>
-                                    <div class="rating-left">
-                                        <img src="~/Assets/Client/images/star-.png" alt=" " class="img-responsive">
-                                    </div>
-                                    <div class="rating-left">
-                                        <img src="~/Assets/Client/images/star-.png" alt=" " class="img-responsive">
-                                    </div>
-                                    <div class="rating-left">
-                                        <img src="~/Assets/Client/images/star.png" alt=" " class="img-responsive">
-                                    </div>
-                                    <div class="rating-left">
-                                        <img src="~/Assets/Client/images/star.png" alt=" " class="img-responsive">
+                                    <div class="col-xs-10 additional_info_sub_grid_right">
+                                        <div class="additional_info_sub_grid_rightl">
+                                            <a href="#">@item.User.Name</a>
+                                            <h5>@item.CreateDate</h5>
+                                            <p>
+                                                @item.CommentContent.ToString();
+                                            </p>
+                                        </div>
+                                        <div class="clearfix"> </div>
                                     </div>
                                     <div class="clearfix"> </div>
                                 </div>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                        <div class="clearfix"> </div>
+                            }
+                        }
+
                     </div>
-                    <div class="additional_info_sub_grids">
-                        <div class="col-xs-2 additional_info_sub_grid_left">
-                            <img src="~/Assets/Client/images/t2.png" alt=" " class="img-responsive" />
-                        </div>
-                        <div class="col-xs-10 additional_info_sub_grid_right">
-                            <div class="additional_info_sub_grid_rightl">
-                                <a href="single.html">Michael</a>
-                                <h5>Oct 04, 2016.</h5>
-                                <p>
-                                    Quis autem vel eum iure reprehenderit qui in ea voluptate
-                                    velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
-                                    quo voluptas nulla pariatur.
-                                </p>
+
+                    @*<div class="additional_info_sub_grids">
+                            <div class="col-xs-2 additional_info_sub_grid_left">
+                                <img src="~/Assets/Client/images/t2.png" alt=" " class="img-responsive" />
                             </div>
-                            <div class="additional_info_sub_grid_rightr">
-                                <div class="rating">
-                                    <div class="rating-left">
-                                        <img src="~/Assets/Client/images/star-.png" alt=" " class="img-responsive">
-                                    </div>
-                                    <div class="rating-left">
-                                        <img src="~/Assets/Client/images/star-.png" alt=" " class="img-responsive">
-                                    </div>
-                                    <div class="rating-left">
-                                        <img src="~/Assets/Client/images/star.png" alt=" " class="img-responsive">
-                                    </div>
-                                    <div class="rating-left">
-                                        <img src="~/Assets/Client/images/star.png" alt=" " class="img-responsive">
-                                    </div>
-                                    <div class="rating-left">
-                                        <img src="~/Assets/Client/images/star.png" alt=" " class="img-responsive">
-                                    </div>
-                                    <div class="clearfix"> </div>
+                            <div class="col-xs-10 additional_info_sub_grid_right">
+                                <div class="additional_info_sub_grid_rightl">
+                                    <a href="single.html">Michael</a>
+                                    <h5>Oct 04, 2016.</h5>
+                                    <p>
+                                        Quis autem vel eum iure reprehenderit qui in ea voluptate
+                                        velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
+                                        quo voluptas nulla pariatur.
+                                    </p>
                                 </div>
+                                <div class="additional_info_sub_grid_rightr">
+                                    <div class="rating">
+                                        <div class="rating-left">
+                                            <img src="~/Assets/Client/images/star-.png" alt=" " class="img-responsive">
+                                        </div>
+                                        <div class="rating-left">
+                                            <img src="~/Assets/Client/images/star-.png" alt=" " class="img-responsive">
+                                        </div>
+                                        <div class="rating-left">
+                                            <img src="~/Assets/Client/images/star.png" alt=" " class="img-responsive">
+                                        </div>
+                                        <div class="rating-left">
+                                            <img src="~/Assets/Client/images/star.png" alt=" " class="img-responsive">
+                                        </div>
+                                        <div class="rating-left">
+                                            <img src="~/Assets/Client/images/star.png" alt=" " class="img-responsive">
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"> </div>
                             </div>
                             <div class="clearfix"> </div>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
+                        </div>*@
+
                     <div class="review_grids">
                         <h5>Add A Review</h5>
                         <form action="#" method="post">

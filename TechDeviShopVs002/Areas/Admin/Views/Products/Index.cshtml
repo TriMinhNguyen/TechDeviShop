@@ -12,14 +12,15 @@
 
 <p>
     @Html.ActionLink("Thêm mới sản phẩm", "Create")
-    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
-    {
-        <a>
-            Nhập nội dung tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-            <input type="submit" value="Tìm kiếm" />
-        </a>
-    }
 </p>
+@using (Html.BeginForm("Index", "Products", FormMethod.Get))
+{
+    <p>
+        Nhập nội dung tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -359,3 +360,4 @@
 <br />
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+

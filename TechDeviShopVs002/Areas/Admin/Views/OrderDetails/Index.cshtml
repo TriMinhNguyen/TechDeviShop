@@ -1,5 +1,6 @@
-﻿@model IEnumerable<TechDeviShopVs002.Models.OrderDetail>
-
+﻿@model PagedList.IPagedList<TechDeviShopVs002.Models.OrderDetail>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -10,32 +11,41 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới hóa đơn chi tiết", "Create")
 </p>
+@using (Html.BeginForm("Index", "OrderDetails", FormMethod.Get))
+{
+    <p>
+        Nhập nội dung tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.OrderID)
+            Mã hóa đơn
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.ProductID)
+            Mã sản phẩm
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.ProductName)
+            Tên sản phẩm
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Product.ProductCode)
+        </th>*@
+        <th>
+            Giá bán
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.Price)
+            Số lượng
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Quantity)
+            Giá bán khuyến mãi
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Product.PromotionPrice)
-        </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
         <th>
@@ -46,9 +56,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ModifiedUser)
-        </th>
+        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.IsActive)
+            Kích hoạt
         </th>
         <th></th>
     </tr>
@@ -65,9 +75,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Product.ProductName)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Product.ProductCode)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Product.Price)
             </td>
@@ -77,7 +87,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Product.PromotionPrice)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.CreateDate)
             </td>
             <td>
@@ -88,16 +98,19 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ModifiedUser)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.OrderDetailID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.OrderDetailID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.OrderDetailID })
+                @Html.ActionLink("Sửa", "Edit", new { id = item.OrderDetailID }) |
+                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.OrderDetailID }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.OrderDetailID })
             </td>
         </tr>
     }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))

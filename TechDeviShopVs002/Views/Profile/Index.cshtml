@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var listOrderHistory = (List<TechDeviShopVs002.Models.Order>)ViewBag.OrderHistory;
+    var listOngingOrder = (List<TechDeviShopVs002.Models.Order>)ViewBag.OngoingOrders;
 }
 
 <link href="~/Assets/Client/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -20,7 +22,7 @@
 
 
 <style>
-    
+
     .tab {
         float: left;
         min-height: 300px;
@@ -71,10 +73,10 @@
         margin-top: 50px;
     }
 
-    .myProfileFooter .a {
-        margin-bottom: 20px;
-        display: block;
-    }
+        .myProfileFooter .a {
+            margin-bottom: 20px;
+            display: block;
+        }
 
     .mybtn {
         background-color: #1a9cb7;
@@ -97,17 +99,17 @@
         position: relative;
     }
 
-    .myChangePassForm input {
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        width: 100%;
-        border: 1px solid #ddd;
-        font-size: 14px;
-        height: 40px;
-        padding: 0 10px 0 10px;
-        margin-bottom: 2px;
-        outline: none;
-    }
+        .myChangePassForm input {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            width: 100%;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            height: 40px;
+            padding: 0 10px 0 10px;
+            margin-bottom: 2px;
+            outline: none;
+        }
 </style>
 
 
@@ -130,7 +132,7 @@
                     <li class="tablinks btn" onclick="openCity(event, 'ChangePass')">Đổi mật khẩu</li>
                     <li><a>Đơn hàng của tôi</a></li>
                     <li class="tablinks btn" onclick="openCity(event, 'OngoingOrders')">Đơn hàng đang thực hiện</li>
-                    <li class="tablinks btn" onclick="openCity(event, 'OrderHistory')">Lịch sử đơn hàng</li>
+                    <li class="tablinks btn" onclick="openCity(event, 'OrderHistory')">Lịch sử mua hàng</li>
                 </ul>
             </div>
             <div class="col-xs-9" style="border: 1px solid #ccc; background-color:white">
@@ -177,6 +179,7 @@
                 <div id="ChangePass" class="tabcontent">
                     <div class="myProfile">
                         <div class="myProfileBody">
+                            <p style="padding-bottom:10px">Ghi chú: Mật khẩu mặc định sau khi đăng nhập bằng Facebook khi chưa đổi là 123456</p>
                             <div class="myChangePassForm">
                                 <label>Mật khẩu hiện tại</label>
                                 <input type="password" placeholder="Vui lòng nhập mật khẩu hiện tại của bạn" />
@@ -203,13 +206,126 @@
                 </div>
 
                 <div id="OngoingOrders" class="tabcontent">
-                    <h3>Đơn hàng</h3>
-                    <p>Đơn hàng đang thực hiện</p>
+                    <label style="padding-bottom:10px">Hóa đơn đang thực hiện</label>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Tên khách hàng
+                            </th>
+                            <th>
+                                Tình trạng hóa đơn
+                            </th>
+                            <th>
+                                Phương thức giao hàng
+                            </th>
+                            <th>
+                                Ngày lập HĐ
+                            </th>
+                            <th>
+                                Ngày BĐ giao hàng
+                            </th>
+                            <th>
+                                Hạn yêu cầu giao hàng
+                            </th>
+                            <th>
+                                Kích hoạt
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @*@foreach (var item in listOngingOrder)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderStatus.OrderStatusName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ShippingMethod.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ShippedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RequiredDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsActive)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.OrderID }) |
+                                    @Html.ActionLink("Xem chi tiết", "Details", new { id = item.OrderID })
+                                </td>
+                            </tr>
+                        }*@
+
+                    </table>
                 </div>
 
                 <div id="OrderHistory" class="tabcontent">
-                    <h3>Đơn hàng</h3>
-                    <p>Lịch sử đơn hàng</p>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Tên khách hàng
+                            </th>
+                            <th>
+                                Tình trạng hóa đơn
+                            </th>
+                            <th>
+                                Phương thức giao hàng
+                            </th>
+                            <th>
+                                Ngày lập HĐ
+                            </th>
+                            <th>
+                                Ngày BĐ giao hàng
+                            </th>
+                            <th>
+                                Hạn yêu cầu giao hàng
+                            </th>
+                            <th>
+                                Kích hoạt
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @*@foreach (var item in listOrderHistory)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderStatus.OrderStatusName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ShippingMethod.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OrderDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ShippedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RequiredDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsActive)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.OrderID }) |
+                                    @Html.ActionLink("Xem chi tiết", "Details", new { id = item.OrderID })
+                                </td>
+                            </tr>
+                        }*@
+
+                    </table>
                 </div>
             </div>
             <script>

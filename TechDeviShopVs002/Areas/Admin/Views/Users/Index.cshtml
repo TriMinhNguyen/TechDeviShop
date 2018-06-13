@@ -12,14 +12,15 @@
 
 <p>
     @Html.ActionLink("Thêm mới tài khoản", "Create")
-    @using (Html.BeginForm("Index", "Users", FormMethod.Get))
-    {
-        <a>
-            Nhập nội dung tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-            <input type="submit" value="Tìm kiếm" />
-        </a>
-    }
 </p>
+@using (Html.BeginForm("Index", "Users", FormMethod.Get))
+{
+    <p>
+        Nhập nội dung tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th style="width:200px">
@@ -61,7 +62,7 @@
         <th></th>
     </tr>
 
-    @foreach(var item in Model)
+    @foreach (var item in Model)
     {
         <tr>
             <td style="width:200px">

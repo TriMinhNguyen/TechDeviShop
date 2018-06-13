@@ -1539,6 +1539,7 @@
     <Content Include="Assets\Client\js\jquery.wmuSlider.js" />
     <Content Include="Assets\Client\js\minicart.js" />
     <Content Include="Assets\Client\js\script.js" />
+    <Content Include="Areas\Admin\Views\Home\Profile.cshtml" />
     <None Include="Assets\Client\NganLuong\Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Assets\Client\NganLuong\Scripts\jquery-1.4.1.js" />
     <Content Include="Assets\Client\NganLuong\Scripts\jquery-1.4.1.min.js" />
