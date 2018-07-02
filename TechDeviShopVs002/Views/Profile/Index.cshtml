@@ -1,4 +1,4 @@
-﻿
+﻿@model TechDeviShopVs002.Models.Customer
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -143,31 +143,31 @@
                                 <h3 class="myProfileItemTitle">
                                     <a>Tên</a>
                                 </h3>
-                                <a class="myProfileItemInfo">Nguyễn Minh Trí</a>
+                                <a class="myProfileItemInfo">@Model.CustomerName</a>
                             </div>
                             <div class="myProfileItem" style="width:250px">
                                 <h3 class="myProfileItemTitle">
                                     <a>Địa chỉ Email</a>
                                 </h3>
-                                <a class="myProfileItemInfo">edwordnguyen@gmail.com</a>
+                                <a class="myProfileItemInfo">@Model.CustomerEmail</a>
                             </div>
                             <div class="myProfileItem">
                                 <h3 class="myProfileItemTitle">
                                     <a>Số điện thoại</a>
                                 </h3>
-                                <a class="myProfileItemInfo">01683696646</a>
+                                <a class="myProfileItemInfo">@Model.CustomerPhone</a>
                             </div>
                             <div class="myProfileItem">
                                 <h3 class="myProfileItemTitle">
                                     <a>Ngày sinh</a>
                                 </h3>
-                                <a class="myProfileItemInfo">16/05/1995</a>
+                                <a class="myProfileItemInfo">@Model.CustomerBirthday</a>
                             </div>
                             <div class="myProfileItem">
                                 <h3 class="myProfileItemTitle">
                                     <a>Giới tính</a>
                                 </h3>
-                                <a class="myProfileItemInfo">Nam</a>
+                                <a class="myProfileItemInfo">@Html.Encode(Model.CustomerGender == true ? "Nam" : "Nữ")</a>
                             </div>
                         </div>
                         <div class="myProfileFooter">
@@ -206,7 +206,7 @@
                 </div>
 
                 <div id="OngoingOrders" class="tabcontent">
-                    <label style="padding-bottom:10px">Hóa đơn đang thực hiện</label>
+                    @*<label style="padding-bottom:10px">Hóa đơn đang thực hiện</label>*@
                     <table class="table">
                         <tr>
                             <th>
@@ -227,42 +227,42 @@
                             <th>
                                 Hạn yêu cầu giao hàng
                             </th>
-                            <th>
-                                Kích hoạt
-                            </th>
                             <th></th>
                         </tr>
 
-                        @*@foreach (var item in listOngingOrder)
+                        @foreach (var item in listOngingOrder)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                                    @*@Html.DisplayFor(modelItem => item.Customer.CustomerName)*@
+                                    @item.Customer.CustomerName
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.OrderStatus.OrderStatusName)
+                                    @*@Html.DisplayFor(modelItem => item.OrderStatus.OrderStatusName)*@
+                                    @item.OrderStatus.OrderStatusName
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ShippingMethod.Title)
+                                    @*@Html.DisplayFor(modelItem => item.ShippingMethod.Title)*@
+                                    @item.ShippingMethod.Title
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.OrderDate)
+                                    @*@Html.DisplayFor(modelItem => item.OrderDate)*@
+                                    @item.OrderDate
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ShippedDate)
+                                    @*@Html.DisplayFor(modelItem => item.ShippedDate)*@
+                                    @item.ShippedDate
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.RequiredDate)
+                                    @*@Html.DisplayFor(modelItem => item.RequiredDate)*@
+                                    @item.RequiredDate
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IsActive)
-                                </td>
-                                <td>
+                                @*<td>
                                     @Html.ActionLink("Sửa", "Edit", new { id = item.OrderID }) |
                                     @Html.ActionLink("Xem chi tiết", "Details", new { id = item.OrderID })
-                                </td>
+                                </td>*@
                             </tr>
-                        }*@
+                        }
 
                     </table>
                 </div>
@@ -288,42 +288,42 @@
                             <th>
                                 Hạn yêu cầu giao hàng
                             </th>
-                            <th>
-                                Kích hoạt
-                            </th>
                             <th></th>
                         </tr>
 
-                        @*@foreach (var item in listOrderHistory)
+                        @foreach (var item in listOrderHistory)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                                    @*@Html.DisplayFor(modelItem => item.Customer.CustomerName)*@
+                                    @item.Customer.CustomerName
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.OrderStatus.OrderStatusName)
+                                    @*@Html.DisplayFor(modelItem => item.OrderStatus.OrderStatusName)*@
+                                    @item.OrderStatus.OrderStatusName
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ShippingMethod.Title)
+                                    @*@Html.DisplayFor(modelItem => item.ShippingMethod.Title)*@
+                                    @item.ShippingMethod.Title
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.OrderDate)
+                                    @*@Html.DisplayFor(modelItem => item.OrderDate)*@
+                                    @item.OrderDate
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ShippedDate)
+                                    @*@Html.DisplayFor(modelItem => item.ShippedDate)*@
+                                    @item.ShippedDate
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.RequiredDate)
+                                    @*@Html.DisplayFor(modelItem => item.RequiredDate)*@
+                                    @item.RequiredDate
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IsActive)
-                                </td>
-                                <td>
+                                @*<td>
                                     @Html.ActionLink("Sửa", "Edit", new { id = item.OrderID }) |
                                     @Html.ActionLink("Xem chi tiết", "Details", new { id = item.OrderID })
-                                </td>
+                                </td>*@
                             </tr>
-                        }*@
+                        }
 
                     </table>
                 </div>

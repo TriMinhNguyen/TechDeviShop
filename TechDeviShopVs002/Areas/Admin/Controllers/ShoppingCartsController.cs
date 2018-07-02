@@ -68,7 +68,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ShoppingCartID,ShoppingDate,ExpireDate,Note,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] ShoppingCart shoppingCart)
+        public ActionResult Create([Bind(Include = "ShoppingCartID,CustomerID,ShoppingDate,ExpireDate,Note,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] ShoppingCart shoppingCart)
         {
             var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)
@@ -111,7 +111,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ShoppingCartID,ShoppingDate,ExpireDate,Note,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] ShoppingCart shoppingCart)
+        public ActionResult Edit([Bind(Include = "ShoppingCartID,CustomerID,ShoppingDate,ExpireDate,Note,CreateDate,CreateUser,ModifiedDate,ModifiedUser,IsActive")] ShoppingCart shoppingCart)
         {
             var UserSession = (UserLogin)Session[TechDeviShopVs002.Common.CommonConstants.USER_SESSION];
             if (ModelState.IsValid)

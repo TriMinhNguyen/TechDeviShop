@@ -23,6 +23,8 @@ namespace TechDeviShopVs002.DAL
         public int Insert(Order entity)
         {
             entity.CreateDate = DateTime.Now;
+            entity.ShippedDate = DateTime.Now.AddDays(1);
+            entity.RequiredDate = DateTime.Now.AddDays(3);
             db.Orders.Add(entity);
             db.SaveChanges();
             return entity.OrderID;
@@ -71,7 +73,8 @@ namespace TechDeviShopVs002.DAL
 
         public List<Order> OrderHistory(int id)
         {
-            var order = db.Orders.Where(x => x.CustomerID == id).ToList();
+            DateTime _tnow = DateTime.Now;
+            var order = db.Orders.Where(x => x.CustomerID == id && x.RequiredDate < _tnow).ToList();
             return order;
         }
 

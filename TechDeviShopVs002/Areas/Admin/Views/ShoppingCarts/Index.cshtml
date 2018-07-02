@@ -23,6 +23,9 @@
 <table class="table">
     <tr>
         <th>
+            Khách hàng
+        </th>
+        <th>
             Ngày khởi tạo
         </th>
         <th>
@@ -32,17 +35,17 @@
             Ghi chú
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.CreateDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifiedUser)
-            </th>*@
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedUser)
+        </th>*@
         <th>
             Kích hoạt
         </th>
@@ -51,37 +54,40 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShoppingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExpireDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Note)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.CreateDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateUser)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModifiedDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModifiedUser)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.ActionLink("Sửa", "Edit", new { id = item.ShoppingCartID }) |
-                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.ShoppingCartID }) |
-                @Html.ActionLink("Xóa", "Delete", new { id = item.ShoppingCartID })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShoppingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpireDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedUser)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id = item.ShoppingCartID }) |
+            @Html.ActionLink("Xem chi tiết", "Details", new { id = item.ShoppingCartID }) |
+            @Html.ActionLink("Xóa", "Delete", new { id = item.ShoppingCartID })
+        </td>
+    </tr>
     }
 
 </table>

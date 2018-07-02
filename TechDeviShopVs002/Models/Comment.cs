@@ -11,8 +11,8 @@
         [Display(Name = "Mã bình luận")]
         public int CommentID { get; set; }
 
-        [Display(Name = "User bình luận")]
-        public int UserID { get; set; }
+        [Display(Name = "Người bình luận")]
+        public int CustomerID { get; set; }
 
         [Display(Name = "Bài viết")]
         public int? ArticleID { get; set; }
@@ -37,9 +37,9 @@
         public int? ModifiedUser { get; set; }
 
         [Display(Name = "Kích hoạt")]
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual Customer Customer { get; set; }
 
         public virtual Article Article { get; set; }
 

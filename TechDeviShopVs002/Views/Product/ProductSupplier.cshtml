@@ -7,8 +7,8 @@
             <ul>
                 @foreach (var item in Model)
                 {
-                    <li><a href="#"><i></i>@item.SupplierName</a></li>
-                    <div class="clearfix"></div>
+                    var url = "/sanpham/" + item.MetaTitle + "-" + item.SupplierID;
+                    <li><a href="@url"><i></i>@item.SupplierName</a></li>
                 }
             </ul>
         </div>

@@ -57,10 +57,10 @@
         public DateTime? ModifiedDate { get; set; }
 
         [Display(Name = "Phân quyền")]
-        public byte? RoleID { get; set; }
+        public byte RoleID { get; set; }
 
         [Display(Name = "Kích hoạt")]
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         public virtual Role Role { get; set; }
     }

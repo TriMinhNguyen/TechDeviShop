@@ -18,7 +18,8 @@ namespace TechDeviShopVs002.Controllers
             var CusUserSession = (CusUserLogin)Session[CommonConstants.CusUserSession];
             ViewBag.OrderHistory = new OrderDAL().OrderHistory(CusUserSession.CustomerID);
             ViewBag.OngoingOrders = new OrderDAL().OngoingOrders(CusUserSession.CustomerID);
-            return View();
+            var model = new CustomerDAL().ViewDetail(CusUserSession.CustomerID);
+            return View(model);
         }
         
         

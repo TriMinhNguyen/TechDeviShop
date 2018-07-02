@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Comments
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(c => c.Product).Include(c => c.User);
+            var comments = db.Comments.Include(c => c.Product).Include(c => c.Customer);
             return View(comments.ToList());
         }
 
@@ -71,7 +71,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             }
 
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", comment.ProductID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", comment.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", comment.Customer);
             return View(comment);
         }
 
@@ -88,7 +88,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", comment.ProductID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", comment.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", comment.Customer);
             return View(comment);
         }
 
@@ -117,7 +117,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 }
             }
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", comment.ProductID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", comment.UserID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", comment.Customer);
             return View(comment);
         }
 

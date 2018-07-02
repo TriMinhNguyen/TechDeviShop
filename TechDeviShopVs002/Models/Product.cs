@@ -78,7 +78,7 @@
         public string MetalDescriptions { get; set; }
 
         [Display(Name = "Kích hoạt")]
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         public DateTime? TopHot { get; set; }
 

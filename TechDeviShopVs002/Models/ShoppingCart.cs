@@ -12,6 +12,9 @@
         [Display(Name = "Mã GH")]
         public int ShoppingCartID { get; set; }
 
+        [Display(Name = "Khách hàng")]
+        public int CustomerID { get; set; }
+
         [Display(Name = "Ngày tạo giỏ hàng")]
         public DateTime? ShoppingDate { get; set; }
 
@@ -35,6 +38,6 @@
         public int? ModifiedUser { get; set; }
 
         [Display(Name = "Kích hoạt")]
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
     }
 }

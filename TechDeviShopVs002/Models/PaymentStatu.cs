@@ -34,6 +34,6 @@
         public int? ModifiedUser { get; set; }
 
         [Display(Name = "Kích hoạt")]
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
     }
 }

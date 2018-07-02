@@ -22,7 +22,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             return RedirectToAction("Index", "Login");
         }
 
-        public ActionResult Profile()
+        public ActionResult ProfileInfo()
         {
             var session = (UserLogin)Session[CommonConstants.USER_SESSION];
             var user = new UserDAL().ViewDetail(session.UserID);

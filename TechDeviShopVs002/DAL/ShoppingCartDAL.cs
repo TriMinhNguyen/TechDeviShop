@@ -18,6 +18,8 @@ namespace TechDeviShopVs002.DAL
         public int Insert(ShoppingCart entity)
         {
             entity.CreateDate = DateTime.Now;
+            entity.ShoppingDate = DateTime.Now;
+            entity.ExpireDate = DateTime.Now.AddDays(7);
             db.ShoppingCarts.Add(entity);
             db.SaveChanges();
             return entity.ShoppingCartID;
@@ -28,8 +30,9 @@ namespace TechDeviShopVs002.DAL
             try
             {
                 var _shoppingCart = db.ShoppingCarts.Find(entity.ShoppingCartID);
+                _shoppingCart.CustomerID = entity.CustomerID;
                 _shoppingCart.ShoppingDate = entity.ShoppingDate;
-                _shoppingCart.ExpireDate = entity.ExpireDate;
+                _shoppingCart.ExpireDate = DateTime.Now.AddDays(7);
                 _shoppingCart.Note = entity.Note;
                 _shoppingCart.ModifiedDate = DateTime.Now;
                 _shoppingCart.ModifiedUser = entity.ModifiedUser;
@@ -48,6 +51,13 @@ namespace TechDeviShopVs002.DAL
         public ShoppingCart ViewDetail(int? id)
         {
             return db.ShoppingCarts.Find(id);
+        }
+
+        public ShoppingCart FindByCus(int id)
+        {
+            DateTime _tnow = DateTime.Now;
+            var _sc = db.ShoppingCarts.SingleOrDefault(x => x.CustomerID == id && x.ExpireDate > _tnow);
+            return _sc;
         }
 
         public bool Delete(int id)

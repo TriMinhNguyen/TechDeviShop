@@ -52,9 +52,15 @@ namespace TechDeviShopVs002.DAL
             return db.ShoppingCartDetails.Find(id);
         }
 
+        public ShoppingCartDetail FindByProductID(int scID, int pID)
+        {
+            var spdetail = db.ShoppingCartDetails.SingleOrDefault(x => x.ShoppingCartID == scID && x.ProductID == pID);
+            return spdetail;
+        }
+
         public List<ShoppingCartDetail> ListByShoppingCartID(int id)
         {
-            return db.ShoppingCartDetails.Where(x => x.ShoppingCartID == id).ToList();
+            return db.ShoppingCartDetails.Where(x => x.ShoppingCartID == id).OrderByDescending(x=>x.CreateDate).Take(id).ToList();
         }
 
         public bool Delete(int id)

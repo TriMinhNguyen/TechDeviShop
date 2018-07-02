@@ -41,6 +41,6 @@ namespace TechDeviShopVs002.Models
 
         public int? ModifiedUser { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
     }
 }
