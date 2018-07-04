@@ -24,9 +24,8 @@ namespace TechDeviShopVs002.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var about = new AboutDAL().ViewDetail(1);
+            return View(about);
         }
 
         public ActionResult Contact()

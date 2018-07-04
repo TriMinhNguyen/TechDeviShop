@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TechDeviShopVs002.Common;
 using TechDeviShopVs002.DAL;
+using TechDeviShopVs002.Models;
 
 namespace TechDeviShopVs002.Controllers
 {
@@ -60,6 +62,32 @@ namespace TechDeviShopVs002.Controllers
             var product = new ProductDAL().ViewDetail(id);
             ViewBag.Comment = new CommentDAL().ListByProductID(product.ProductID);
             return View(product);
+        }
+
+        public ActionResult ProductComment(int ProductID)
+        {
+            string productComment = String.Format("{0}", Request.Form["CommentContent"]);
+            string CommentName = String.Format("{0}", Request.Form["Name"]);
+            string CommentEmail = String.Format("{0}", Request.Form["Email"]);
+            if (ModelState.IsValid)
+            {
+                var pComment = new Comment();
+                pComment.ProductID = ProductID;
+                pComment.Email = CommentEmail;
+                pComment.Name = CommentName;
+                pComment.CommentContent = productComment;
+                pComment.IsActive = true;
+                var result = new CommentDAL().Insert(pComment);
+                if (result > 0)
+                {
+                    return RedirectToAction("Detail", "Product", ProductID);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thêm bình luận ko thành công");
+                }
+            }
+            return RedirectToAction("Detail", "Product", ProductID);
         }
     }
 }

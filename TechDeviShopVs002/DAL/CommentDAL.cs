@@ -28,8 +28,10 @@ namespace TechDeviShopVs002.DAL
             try
             {
                 var _comment = db.Comments.Find(entity.CommentID);
-                _comment.CustomerID = entity.CustomerID;
+                _comment.ArticleID = entity.ArticleID;
                 _comment.ProductID = entity.ProductID;
+                _comment.Email = entity.Email;
+                _comment.Name = entity.Name;
                 _comment.CommentContent = entity.CommentContent;
                 _comment.CreateDate = entity.CreateDate;
                 _comment.CreateUser = entity.CreateUser;

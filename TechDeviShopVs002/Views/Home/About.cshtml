@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TechDeviShopVs002.Models.About
+@{
     ViewBag.Title = "About";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -46,36 +47,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
-                <h2>Thông tin liên hệ</h2>
-                @*@Html.Raw(Model.Content)
-
+                <div style="padding:20px"> 
+                    <span style="font:36px">@Model.AboutName</span>
                     <br />
-                    <h2>Gửi thông tin</h2>
-                    <form>
-                        <div class="form-group">
-                            <label>Họ tên</label>
-                            <input type="text" id="txtName" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>Điện thoại</label>
-                            <input type="text" id="txtMobile" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>Địa chỉ</label>
-                            <input type="text" id="txtAddress" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="text" id="txtEmail" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>Yêu cầu</label>
-                            <textarea id="txtContent" class="form-control">
-
-                        </textarea>
-                        </div>
-                        <button id="btnSend" class="btn btn-success">Gửi đi</button>
-                    </form>*@
+                    <span style="font:18px">@Model.Description</span>
+                    <p style="font:18px">@Model.Detail</p>
+                </div>
             </div>
             <div class="col-md-6">
                 <a>Bản đồ</a>

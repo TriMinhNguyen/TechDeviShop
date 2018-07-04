@@ -18,7 +18,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/Comments
         public ActionResult Index()
         {
-            var comments = db.Comments.Include(c => c.Product).Include(c => c.Customer);
+            var comments = db.Comments.Include(c => c.Product).Include(c=>c.Article);
             return View(comments.ToList());
         }
 
@@ -41,7 +41,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName");
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName");
+            ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "Title");
             return View();
         }
 
@@ -71,7 +71,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             }
 
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", comment.ProductID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", comment.Customer);
+            ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "Title", comment.ArticleID);
             return View(comment);
         }
 
@@ -88,7 +88,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", comment.ProductID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", comment.Customer);
+            ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "Title", comment.ArticleID);
             return View(comment);
         }
 
@@ -117,7 +117,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 }
             }
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", comment.ProductID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "UserName", comment.Customer);
+            ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "Title", comment.ArticleID);
             return View(comment);
         }
 

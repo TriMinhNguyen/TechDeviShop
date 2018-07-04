@@ -113,6 +113,13 @@ namespace TechDeviShopVs002
             );
 
             routes.MapRoute(
+                name: "Profile change pass",
+                url: "ho-so/changepass",
+                defaults: new { controller = "Profile", action = "ChangePass", id = UrlParameter.Optional },
+                namespaces: new[] { "TechDeviShopVs002.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },

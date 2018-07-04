@@ -117,33 +117,33 @@
                     <p>@Model.Color</p>
                 </div>
                 @*<div class="color-quality-right">
-                    <h5>Quality :</h5>
-                    <div class="quantity">
-                        @{int pQuantity = 1;}
-                        <div class="quantity-select">
-                            <div class="entry value-minus1">&nbsp;</div>
-                            <div class="entry value1"><span id="proQuantity">@pQuantity</span></div>
-                            <div class="entry value-plus1 active">&nbsp;</div>
+                        <h5>Quality :</h5>
+                        <div class="quantity">
+                            @{int pQuantity = 1;}
+                            <div class="quantity-select">
+                                <div class="entry value-minus1">&nbsp;</div>
+                                <div class="entry value1"><span id="proQuantity">@pQuantity</span></div>
+                                <div class="entry value-plus1 active">&nbsp;</div>
+                            </div>
                         </div>
-                    </div>
-                    <!--quantity-->
-                    <script>
-                        $('.value-plus1').on('click', function () {
-                            var divUpd = $(this).parent().find('.value1'), newVal = parseInt(divUpd.text(), 10) + 1;
-                            divUpd.text(newVal);
-                        });
-
-                        $('.value-minus1').on('click', function () {
-                            var divUpd = $(this).parent().find('.value1'), newVal = parseInt(divUpd.text(), 10) - 1;
-                            if (newVal >= 1) {
+                        <!--quantity-->
+                        <script>
+                            $('.value-plus1').on('click', function () {
+                                var divUpd = $(this).parent().find('.value1'), newVal = parseInt(divUpd.text(), 10) + 1;
                                 divUpd.text(newVal);
-                            }
-                        });
+                            });
 
-                    </script>
-                    <!--quantity-->
+                            $('.value-minus1').on('click', function () {
+                                var divUpd = $(this).parent().find('.value1'), newVal = parseInt(divUpd.text(), 10) - 1;
+                                if (newVal >= 1) {
+                                    divUpd.text(newVal);
+                                }
+                            });
 
-                </div>*@
+                        </script>
+                        <!--quantity-->
+
+                    </div>*@
                 <div class="clearfix"> </div>
             </div>
             <div class="occasional">
@@ -381,11 +381,11 @@
                             {
                                 <div class="additional_info_sub_grids">
                                     <div class="col-xs-2 additional_info_sub_grid_left">
-                                        <img src="@item.Customer.Avatar" alt=" " class="img-responsive" />
+                                        <img src="/Data/images/avatar.jpg" alt=" " class="img-responsive" style="width:80px;height:80px;"/>
                                     </div>
                                     <div class="col-xs-10 additional_info_sub_grid_right">
                                         <div class="additional_info_sub_grid_rightl">
-                                            <a href="#">@item.Customer.CustomerName</a>
+                                            <a href="#">@item.Name</a>
                                             <h5>@item.CreateDate</h5>
                                             <p>
                                                 @item.CommentContent.ToString();
@@ -400,54 +400,43 @@
 
                     </div>
 
-                    <div class="additional_info_sub_grids">
-                            <div class="col-xs-2 additional_info_sub_grid_left">
-                                <img src="~/Assets/Client/images/t2.png" alt=" " class="img-responsive" />
-                            </div>
-                            <div class="col-xs-10 additional_info_sub_grid_right">
-                                <div class="additional_info_sub_grid_rightl">
-                                    <a href="single.html">Michael</a>
-                                    <h5>Oct 04, 2016.</h5>
-                                    <p>
-                                        Quis autem vel eum iure reprehenderit qui in ea voluptate
-                                        velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
-                                        quo voluptas nulla pariatur.
-                                    </p>
-                                </div>
-                                <div class="additional_info_sub_grid_rightr">
-                                    <div class="rating">
-                                        <div class="rating-left">
-                                            <img src="~/Assets/Client/images/star-.png" alt=" " class="img-responsive">
-                                        </div>
-                                        <div class="rating-left">
-                                            <img src="~/Assets/Client/images/star-.png" alt=" " class="img-responsive">
-                                        </div>
-                                        <div class="rating-left">
-                                            <img src="~/Assets/Client/images/star.png" alt=" " class="img-responsive">
-                                        </div>
-                                        <div class="rating-left">
-                                            <img src="~/Assets/Client/images/star.png" alt=" " class="img-responsive">
-                                        </div>
-                                        <div class="rating-left">
-                                            <img src="~/Assets/Client/images/star.png" alt=" " class="img-responsive">
-                                        </div>
-                                        <div class="clearfix"> </div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"> </div>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
 
                     <div class="review_grids">
-                        <h5>Add A Review</h5>
-                        <form action="#" method="post">
-                            <input type="text" name="Name" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
-                            <input type="email" name="Email" placeholder="Email" required="">
-                            <input type="text" name="Telephone" value="Telephone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Telephone';}" required="">
-                            <textarea name="Review" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Add Your Review';}" required="">Add Your Review</textarea>
-                            <input type="submit" value="Submit">
-                        </form>
+                        <h5>Nhập bình luận</h5>
+
+                        @using (Html.BeginForm("ProductComment", "Product", FormMethod.Post))
+                        {
+                            var session = (TechDeviShopVs002.Common.CusUserLogin)Session[TechDeviShopVs002.Common.CommonConstants.CusUserSession];
+
+                            if (session != null)
+                            {
+                                <div class="form-group">
+                                    <textarea type="text" name="CommentContent" placeholder="Nhập nội dung bình luận"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="Name" placeholder="Tên người bình luận" value="@session.CustomerName"/>
+                                    <input type="email" name="Email" placeholder="Email" value="@session.CustomerEmail"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" name="ProductID" value="@Model.ProductID" />
+                                    <input value="Gửi" type="Submit" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="form-group">
+                                    <textarea type="text" name="CommentContent" placeholder="Nhập nội dung bình luận"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="Name" placeholder="Tên người bình luận" />
+                                    <input type="email" name="Email" placeholder="Email" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" id="productID" name="productID" value="@Model.ProductID" />
+                                    <input value="Gửi" type="Submit" />
+                                </div>
+                            }
+                        }
                     </div>
                 </div>
             </div>
