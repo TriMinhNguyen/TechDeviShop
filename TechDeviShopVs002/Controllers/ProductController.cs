@@ -69,9 +69,9 @@ namespace TechDeviShopVs002.Controllers
             string productComment = String.Format("{0}", Request.Form["CommentContent"]);
             string CommentName = String.Format("{0}", Request.Form["Name"]);
             string CommentEmail = String.Format("{0}", Request.Form["Email"]);
+            var pComment = new Comment();
             if (ModelState.IsValid)
             {
-                var pComment = new Comment();
                 pComment.ProductID = ProductID;
                 pComment.Email = CommentEmail;
                 pComment.Name = CommentName;
@@ -80,14 +80,14 @@ namespace TechDeviShopVs002.Controllers
                 var result = new CommentDAL().Insert(pComment);
                 if (result > 0)
                 {
-                    return RedirectToAction("Detail", "Product", ProductID);
+                    return RedirectToAction("Detail", "Product", new { id = ProductID });
                 }
                 else
                 {
                     ModelState.AddModelError("", "Thêm bình luận ko thành công");
                 }
             }
-            return RedirectToAction("Detail", "Product", ProductID);
+            return View(pComment);
         }
     }
 }

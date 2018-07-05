@@ -5,6 +5,9 @@
     var OngoingOD = (TechDeviShopVs002.Models.Order)ViewBag.OngoingOD;
 }
 
+<script src="~/Assets/Client/js/jquery.min.js"></script>
+<link rel="stylesheet" href="~/Assets/Client/css/jquery.countdown.css" />
+<script type="text/javascript" src="~/Assets/Client/js/bootstrap-3.1.1.min.js"></script>
 
 <div class="container">
     <div class="content">
@@ -14,7 +17,7 @@
                     <tr>
                         <td style="width:300px; font-size:18px">Mã hóa đơn: @OngoingOD.OrderID</td>
                         <td style="width:300px; font-size:18px">Ngày đặt hàng: @(OngoingOD.OrderDate.GetValueOrDefault().ToString("dd/MM/yyyy"))</td>
-                        <td class="btn btn-default"style="font-size:18px; background-color:deeppink">
+                        <td class="btn btn-default" style="font-size:18px; background-color:deeppink">
                             @Html.ActionLink("Hủy đặt hàng", "OrderCancel", new { id = OngoingOD.OrderID }, new { onclick = "return confirm ('Bạn có chắc chắn muốn hủy đơn đặt hàng?');" })
                         </td>
                     </tr>

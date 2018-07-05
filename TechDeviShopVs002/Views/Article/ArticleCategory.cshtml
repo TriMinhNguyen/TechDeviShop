@@ -1,13 +1,17 @@
 ﻿@model List<TechDeviShopVs002.Models.ArticleCategory>
 
-<div class="w3ls_mobiles_grid_left_grid" >
+<script src="~/Assets/Client/js/jquery.min.js"></script>
+<link rel="stylesheet" href="~/Assets/Client/css/jquery.countdown.css" />
+<script type="text/javascript" src="~/Assets/Client/js/bootstrap-3.1.1.min.js"></script>
+
+<div class="w3ls_mobiles_grid_left_grid">
     <div class="w3ls_mobiles_grid_left_grid_sub" style="padding:10px; background-color:white">
         <a>Chuyên đề bài viết</a>
     </div>
     <div class="w3ls_mobiles_grid_left_grid_sub" style="padding-left:10px;padding-right:0; padding-top:5px;background-color:white">
         @foreach (var item in Model.Where(x => x.ParentID == 0 || x.ParentID == null))
         {
-            var url = "/tin-tuc/" + item.MetaTitle + "-" + item;
+            var url = "/tin-tuc/" + item.MetaTitle + "-" + item.ArticleCategoryID;
             var child = Model.Where(x => x.ParentID == item.ArticleCategoryID);
             if (child.Count() <= 0)
             {

@@ -146,7 +146,7 @@
                     <div role="tabpanel" class="tab-pane fade active in" id="hotProduct" aria-labelledby="hotProduct-tab">
                         <p style="text-align:end"><a href="#">Xem tất cả >></a></p>
                         <div class="agile_ecommerce_tabs">
-                            
+
                             @foreach (var item in listFeatureProducts)
                             {
                                 var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ProductID;
@@ -173,10 +173,10 @@
                                             <p><span>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span> <i class="item_price">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") : "Liên hệ")</i></p>
                                             <form action="#" method="post">
                                                 @*<input type="hidden" name="cmd" value="_cart">
-                                                <input type="hidden" name="add" value="1">
-                                                <input type="hidden" name="w3ls_item" value="@item.ProductName">
-                                                <input type="hidden" name="amount" value="@item.PromotionPrice">
-                                                <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>*@
+                                                    <input type="hidden" name="add" value="1">
+                                                    <input type="hidden" name="w3ls_item" value="@item.ProductName">
+                                                    <input type="hidden" name="amount" value="@item.PromotionPrice">
+                                                    <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>*@
                                                 <a class="btn btn-default" href="/them-gio-hang?productId=@item.ProductID&quantity=1">Thêm vào giỏ hàng</a>
                                             </form>
                                         </div>
@@ -215,10 +215,10 @@
                                             <p><span>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span> <i class="item_price">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") : "Liên hệ")</i></p>
                                             <form action="#" method="post">
                                                 @*<input type="hidden" name="cmd" value="_cart">
-                                                <input type="hidden" name="add" value="1">
-                                                <input type="hidden" name="w3ls_item" value="@item.ProductName">
-                                                <input type="hidden" name="amount" value="@item.PromotionPrice">
-                                                <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>*@
+                                                    <input type="hidden" name="add" value="1">
+                                                    <input type="hidden" name="w3ls_item" value="@item.ProductName">
+                                                    <input type="hidden" name="amount" value="@item.PromotionPrice">
+                                                    <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>*@
                                                 <a class="btn btn-default" href="/them-gio-hang?productId=@item.ProductID&quantity=1">Thêm vào giỏ hàng</a>
                                             </form>
                                         </div>
@@ -336,10 +336,10 @@
                             <p><span>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span> <i class="item_price">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") : "Liên hệ")</i></p>
                             <form action="#" method="post">
                                 @*<input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="1">
-                                <input type="hidden" name="w3ls_item" value="@item.ProductName">
-                                <input type="hidden" name="amount" value="@item.PromotionPrice">
-                                <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>*@
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="w3ls_item" value="@item.ProductName">
+                                    <input type="hidden" name="amount" value="@item.PromotionPrice">
+                                    <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>*@
                                 <a class="btn btn-default" href="/them-gio-hang?productId=@item.ProductID&quantity=1">Thêm vào giỏ hàng</a>
                             </form>
                         </div>
@@ -387,10 +387,10 @@
                             <p><span>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span> <i class="item_price">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") : "Liên hệ")</i></p>
                             <form action="#" method="post">
                                 @*<input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="1">
-                                <input type="hidden" name="w3ls_item" value="@item.ProductName">
-                                <input type="hidden" name="amount" value="@item.PromotionPrice">
-                                <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>*@
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="w3ls_item" value="@item.ProductName">
+                                    <input type="hidden" name="amount" value="@item.PromotionPrice">
+                                    <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>*@
                                 <a class="btn btn-default" href="/them-gio-hang?productId=@item.ProductID&quantity=1">Thêm vào giỏ hàng</a>
                             </form>
                         </div>
@@ -438,10 +438,10 @@
                             <p><span>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span> <i class="item_price">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") : "Liên hệ")</i></p>
                             <form action="#" method="post">
                                 @*<input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="add" value="1">
-                                <input type="hidden" name="w3ls_item" value="@item.ProductName">
-                                <input type="hidden" name="amount" value="@item.PromotionPrice">
-                                <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>*@
+                                    <input type="hidden" name="add" value="1">
+                                    <input type="hidden" name="w3ls_item" value="@item.ProductName">
+                                    <input type="hidden" name="amount" value="@item.PromotionPrice">
+                                    <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>*@
                                 <a class="btn btn-default" href="/them-gio-hang?productId=@item.ProductID&quantity=1">Thêm vào giỏ hàng</a>
                             </form>
                         </div>
@@ -453,128 +453,129 @@
     </div>
 </div>
 <!-- //List laptop-->
-<!-- banner-bottom1 -->
-<div class="banner-bottom1">
-    <div class="agileinfo_banner_bottom1_grids">
-        <div class="col-md-7 agileinfo_banner_bottom1_grid_left">
-            <h3>Grand Opening Event With flat<span>20% <i>Discount</i></span></h3>
-            <a href="products.html">Shop Now</a>
-        </div>
-        <div class="col-md-5 agileinfo_banner_bottom1_grid_right">
-            <h4>hot deal</h4>
-            <div class="timer_wrap">
-                <div id="counter"> </div>
-            </div>
-            <script src="js/jquery.countdown.js"></script>
-            <script src="js/script.js"></script>
-        </div>
-        <div class="clearfix"> </div>
-    </div>
-</div>
-<!-- //banner-bottom1 -->
-@*<!-- new-products -->
-    <div class="new-products">
-        <div class="container">
-            <h3>New Products</h3>
-            <div class="agileinfo_new_products_grids">
-                @foreach (var item in listNewProducts)
-                {
-                    var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ProductID;
-                    <div class="col-md-3 agileinfo_new_products_grid">
-                        <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
-                            <div class="hs-wrapper hs-wrapper1">
-                                <img src="@item.Image" alt="@item.ProductName" class="img-responsive" />
-                                <img src="@item.Image" alt="@item.ProductName" class="img-responsive" />
-                                <img src="@item.Image" alt="@item.ProductName" class="img-responsive" />
-                                <img src="@item.Image" alt="@item.ProductName" class="img-responsive" />
-                                <img src="@item.Image" alt="@item.ProductName" class="img-responsive" />
-                                <div class="w3_hs_bottom w3_hs_bottom_sub">
-                                    <ul>
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div style="height:70px">
-                                <h5><a href="@url">@item.ProductName</a></h5>
-                            </div>
-                            <div class="simpleCart_shelfItem">
-                                <p><span>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span> <i class="item_price">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") : "Liên hệ")</i></p>
-                                <form action="#" method="post">
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="w3ls_item" value="@item.ProductName">
-                                    <input type="hidden" name="amount" value="@item.PromotionPrice">
-                                    <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>
-                                </form>
-                            </div>
-                        </div>
+@*<!-- banner-bottom1 -->
+        <div class="banner-bottom1">
+            <div class="agileinfo_banner_bottom1_grids">
+                <div class="col-md-7 agileinfo_banner_bottom1_grid_left">
+                    <h3>Grand Opening Event With flat<span>20% <i>Discount</i></span></h3>
+                    <a href="products.html">Shop Now</a>
+                </div>
+                <div class="col-md-5 agileinfo_banner_bottom1_grid_right">
+                    <h4>hot deal</h4>
+                    <div class="timer_wrap">
+                        <div id="counter"> </div>
                     </div>
-                }
-
+                    <script src="~/Assets/Client/js/jquery.countdown.js"></script>
+                    <script src="~/Assets/Client/js/script.js"></script>
+                </div>
                 <div class="clearfix"> </div>
             </div>
         </div>
-    </div>
-    <!-- //new-products -->*@
-<!-- top-brands -->
-<div class="top-brands">
-    <div class="container">
-        <h3>Top Brands</h3>
-        <div class="sliderfig">
-            <ul id="flexiselDemo1">
-                @*@foreach (var topbrand in listSupplier)
-                    {
-                        <li>
-                            <img src="@topbrand.image" alt=" " class="img-responsive" />
-                        </li>
-                    }*@
-                <li>
-                    <img src="~/Assets/Client/images/tb1.jpg" alt=" " class="img-responsive" />
-                </li>
-                <li>
-                    <img src="~/Assets/Client/images/tb2.jpg" alt=" " class="img-responsive" />
-                </li>
-                <li>
-                    <img src="~/Assets/Client/images/tb3.jpg" alt=" " class="img-responsive" />
-                </li>
-                <li>
-                    <img src="~/Assets/Client/images/tb4.jpg" alt=" " class="img-responsive" />
-                </li>
-                <li>
-                    <img src="~/Assets/Client/images/tb5.jpg" alt=" " class="img-responsive" />
-                </li>
-            </ul>
-        </div>
-        <script type="text/javascript">
-            $(window).load(function () {
-                $("#flexiselDemo1").flexisel({
-                    visibleItems: 4,
-                    animationSpeed: 1000,
-                    autoPlay: true,
-                    autoPlaySpeed: 3000,
-                    pauseOnHover: true,
-                    enableResponsiveBreakpoints: true,
-                    responsiveBreakpoints: {
-                        portrait: {
-                            changePoint: 480,
-                            visibleItems: 1
-                        },
-                        landscape: {
-                            changePoint: 640,
-                            visibleItems: 2
-                        },
-                        tablet: {
-                            changePoint: 768,
-                            visibleItems: 3
+        <!-- //banner-bottom1 -->
+        <!-- new-products -->
+            <div class="new-products">
+                <div class="container">
+                    <h3>New Products</h3>
+                    <div class="agileinfo_new_products_grids">
+                        @foreach (var item in listNewProducts)
+                        {
+                            var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ProductID;
+                            <div class="col-md-3 agileinfo_new_products_grid">
+                                <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+                                    <div class="hs-wrapper hs-wrapper1">
+                                        <img src="@item.Image" alt="@item.ProductName" class="img-responsive" />
+                                        <img src="@item.Image" alt="@item.ProductName" class="img-responsive" />
+                                        <img src="@item.Image" alt="@item.ProductName" class="img-responsive" />
+                                        <img src="@item.Image" alt="@item.ProductName" class="img-responsive" />
+                                        <img src="@item.Image" alt="@item.ProductName" class="img-responsive" />
+                                        <div class="w3_hs_bottom w3_hs_bottom_sub">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div style="height:70px">
+                                        <h5><a href="@url">@item.ProductName</a></h5>
+                                    </div>
+                                    <div class="simpleCart_shelfItem">
+                                        <p><span>@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span> <i class="item_price">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") : "Liên hệ")</i></p>
+                                        <form action="#" method="post">
+                                            <input type="hidden" name="cmd" value="_cart">
+                                            <input type="hidden" name="add" value="1">
+                                            <input type="hidden" name="w3ls_item" value="@item.ProductName">
+                                            <input type="hidden" name="amount" value="@item.PromotionPrice">
+                                            <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         }
-                    }
-                });
 
-            });
-        </script>
-        <script type="text/javascript" src="~/Assets/Client/js/jquery.flexisel.js"></script>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //new-products -->
+    <!-- top-brands -->
+    <div class="top-brands">
+        <div class="container">
+            <h3>Top Brands</h3>
+            <div class="sliderfig">
+                <ul id="flexiselDemo1">
+                    @foreach (var topbrand in listSupplier)
+                        {
+                            <li>
+                                <img src="@topbrand.image" alt=" " class="img-responsive" />
+                            </li>
+                        }
+                    <li>
+                        <img src="~/Assets/Client/images/tb1.jpg" alt=" " class="img-responsive" />
+                    </li>
+                    <li>
+                        <img src="~/Assets/Client/images/tb2.jpg" alt=" " class="img-responsive" />
+                    </li>
+                    <li>
+                        <img src="~/Assets/Client/images/tb3.jpg" alt=" " class="img-responsive" />
+                    </li>
+                    <li>
+                        <img src="~/Assets/Client/images/tb4.jpg" alt=" " class="img-responsive" />
+                    </li>
+                    <li>
+                        <img src="~/Assets/Client/images/tb5.jpg" alt=" " class="img-responsive" />
+                    </li>
+                </ul>
+            </div>
+            <script type="text/javascript">
+                $(window).load(function () {
+                    $("#flexiselDemo1").flexisel({
+                        visibleItems: 4,
+                        animationSpeed: 1000,
+                        autoPlay: true,
+                        autoPlaySpeed: 3000,
+                        pauseOnHover: true,
+                        enableResponsiveBreakpoints: true,
+                        responsiveBreakpoints: {
+                            portrait: {
+                                changePoint: 480,
+                                visibleItems: 1
+                            },
+                            landscape: {
+                                changePoint: 640,
+                                visibleItems: 2
+                            },
+                            tablet: {
+                                changePoint: 768,
+                                visibleItems: 3
+                            }
+                        }
+                    });
+
+                });
+            </script>
+            <script type="text/javascript" src="~/Assets/Client/js/jquery.flexisel.js"></script>
+        </div>
     </div>
-</div>
-<!-- //top-brands -->
+    <!-- //top-brands -->
+*@

@@ -1813,6 +1813,7 @@
     <Content Include="Views\Profile\OngoingOrderDetail.cshtml" />
     <Content Include="Views\Profile\CancelOrderSuccess.cshtml" />
     <Content Include="Views\Profile\ChangeInfo.cshtml" />
+    <Content Include="Views\Article\ArticleByCate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

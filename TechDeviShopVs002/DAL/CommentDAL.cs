@@ -57,6 +57,11 @@ namespace TechDeviShopVs002.DAL
             return db.Comments.Where(x => x.ProductID == id).OrderByDescending(x => x.CreateDate).ToList();
         }
 
+        public List<Comment> ListByArticleID(int id)
+        {
+            return db.Comments.Where(x => x.ArticleID == id).OrderByDescending(x => x.CreateDate).ToList();
+        }
+
         public bool Delete(int id)
         {
             try

@@ -50,6 +50,13 @@ namespace TechDeviShopVs002
             );
 
             routes.MapRoute(
+                name: "Article By Cate",
+                url: "tin-tuc/{metatitle}-{id}",
+                defaults: new { controller = "Article", action = "ArticleByCate", id = UrlParameter.Optional },
+                namespaces: new[] { "TechDeviShopVs002.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Article Category",
                 url: "tin-tuc/{metatitle}-{id}",
                 defaults: new { controller = "Article", action = "ArticleCategory", id = UrlParameter.Optional },

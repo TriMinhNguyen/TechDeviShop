@@ -66,6 +66,11 @@ namespace TechDeviShopVs002.DAL
             return db.Articles.Where(x => x.IsActive == true).ToList();
         }
 
+        public List<Article> ListByArticleCategory(int id)
+        {
+            return db.Articles.Where(x => x.IsActive == true && x.ArticleCategoryID == id).ToList();
+        }
+
         public Article ViewDetail(int? id)
         {
             return db.Articles.Find(id);
