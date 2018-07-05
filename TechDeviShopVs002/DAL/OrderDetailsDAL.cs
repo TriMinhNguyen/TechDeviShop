@@ -59,6 +59,11 @@ namespace TechDeviShopVs002.DAL
             return db.OrderDetails.Find(id);
         }
 
+        public List<OrderDetail> ListByOrderID(int id)
+        {
+            return db.OrderDetails.Where(x => x.OrderID == id).OrderByDescending(x => x.CreateDate).Take(id).ToList();
+        }
+
         public bool Delete(int id)
         {
             try

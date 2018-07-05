@@ -1,0 +1,94 @@
+﻿@model List<TechDeviShopVs002.Models.OrderDetail>
+@{
+    ViewBag.Title = "OngoingOrderDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var OngoingOD = (TechDeviShopVs002.Models.Order)ViewBag.OngoingOD;
+}
+
+
+<div class="container">
+    <div class="content">
+        <div class="section group" style="background-color:lavender">
+            <div style="margin:1em;">
+                <table>
+                    <tr>
+                        <td style="width:300px; font-size:18px">Mã hóa đơn: @OngoingOD.OrderID</td>
+                        <td style="width:300px; font-size:18px">Ngày đặt hàng: @(OngoingOD.OrderDate.GetValueOrDefault().ToString("dd/MM/yyyy"))</td>
+                        <td class="btn btn-default"style="font-size:18px; background-color:deeppink">
+                            @Html.ActionLink("Hủy đặt hàng", "OrderCancel", new { id = OngoingOD.OrderID }, new { onclick = "return confirm ('Bạn có chắc chắn muốn hủy đơn đặt hàng?');" })
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="font-size:18px; width:600px">Tình trạng hóa đơn: @OngoingOD.OrderStatus.OrderStatusName</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="font-size:18px; width:600px">Phương thức vận chuyển: @OngoingOD.ShippingMethod.Title</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="width:600px; font-size:18px">Thời gian giao hàng trong khoảng: @(OngoingOD.ShippedDate.GetValueOrDefault().ToString("dd/MM/yyyy")) - @(OngoingOD.RequiredDate.GetValueOrDefault().ToString("dd/MM/yyyy"))</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="width:300px; font-size:18px">Mã TK khách hàng: @OngoingOD.CustomerID</td>
+                        <td style="width:300px; font-size:18px">Tên khách nhận hàng: @OngoingOD.CusName</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="width:300px; font-size:18px">Điện thoại: @OngoingOD.CusPhone</td>
+                        <td style="width:300px; font-size:18px">Email: @OngoingOD.CusEmail</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="width:900px; font-size:18px">Địa chỉ: @OngoingOD.Address</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section group">
+            @if (Model.Count > 0)
+            {
+                <table class="table">
+                    <thead style="background-color:lavender">
+                        <tr>
+                            <td style="color:black">Mã SP</td>
+                            <td style="color:black">Tên SP</td>
+                            <td style="color:black">Ảnh SP</td>
+                            <td style="color:black">Số lượng</td>
+                            <td style="color:black">Đơn giá</td>
+                            <td style="color:black">Thành tiền</td>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color:whitesmoke">
+                        @foreach (var item in Model)
+                        {
+                            <tr style="border-bottom:solid; border-bottom-width:0.5px; border-bottom-color:lightgray">
+                                <td style="color:black">@item.Product.ProductID</td>
+                                <td style="color:black">@item.Product.ProductName</td>
+                                <td style="color:black"><img src="@item.Product.Image" width="100" /></td>
+                                <td style="color:black">@item.Quantity</td>
+                                <td style="color:black">@item.Product.Price</td>
+                                <td style="color:black">@((item.Product.Price.GetValueOrDefault(0) * item.Quantity))</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            }
+        </div>
+        <p>@Html.ActionLink("Thoát", "Index")</p>
+    </div>
+</div>
+
+
+
+

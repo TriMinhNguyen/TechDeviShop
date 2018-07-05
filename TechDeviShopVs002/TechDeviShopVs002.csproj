@@ -1544,6 +1544,7 @@
     <Content Include="Assets\Client\NganLuong\Scripts\jquery-1.4.1.js" />
     <Content Include="Assets\Client\NganLuong\Scripts\jquery-1.4.1.min.js" />
     <Content Include="Assets\Client\NganLuong\Styles\Site.css" />
+    <Content Include="Assets\Client\template\CancelOrder.html" />
     <Content Include="Assets\Client\template\neworder.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -1808,6 +1809,10 @@
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Article\ArticleCategory.cshtml" />
     <Content Include="Views\Article\Details.cshtml" />
+    <Content Include="Views\Profile\HistoryOrderDetail.cshtml" />
+    <Content Include="Views\Profile\OngoingOrderDetail.cshtml" />
+    <Content Include="Views\Profile\CancelOrderSuccess.cshtml" />
+    <Content Include="Views\Profile\ChangeInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

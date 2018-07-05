@@ -74,7 +74,7 @@ namespace TechDeviShopVs002.DAL
         public List<Order> OrderHistory(int id)
         {
             DateTime _tnow = DateTime.Now;
-            var order = db.Orders.Where(x => x.CustomerID == id && x.RequiredDate < _tnow).ToList();
+            var order = db.Orders.Where(x => x.CustomerID == id && x.RequiredDate < _tnow && x.OrderStatusID >= 4 ).ToList();
             return order;
         }
 

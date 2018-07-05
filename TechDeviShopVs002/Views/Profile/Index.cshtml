@@ -70,7 +70,7 @@
 
     .myProfileFooter {
         width: 288px;
-        margin-top: 50px;
+        margin-top: 30px;
     }
 
         .myProfileFooter .a {
@@ -115,18 +115,10 @@
 
 
 <div class="single" style="padding:0; background-color:#eff0f4">
-    <div class="container">
-        <div class="row" style="min-height:50px">
-            <div class="col-xs-3">
-
-            </div>
-            <div class="col-xs-9">
-                <a style="padding:2px; font-size: 30px;">Thông tin</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">
-                <ul class="tab" style="list-style-type:none; max-width:190px">
+    <div class="container-fluid" style="margin:0;">
+        <div class="row" style="margin-top:20px">
+            <div style="width:250px">
+                <ul class="tab" style="list-style-type:none; max-width:190px; margin-left:30px;">
                     <li><a>Quản lý tài khoản</a></li>
                     <li class="tablinks btn" onclick="openCity(event, 'ProfileInfo')" id="defaultOpen">Thông tin cá nhân</li>
                     <li class="tablinks btn" onclick="openCity(event, 'ChangePass')">Đổi mật khẩu</li>
@@ -135,76 +127,105 @@
                     <li class="tablinks btn" onclick="openCity(event, 'OrderHistory')">Lịch sử mua hàng</li>
                 </ul>
             </div>
-            <div class="col-xs-9" style="border: 1px solid #ccc; background-color:white">
-                <div id="ProfileInfo" class="tabcontent">
+            <div style="background-color:white; margin-left:250px;">
+                <div id="ProfileInfo" class="tabcontent" style="width:98%">
                     <div class="myProfile">
                         <div class="myProfileBody">
-                            <div class="myProfileItem">
-                                <h3 class="myProfileItemTitle">
-                                    <a>Tên</a>
-                                </h3>
-                                <a class="myProfileItemInfo">@Model.CustomerName</a>
+                            <div>
+                                <div class="myProfileItem">
+                                    <h3 class="myProfileItemTitle">
+                                        <a>Tên</a>
+                                    </h3>
+                                    <a class="myProfileItemInfo">@Model.CustomerName</a>
+                                </div>
+                                <div class="myProfileItem" style="min-width:200px">
+                                    <h3 class="myProfileItemTitle">
+                                        <a>Địa chỉ Email</a>
+                                    </h3>
+                                    <a class="myProfileItemInfo">@Model.CustomerEmail</a>
+                                </div>
+                                <div class="myProfileItem" style="width:120px">
+                                    <h3 class="myProfileItemTitle">
+                                        <a>Số điện thoại</a>
+                                    </h3>
+                                    <a class="myProfileItemInfo">@Model.CustomerPhone</a>
+                                </div>
                             </div>
-                            <div class="myProfileItem" style="width:250px">
-                                <h3 class="myProfileItemTitle">
-                                    <a>Địa chỉ Email</a>
-                                </h3>
-                                <a class="myProfileItemInfo">@Model.CustomerEmail</a>
+                            <div>
+                                <div class="myProfileItem">
+                                    <h3 class="myProfileItemTitle">
+                                        <a>Ngày sinh</a>
+                                    </h3>
+                                    <a class="myProfileItemInfo">@(Model.CustomerBirthday.GetValueOrDefault().ToString("dd/MM/yyyy"))</a>
+                                </div>
+                                <div class="myProfileItem" style="width:120px">
+                                    <h3 class="myProfileItemTitle">
+                                        <a>Giới tính</a>
+                                    </h3>
+                                    <a class="myProfileItemInfo">@Html.Encode(Model.CustomerGender == true ? "Nam" : "Nữ")</a>
+                                </div>
                             </div>
-                            <div class="myProfileItem">
-                                <h3 class="myProfileItemTitle">
-                                    <a>Số điện thoại</a>
-                                </h3>
-                                <a class="myProfileItemInfo">@Model.CustomerPhone</a>
+                            <div>
+                                <div class="myProfileItem" style="min-width:900px">
+                                    <h3 class="myProfileItemTitle">
+                                        <a>Địa chỉ</a>
+                                    </h3>
+                                    <a class="myProfileItemInfo">@Model.CustomerAddress</a>
+                                </div>
                             </div>
-                            <div class="myProfileItem">
-                                <h3 class="myProfileItemTitle">
-                                    <a>Ngày sinh</a>
-                                </h3>
-                                <a class="myProfileItemInfo">@Model.CustomerBirthday</a>
-                            </div>
-                            <div class="myProfileItem">
-                                <h3 class="myProfileItemTitle">
-                                    <a>Giới tính</a>
-                                </h3>
-                                <a class="myProfileItemInfo">@Html.Encode(Model.CustomerGender == true ? "Nam" : "Nữ")</a>
-                            </div>
+                            @if (Model.OrtherDetail != null)
+                            {
+                                <div>
+                                    <div class="myProfileItem" style="min-width:900px">
+                                        <h3 class="myProfileItemTitle">
+                                            <a>Thông tin khác</a>
+                                        </h3>
+                                        <a class="myProfileItemInfo">@Model.OrtherDetail</a>
+                                    </div>
+                                </div>
+                            }
                         </div>
                         <div class="myProfileFooter">
-                            <a class="btn btn-default mybtn" href="">Thay đổi thông tin</a>
+                            <a class="btn btn-default mybtn" href="@Url.Action("ChangeInfo","Profile")">Thay đổi thông tin</a>
                         </div>
                     </div>
                 </div>
 
-                <div id="ChangePass" class="tabcontent">
+                <div id="ChangePass" class="tabcontent" style="width:98%">
                     <div class="myProfile">
                         @using (Html.BeginForm("ChangePass", "Profile", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
-                            <div class="myProfileBody">
-                                <p style="padding-bottom:10px">Ghi chú: Mật khẩu mặc định sau khi đăng nhập bằng Facebook khi chưa đổi là 123456</p>
-                                <div class="myChangePassForm form-group">
-                                    <label>Mật khẩu hiện tại</label>
-                                    <input name="OldPassword" type="password" placeholder="Vui lòng nhập mật khẩu hiện tại của bạn" />
-                                    <b></b>
-                                    <span></span>
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.CustomerID)
+                                <div class="myProfileBody">
+                                    <p style="padding-bottom:10px">Ghi chú: Mật khẩu mặc định sau khi đăng nhập bằng Facebook khi chưa đổi là 123456</p>
+                                    <div class="myChangePassForm form-group">
+                                        <label>Mật khẩu hiện tại</label>
+                                        <input name="OldPassword" type="password" placeholder="Vui lòng nhập mật khẩu hiện tại của bạn" />
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                        <b></b>
+                                        <span></span>
+                                    </div>
+                                    <div class="myChangePassForm form-group">
+                                        <label>Mật khẩu mới</label>
+                                        <input name="NewPassword" type="password" placeholder="Tối thiểu 6 kí tự bao gồm cả chữ và số" />
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                        <b></b>
+                                        <span></span>
+                                    </div>
                                 </div>
-                                <div class="myChangePassForm form-group">
-                                    <label>Mật khẩu mới</label>
-                                    <input name="NewPassword" type="password" placeholder="Tối thiểu 6 kí tự bao gồm cả chữ và số" />
-                                    <b></b>
-                                    <span></span>
+                                <div class="myProfileFooter">
+                                    @*<button type="button" class="btn btn-default mybtn" href="">Thay đổi</button>*@
+                                    <input value="Thay đổi" type="Submit" />
                                 </div>
-                            </div>
-                            <div class="myProfileFooter">
-                                @*<button type="button" class="btn btn-default mybtn" href="">Thay đổi</button>*@
-                                <input value="Save" type="Submit" />
                             </div>
                         }
                     </div>
                 </div>
 
-                <div id="OngoingOrders" class="tabcontent">
+                <div id="OngoingOrders" class="tabcontent" style="width:98%">
                     @*<label style="padding-bottom:10px">Hóa đơn đang thực hiện</label>*@
                     <table class="table">
                         <tr>
@@ -256,38 +277,37 @@
                                     @*@Html.DisplayFor(modelItem => item.RequiredDate)*@
                                     @item.RequiredDate
                                 </td>
-                                @*<td>
-                                        @Html.ActionLink("Sửa", "Edit", new { id = item.OrderID }) |
-                                        @Html.ActionLink("Xem chi tiết", "Details", new { id = item.OrderID })
-                                    </td>*@
+                                <td>
+                                    @Html.ActionLink("Xem chi tiết", "OngoingOrderDetail", new { id = item.OrderID })
+                                </td>
                             </tr>
                         }
 
                     </table>
                 </div>
 
-                <div id="OrderHistory" class="tabcontent">
+                <div id="OrderHistory" class="tabcontent" style="width:98%">
                     <table class="table">
                         <tr>
-                            <th>
+                            <th style="min-width:120px">
                                 Tên khách hàng
                             </th>
-                            <th>
+                            <th style="min-width:120px">
                                 Tình trạng hóa đơn
                             </th>
-                            <th>
+                            <th style="min-width:120px">
                                 Phương thức giao hàng
                             </th>
-                            <th>
+                            <th style="min-width:120px">
                                 Ngày lập HĐ
                             </th>
-                            <th>
+                            <th style="min-width:120px">
                                 Ngày BĐ giao hàng
                             </th>
-                            <th>
+                            <th style="min-width:120px">
                                 Hạn yêu cầu giao hàng
                             </th>
-                            <th></th>
+                            <th style="min-width:80px"></th>
                         </tr>
 
                         @foreach (var item in listOrderHistory)
@@ -317,10 +337,9 @@
                                     @*@Html.DisplayFor(modelItem => item.RequiredDate)*@
                                     @item.RequiredDate
                                 </td>
-                                @*<td>
-                                        @Html.ActionLink("Sửa", "Edit", new { id = item.OrderID }) |
-                                        @Html.ActionLink("Xem chi tiết", "Details", new { id = item.OrderID })
-                                    </td>*@
+                                <td>
+                                    @Html.ActionLink("Xem chi tiết", "HistoryOrderDetail", new { id = item.OrderID })
+                                </td>
                             </tr>
                         }
 

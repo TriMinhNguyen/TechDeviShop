@@ -120,6 +120,27 @@ namespace TechDeviShopVs002
             );
 
             routes.MapRoute(
+                name: "Profile Order History",
+                url: "ho-so/history-order-detail-{id}",
+                defaults: new { controller = "Profile", action = "HistoryOrderDetail", id = UrlParameter.Optional },
+                namespaces: new[] { "TechDeviShopVs002.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Profile Order Ongoing",
+                url: "ho-so/ongoing-order-detail-{id}",
+                defaults: new { controller = "Profile", action = "OngoingOrderDetail", id = UrlParameter.Optional },
+                namespaces: new[] { "TechDeviShopVs002.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Cancel order Success",
+                url: "huy-bo-thanh-cong",
+                defaults: new { controller = "Profile", action = "CancelOrderSuccess", id = UrlParameter.Optional },
+                namespaces: new[] { "TechDeviShopVs002.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },

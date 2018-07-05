@@ -147,23 +147,26 @@
                 <div class="clearfix"> </div>
             </div>
             <div class="occasional">
-                <h5>RAM :</h5>
-                <div class="colr ert">
-                    <div class="check">
-                        <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>4 GB</label>
+                @if (Model.SupplierID == 1 || Model.SupplierID == 2)
+                {
+                    <h5>RAM :</h5>
+                    <div class="colr ert">
+                        <div class="check">
+                            <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>4 GB</label>
+                        </div>
                     </div>
-                </div>
-                <div class="colr">
-                    <div class="check">
-                        <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>8 GB</label>
+                    <div class="colr">
+                        <div class="check">
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>8 GB</label>
+                        </div>
                     </div>
-                </div>
-                <div class="colr">
-                    <div class="check">
-                        <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>16 GB</label>
+                    <div class="colr">
+                        <div class="check">
+                            <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>16 GB</label>
+                        </div>
                     </div>
-                </div>
-                <div class="clearfix"> </div>
+                    <div class="clearfix"> </div>
+                }
             </div>
             <div class="simpleCart_shelfItem">
                 <p><span>@Model.Price</span> <i class="item_price">@Model.PromotionPrice</i> VNĐ</p>
@@ -172,8 +175,8 @@
                         <input type="hidden" name="add" value="1">
                         <input type="hidden" name="w3ls_item" value="@Model.ProductName">
                         <input type="hidden" name="amount" value="@Model.PromotionPrice">
-                        <button type="submit" class="w3ls-cart">Add to cart</button>*@
-                    <a class="btn btn-default" href="/them-gio-hang?productId=@Model.ProductID&quantity=1">Add to cart</a>
+                        <button type="submit" class="w3ls-cart">Thêm vào giỏ hàng</button>*@
+                    <a class="btn btn-default" href="/them-gio-hang?productId=@Model.ProductID&quantity=1">Thêm vào giỏ hàng</a>
                 </form>
             </div>
         </div>
@@ -185,8 +188,8 @@
         <div class="sap_tabs">
             <div id="horizontalTab1" style="display: block; width: 100%; margin: 0px;">
                 <ul>
-                    <li class="resp-tab-item" aria-controls="tab_product_information" role="tab"><span>Product Information</span></li>
-                    <li class="resp-tab-item" aria-controls="tab_Reviews" role="tab"><span>Reviews</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_product_information" role="tab"><span>Thông tin sản phẩm</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_Reviews" role="tab"><span>Bình luận</span></li>
                 </ul>
                 <div class="tab-1 resp-tab-content additional_info_grid" aria-labelledby="tab_product_information">
                     @if (Model.SupplierID == 1 || Model.SupplierID == 2)
@@ -373,7 +376,7 @@
                 </div>
 
                 <div class="tab-2 resp-tab-content additional_info_grid" aria-labelledby="tab_Reviews">
-                    <p style="padding-bottom:10px; font-size:26px">Reviews comment</p>
+                    <p style="padding-bottom:10px; font-size:26px">Bình luận</p>
                     <div style="border-style:solid; border-width:1px; min-height:300px">
                         @if (listComment != null)
                         {
@@ -381,7 +384,7 @@
                             {
                                 <div class="additional_info_sub_grids">
                                     <div class="col-xs-2 additional_info_sub_grid_left">
-                                        <img src="/Data/images/avatar.jpg" alt=" " class="img-responsive" style="width:80px;height:80px;"/>
+                                        <img src="/Data/images/avatar.jpg" alt=" " class="img-responsive" style="width:80px;height:80px;" />
                                     </div>
                                     <div class="col-xs-10 additional_info_sub_grid_right">
                                         <div class="additional_info_sub_grid_rightl">
@@ -400,7 +403,6 @@
 
                     </div>
 
-
                     <div class="review_grids">
                         <h5>Nhập bình luận</h5>
 
@@ -414,8 +416,8 @@
                                     <textarea type="text" name="CommentContent" placeholder="Nhập nội dung bình luận"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="Name" placeholder="Tên người bình luận" value="@session.CustomerName"/>
-                                    <input type="email" name="Email" placeholder="Email" value="@session.CustomerEmail"/>
+                                    <input type="text" name="Name" placeholder="Tên người bình luận" value="@session.CustomerName" />
+                                    <input type="email" name="Email" placeholder="Email" value="@session.CustomerEmail" />
                                 </div>
                                 <div class="form-group">
                                     <input type="hidden" name="ProductID" value="@Model.ProductID" />
