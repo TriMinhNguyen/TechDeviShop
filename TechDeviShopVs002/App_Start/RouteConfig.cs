@@ -99,6 +99,13 @@ namespace TechDeviShopVs002
             );
 
             routes.MapRoute(
+                name: "Payment Error",
+                url: "loi-thanh-toan",
+                defaults: new { controller = "Cart", action = "PaymentError", id = UrlParameter.Optional },
+                namespaces: new[] { "TechDeviShopVs002.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Login",
                 url: "dang-nhap",
                 defaults: new { controller = "User", action = "Login", id = UrlParameter.Optional },
@@ -144,6 +151,13 @@ namespace TechDeviShopVs002
                 name: "Cancel order Success",
                 url: "huy-bo-thanh-cong",
                 defaults: new { controller = "Profile", action = "CancelOrderSuccess", id = UrlParameter.Optional },
+                namespaces: new[] { "TechDeviShopVs002.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "Cancel order Error",
+                url: "loi-huy-bo",
+                defaults: new { controller = "Profile", action = "CancelOrderError", id = UrlParameter.Optional },
                 namespaces: new[] { "TechDeviShopVs002.Controllers" }
             );
 

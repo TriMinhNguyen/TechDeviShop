@@ -158,6 +158,9 @@ namespace TechDeviShopVs002.Controllers
             return View();
         }
 
-
+        public ActionResult CancelOrderError()
+        {
+            return View();
+        }
     }
 }

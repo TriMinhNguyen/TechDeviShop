@@ -328,7 +328,8 @@ namespace TechDeviShopVs002.Controllers
         public ActionResult Payment(string shipName, string mobile, string address, string email)
         {
             var CusUserSession = (CusUserLogin)Session[TechDeviShopVs002.Common.CommonConstants.CusUserSession];
-            
+            var _sc = new ShoppingCartDAL().FindByCus(CusUserSession.CustomerID);
+
             var order = new Order();
             order.CustomerID = CusUserSession.CustomerID;
             order.OrderDate = DateTime.Now;
@@ -336,16 +337,21 @@ namespace TechDeviShopVs002.Controllers
             order.CusPhone = mobile;
             order.CusName = shipName;
             order.CusEmail = email;
+            order.ShipperID = 1;
+            order.ShippingMethodID = 2;
             order.OrderStatusID = 1;
             order.IsActive = true;
             
             try
             {
                 var id = new OrderDAL().Insert(order);
-                var cart = (List<CartItem>)Session[CartSession];
-                
+                //var cart = (List<CartItem>)Session[CartSession];
+
+                int scid = _sc.ShoppingCartID;
+                var listSCD = new ShoppingCartDetailDAL().ListByShoppingCartID(scid).ToList();
+
                 decimal total = 0;
-                foreach (var item in cart)
+                foreach (var item in listSCD)
                 {
                     //Create order detail;
                     var orderDetail = new OrderDetail();
@@ -363,7 +369,7 @@ namespace TechDeviShopVs002.Controllers
                     var product = new ProductDAL().ViewDetail(item.Product.ProductID);
                     if(product.Quantity > 1)
                     {
-                        product.Quantity = product.Quantity - item.Quantity;
+                        product.Quantity = product.Quantity - (int)item.Quantity;
                     }
                     var productResult = new ProductDAL().Update(product);
 
@@ -373,7 +379,7 @@ namespace TechDeviShopVs002.Controllers
                     var spcartResult = new ShoppingCartDAL().Update(spcart);
 
                     //calculated total price;
-                    total += (item.Product.Price.GetValueOrDefault(0) * item.Quantity);
+                    total += (item.Product.Price.GetValueOrDefault(0) * (int)item.Quantity);
                 }
 
                 ////Create payment;
@@ -411,5 +417,9 @@ namespace TechDeviShopVs002.Controllers
             return View();
         }
 
+        public ActionResult PaymentError()
+        {
+            return View();
+        }
     }
 }

@@ -1816,6 +1816,8 @@
     <Content Include="Views\Profile\CancelOrderSuccess.cshtml" />
     <Content Include="Views\Profile\ChangeInfo.cshtml" />
     <Content Include="Views\Article\ArticleByCate.cshtml" />
+    <Content Include="Views\Cart\PaymentError.cshtml" />
+    <Content Include="Views\Profile\CancelOrderError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
