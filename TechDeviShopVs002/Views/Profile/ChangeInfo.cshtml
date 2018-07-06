@@ -36,7 +36,7 @@
                     @Html.LabelFor(model => model.CustomerGender, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <div class="checkbox">
-                            @Html.EditorFor(model => model.CustomerGender)
+                            @Html.DropDownListFor(model => model.CustomerGender, new List<SelectListItem> { new SelectListItem { Text = "Nam", Value = "True" }, new SelectListItem { Text = "Nữ", Value = "False" } }, Model.CustomerGender)
                             @Html.ValidationMessageFor(model => model.CustomerGender, "", new { @class = "text-danger" })
                         </div>
                     </div>

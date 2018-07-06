@@ -6,7 +6,7 @@
 }
 
 @section header{
-    Tạo About
+    Tạo thông tin website
 }
 
 @section jsPluginCK{
@@ -31,7 +31,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.AboutName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.MetalKeywords, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MetalKeywords, new { htmlAttributes = new { @class = "form-control" } })
@@ -90,7 +90,7 @@
             </div>
         </div>
 
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control" } })

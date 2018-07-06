@@ -31,7 +31,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Content)
+                @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Content))
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DisplayOrder)
