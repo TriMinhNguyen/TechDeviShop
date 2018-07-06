@@ -29,6 +29,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                     var userSession = new UserLogin();
                     userSession.UserName = user.UserName;
                     userSession.UserID = user.UserID;
+                    userSession.RoleID = user.RoleID;
 
                     Session.Add(CommonConstants.USER_SESSION, userSession);
                     return RedirectToAction("Index", "Home");

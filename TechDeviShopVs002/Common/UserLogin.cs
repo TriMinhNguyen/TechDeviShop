@@ -10,5 +10,7 @@ namespace TechDeviShopVs002
     {
         public int UserID { set; get; }
         public string UserName { set; get; }
+
+        public byte RoleID { set; get; }
     }
 }

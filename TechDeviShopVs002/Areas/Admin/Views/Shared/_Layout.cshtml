@@ -257,7 +257,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li>
-                            <a href="@Url.Action("Profile","Home")"><i class="fa fa-user fa-fw"></i> Hồ sơ người dùng</a>
+                            <a href="@Url.Action("ProfileInfo","Home")"><i class="fa fa-user fa-fw"></i> Hồ sơ người dùng</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -270,7 +270,14 @@
             </ul>
             <!-- /.navbar-top-links -->
             <div id="myLeftMenu">
-                @RenderPage("_LeftMenu.cshtml")
+                @if (session.RoleID == 1)
+                {
+                    @RenderPage("LeftMenu.cshtml")
+                }
+                else
+                {
+                    @RenderPage("LeftMenuEmployee.cshtml")
+                }
             </div>
             <!-- /.navbar-static-side -->
         </nav>
