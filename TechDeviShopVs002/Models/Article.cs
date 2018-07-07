@@ -71,7 +71,7 @@
         [StringLength(250)]
         public string MetalKeywords { get; set; }
 
-        [Display(Name = "Thẻ miêu tả SEO")]
+        [Display(Name = "Miêu tả ngắn")]
         [StringLength(500)]
         public string MetalDescriptions { get; set; }
 

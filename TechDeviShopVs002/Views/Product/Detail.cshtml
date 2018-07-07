@@ -150,7 +150,7 @@
                 @if (Model.SupplierID == 1 || Model.SupplierID == 2)
                 {
                     <h5>RAM :</h5>
-                    <div class="colr ert">
+                    @*<div class="colr ert">
                         <div class="check">
                             <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>4 GB</label>
                         </div>
@@ -164,7 +164,8 @@
                         <div class="check">
                             <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>16 GB</label>
                         </div>
-                    </div>
+                    </div>*@
+                    @Model.Ram
                     <div class="clearfix"> </div>
                 }
             </div>
