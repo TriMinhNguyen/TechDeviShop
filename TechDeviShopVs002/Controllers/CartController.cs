@@ -364,14 +364,7 @@ namespace TechDeviShopVs002.Controllers
                     orderDetail.Quantity = item.Quantity;
                     orderDetail.IsActive = true;
                     var detailDal = new OrderDetailsDAL().Insert(orderDetail);
-
-                    //Edit Product Quantity
-                    var product = new ProductDAL().ViewDetail(item.Product.ProductID);
-                    if(product.Quantity > 1)
-                    {
-                        product.Quantity = product.Quantity - (int)item.Quantity;
-                    }
-                    var productResult = new ProductDAL().Update(product);
+                    
 
                     //End Shopping Cart
                     var spcart = new ShoppingCartDAL().ViewDetail(item.ShoppingCartID);
@@ -381,15 +374,6 @@ namespace TechDeviShopVs002.Controllers
                     //calculated total price;
                     total += (item.Product.Price.GetValueOrDefault(0) * (int)item.Quantity);
                 }
-
-                ////Create payment;
-                //var MyPay = new Payment();
-                //MyPay.OrderID = order.OrderID;
-                //MyPay.PaymentMethodID = 1;
-                //MyPay.PaymentStatusID = 1;
-                //MyPay.TotalPrice = total;
-                //MyPay.IsActive = true;
-                //var MyPayResult = new PaymentDAL().Insert(MyPay);
 
                 
                 string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/Client/template/neworder.html"));

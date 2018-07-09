@@ -40,7 +40,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
 
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            return View(orders.OrderBy(u => u.CreateDate).ToPagedList(pageNumber, pageSize));
+            return View(orders.OrderByDescending(u => u.CreateDate).ToPagedList(pageNumber, pageSize));
         }
 
 
@@ -183,5 +183,61 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        public ActionResult CompleteOrder(int id)
+        {
+            var order = new OrderDAL().ViewDetail(id);
+            order.OrderStatusID = 4;
+
+            var _dal = new OrderDAL();
+
+            var listOD = new OrderDetailsDAL().ListByOrderID(id).ToList();
+
+            foreach (var item in listOD)
+            {
+                //Edit Product Quantity
+                var product = new ProductDAL().ViewDetail(item.ProductID);
+                if (product.Quantity > 1)
+                {
+                    product.Quantity = product.Quantity - (int)item.Quantity;
+                }
+                var productResult = new ProductDAL().Update(product);
+            }
+
+            var _result = _dal.Update(order);
+
+            if (_result)
+            {
+                return RedirectToAction("Index", "Orders");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Cập nhật trạng thái không thành công ko thành công");
+            }
+
+            return View(order);
+        }
+
+        public ActionResult CancelOrder(int id)
+        {
+            var order = new OrderDAL().ViewDetail(id);
+            order.OrderStatusID = 5;
+
+            var _dal = new OrderDAL();
+            var _result = _dal.Update(order);
+
+            if (_result)
+            {
+                return RedirectToAction("Index", "Orders");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Cập nhật trạng thái không thành công ko thành công");
+            }
+
+            return View(order);
+        }
+        
     }
 }

@@ -84,6 +84,12 @@ namespace TechDeviShopVs002.DAL
             return order;
         }
 
+        public List<Order> ListByCustomer(int id)
+        {
+            var order = db.Orders.Where(x => x.CustomerID == id).ToList();
+            return order;
+        }
+
         public bool Delete(int id)
         {
             try

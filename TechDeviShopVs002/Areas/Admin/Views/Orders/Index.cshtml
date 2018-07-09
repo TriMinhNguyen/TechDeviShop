@@ -76,13 +76,13 @@
             Hạn yêu cầu giao hàng
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateUser)
-        </th>*@
-        <th>
-            Kích hoạt
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateUser)
+            </th>*@
+        <th style="width:100px">
+            Đổi nhanh trạng thái
         </th>
         <th></th>
     </tr>
@@ -142,14 +142,24 @@
                 @Html.DisplayFor(modelItem => item.RequiredDate)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateUser)
+                </td>*@
+            @if (item.OrderStatusID < 4)
+            {
             <td>
-                @Html.DisplayFor(modelItem => item.CreateUser)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
+                @*@Html.DisplayFor(modelItem => item.IsActive)*@
+                @Html.ActionLink("Hoàn Thành", "CompleteOrder", new { id = item.OrderID }, new { onclick = "return confirm ('Bạn có chắc chắn muốn hủy đơn đặt hàng?');" }) |
+                @Html.ActionLink("Hủy đơn", "CancelOrder", new { id = item.OrderID }, new { onclick = "return confirm ('Bạn có chắc chắn muốn hủy đơn đặt hàng?');" })
             </td>
+            }
+            else
+            {
+                <td></td>
+            }
+
             <td>
                 @Html.ActionLink("Sửa", "Edit", new { id = item.OrderID }) |
                 @Html.ActionLink("Xem chi tiết", "Details", new { id = item.OrderID }) |
