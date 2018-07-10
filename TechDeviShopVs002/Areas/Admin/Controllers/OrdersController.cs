@@ -82,6 +82,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 var _dal = new OrderDAL();
 
                 order.CreateUser = UserSession.UserID;
+                order.OrderDate = DateTime.Now;
 
                 int id = _dal.Insert(order);
                 if (id > 0)

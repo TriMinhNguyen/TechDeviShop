@@ -36,7 +36,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 orderDetail = orderDetail.Where(s => s.Product.ProductName.Contains(searchString));
             }
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(orderDetail.OrderBy(u => u.ProductName).ToPagedList(pageNumber, pageSize));
         }
@@ -59,11 +59,12 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         // GET: Admin/OrderDetails/Create
         public ActionResult Create()
         {
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductID");
-            ViewBag.ProductName = new SelectList(db.Products, "ProductName", "ProductName");
-            ViewBag.ProductCode = new SelectList(db.Products, "ProductCode", "ProductCode");
-            ViewBag.UnitPrice = new SelectList(db.Products, "UnitPrice", "Price");
-            ViewBag.PromotionPrice = new SelectList(db.Products, "PromotionPrice", "PromotionPrice");
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID");
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName");
+            //ViewBag.ProductName = new SelectList(db.Products, "ProductName", "ProductName");
+            //ViewBag.ProductCode = new SelectList(db.Products, "ProductCode", "ProductCode");
+            //ViewBag.UnitPrice = new SelectList(db.Products, "UnitPrice", "Price");
+            //ViewBag.PromotionPrice = new SelectList(db.Products, "PromotionPrice", "PromotionPrice");
             return View();
         }
 
@@ -80,6 +81,11 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 var _dal = new OrderDetailsDAL();
 
                 orderDetail.CreateUser = UserSession.UserID;
+                var pd = new ProductDAL().ViewDetail(orderDetail.ProductID);
+                orderDetail.ProductName = pd.ProductName;
+                orderDetail.ProductCode = pd.ProductCode;
+                orderDetail.UnitPrice = pd.Price;
+                orderDetail.PromotionPrice = pd.PromotionPrice;
 
                 int id = _dal.Insert(orderDetail);
                 if (id > 0)
@@ -91,11 +97,12 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Thêm Chi tiết hóa đơn ko thành công");
                 }
             }
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductID", orderDetail.ProductID);
-            ViewBag.ProductName = new SelectList(db.Products, "ProductName", "ProductName", orderDetail.ProductName);
-            ViewBag.ProductCode = new SelectList(db.Products, "ProductCode", "ProductCode", orderDetail.ProductCode);
-            ViewBag.UnitPrice = new SelectList(db.Products, "UnitPrice", "Price", orderDetail.UnitPrice);
-            ViewBag.PromotionPrice = new SelectList(db.Products, "PromotionPrice", "PromotionPrice", orderDetail.PromotionPrice);
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", orderDetail.OrderID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", orderDetail.ProductID);
+            //ViewBag.ProductName = new SelectList(db.Products, "ProductName", "ProductName", orderDetail.ProductName);
+            //ViewBag.ProductCode = new SelectList(db.Products, "ProductCode", "ProductCode", orderDetail.ProductCode);
+            //ViewBag.UnitPrice = new SelectList(db.Products, "UnitPrice", "Price", orderDetail.UnitPrice);
+            //ViewBag.PromotionPrice = new SelectList(db.Products, "PromotionPrice", "PromotionPrice", orderDetail.PromotionPrice);
             return View(orderDetail);
         }
 
@@ -111,11 +118,12 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductID", orderDetail.ProductID);
-            ViewBag.ProductName = new SelectList(db.Products, "ProductName", "ProductName", orderDetail.ProductName);
-            ViewBag.ProductCode = new SelectList(db.Products, "ProductCode", "ProductCode", orderDetail.ProductCode);
-            ViewBag.UnitPrice = new SelectList(db.Products, "UnitPrice", "Price", orderDetail.UnitPrice);
-            ViewBag.PromotionPrice = new SelectList(db.Products, "PromotionPrice", "PromotionPrice", orderDetail.PromotionPrice);
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", orderDetail.OrderID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", orderDetail.ProductID);
+            //ViewBag.ProductName = new SelectList(db.Products, "ProductName", "ProductName", orderDetail.ProductName);
+            //ViewBag.ProductCode = new SelectList(db.Products, "ProductCode", "ProductCode", orderDetail.ProductCode);
+            //ViewBag.UnitPrice = new SelectList(db.Products, "UnitPrice", "Price", orderDetail.UnitPrice);
+            //ViewBag.PromotionPrice = new SelectList(db.Products, "PromotionPrice", "PromotionPrice", orderDetail.PromotionPrice);
             return View(orderDetail);
         }
 
@@ -132,6 +140,11 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 var _dal = new OrderDetailsDAL();
 
                 orderDetail.ModifiedUser = UserSession.UserID;
+                var pd = new ProductDAL().ViewDetail(orderDetail.ProductID);
+                orderDetail.ProductName = pd.ProductName;
+                orderDetail.ProductCode = pd.ProductCode;
+                orderDetail.UnitPrice = pd.Price;
+                orderDetail.PromotionPrice = pd.PromotionPrice;
 
                 var _result = _dal.Update(orderDetail);
                 if (_result)
@@ -143,11 +156,12 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Cập nhật chi tiết hóa đơn ko thành công");
                 }
             }
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductID", orderDetail.ProductID);
-            ViewBag.ProductName = new SelectList(db.Products, "ProductName", "ProductName", orderDetail.ProductName);
-            ViewBag.ProductCode = new SelectList(db.Products, "ProductCode", "ProductCode", orderDetail.ProductCode);
-            ViewBag.UnitPrice = new SelectList(db.Products, "UnitPrice", "Price", orderDetail.UnitPrice);
-            ViewBag.PromotionPrice = new SelectList(db.Products, "PromotionPrice", "PromotionPrice", orderDetail.PromotionPrice);
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", orderDetail.OrderID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", orderDetail.ProductID);
+            //ViewBag.ProductName = new SelectList(db.Products, "ProductName", "ProductName", orderDetail.ProductName);
+            //ViewBag.ProductCode = new SelectList(db.Products, "ProductCode", "ProductCode", orderDetail.ProductCode);
+            //ViewBag.UnitPrice = new SelectList(db.Products, "UnitPrice", "Price", orderDetail.UnitPrice);
+            //ViewBag.PromotionPrice = new SelectList(db.Products, "PromotionPrice", "PromotionPrice", orderDetail.PromotionPrice);
             return View(orderDetail);
         }
 
@@ -182,6 +196,42 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        public ViewResult ODofCustomer(int cID, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CustInfo = new CustomerDAL().ViewDetail(cID);
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var orderDetail = db.OrderDetails.Where(o=>o.Order.CustomerID == cID).Include(o => o.Product);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                orderDetail = orderDetail.Where(s => s.Product.ProductName.Contains(searchString));
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(orderDetail.OrderBy(u => u.ProductName).ToPagedList(pageNumber, pageSize));
+        }
+
+        public ViewResult ODofOrder(int oID)
+        {
+            var model = new OrderDetailsDAL().ListByOrderID(oID);
+
+            ViewBag.ODinfo = new OrderDAL().ViewDetail(oID);
+            return View(model);
         }
     }
 }

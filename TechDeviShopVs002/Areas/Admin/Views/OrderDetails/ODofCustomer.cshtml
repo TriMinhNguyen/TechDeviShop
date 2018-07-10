@@ -1,0 +1,92 @@
+﻿@model PagedList.IPagedList<TechDeviShopVs002.Models.OrderDetail>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "ODofCustomer";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var CustInfos = (TechDeviShopVs002.Models.Customer)ViewBag.CustInfo;
+}
+
+@section header{
+    Danh sách hóa đơn chi tiết của @CustInfos.CustomerName 
+    Mã khách hàng: @CustInfos.CustomerID
+}
+
+<p>
+    @Html.ActionLink("Thêm mới hóa đơn chi tiết", "Create", "OrderDetails")
+</p>
+<p> 
+    @Html.ActionLink("Thoát", "Index", "Customers")
+</p>
+@using (Html.BeginForm("Index", "OrderDetails", FormMethod.Get))
+{
+    <p>
+        Nhập nội dung tìm kiếm: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            Mã hóa đơn
+        </th>
+        <th>
+            Mã sản phẩm
+        </th>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Giá bán
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Giá bán khuyến mãi
+        </th>
+        <th>
+            Kích hoạt
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.PromotionPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "OrderDetails",new { id = item.OrderDetailID })">Sửa</a> |
+                <a href="@Url.Action("Details", "OrderDetails",new { id = item.OrderDetailID })">Xem chi tiết</a> |
+                <a href="@Url.Action("Delete", "OrderDetails",new { id = item.OrderDetailID })">Xóa</a>
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
+

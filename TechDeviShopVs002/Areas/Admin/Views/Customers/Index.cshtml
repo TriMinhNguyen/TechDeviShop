@@ -24,6 +24,9 @@
 <table class="table">
     <tr>
         <th>
+            Mã KH
+        </th>
+        <th>
             Tên khách hàng
         </th>
         <th>
@@ -38,24 +41,6 @@
         <th>
             Email
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
-                    @Html.DisplayNameFor(model => model.CustomerAddress)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CustomerCity)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CustomerDistrict)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PostCost)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OrtherDetail)
-                </th>*@
         <th>
             Kích hoạt
         </th>
@@ -66,10 +51,14 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.CustomerName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CustomerGender, new List<SelectListItem> { new SelectListItem { Text = "Nam", Value = "True" }, new SelectListItem { Text = "Nữ", Value = "False" } })
+                @*@Html.DisplayFor(modelItem => item.CustomerGender, new List<SelectListItem> { new SelectListItem { Text = "Nam", Value = "True" }, new SelectListItem { Text = "Nữ", Value = "False" } })*@
+                @Html.Encode(item.CustomerGender == true ? "Nam" : "Nữ")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CustomerBirthday)
@@ -80,31 +69,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CustomerEmail)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Password)
-                </td>
-                <td>
-                        @Html.DisplayFor(modelItem => item.CustomerAddress)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomerCity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomerDistrict)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PostCost)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrtherDetail)
-                    </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
-            <td>
+            <td style="width:180px">
                 @Html.ActionLink("Sửa", "Edit", new { id = item.CustomerID }) |
                 @Html.ActionLink("Xem chi tiết", "Details", new { id = item.CustomerID }) |
-                @Html.ActionLink("Xóa", "Delete", new { id = item.CustomerID })
+                @Html.ActionLink("Xóa", "Delete", new { id = item.CustomerID }) |
+                <a href="@Url.Action("ODofCustomer", "OrderDetails", new {cID = item.CustomerID })">Lịch sử mua hàng</a>
             </td>
         </tr>
     }

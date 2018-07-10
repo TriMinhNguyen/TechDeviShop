@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TechDeviShopVs002.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "ODofOrder";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var ODinfos = (TechDeviShopVs002.Models.Order)ViewBag.ODinfo;
+}
+
+@section header{
+    Danh sách hóa đơn chi tiết của đơn hàng mã @ODinfos.OrderID
+}
+
+<p>
+    @Html.ActionLink("Thêm mới hóa đơn chi tiết", "Create", "OrderDetails")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PromotionPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PromotionPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "OrderDetails",new { id = item.OrderDetailID })">Sửa</a> |
+                <a href="@Url.Action("Details", "OrderDetails",new { id = item.OrderDetailID })">Xem chi tiết</a> |
+                <a href="@Url.Action("Delete", "OrderDetails",new { id = item.OrderDetailID })">Xóa</a>
+            </td>
+        </tr>
+    }
+
+</table>

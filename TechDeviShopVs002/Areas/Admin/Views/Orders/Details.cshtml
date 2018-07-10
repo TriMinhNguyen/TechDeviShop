@@ -185,5 +185,6 @@
 </div>
 <p>
     @Html.ActionLink("Sửa", "Edit", new { id = Model.OrderID }) |
-    @Html.ActionLink("Thoát", "Index")
+    @Html.ActionLink("Thoát", "Index") |
+    <a href="@Url.Action("ODofOrder", "OrderDetails", new { oID = Model.OrderID})">Danh sách hóa đơn chi tiết</a>
 </p>
