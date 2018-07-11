@@ -10,7 +10,7 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Thêm mới", "Create")
 </p>
 <table class="table">
     <tr>
@@ -135,9 +135,9 @@
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ArticleID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ArticleID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })
+                @Html.ActionLink("Sửa", "Edit", new { id = item.ArticleID }) |
+                @Html.ActionLink("Xem chi tiết", "Details", new { id = item.ArticleID }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.ArticleID })
             </td>
         </tr>
     }

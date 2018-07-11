@@ -90,6 +90,7 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             ViewBag.ArticleCategoryID = new SelectList(db.ArticleCategories, "ArticleCategoryID", "ArticleCategoryName", article.ArticleCategoryID);
+            ViewBag.ArticleContent = System.Web.HttpUtility.HtmlDecode(article.ArticleContent);
             return View(article);
         }
 
