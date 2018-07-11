@@ -1,12 +1,14 @@
 ﻿@model IEnumerable<TechDeviShopVs002.Models.ArticleImage>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ImageOfArtivle";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var ADinfos = (TechDeviShopVs002.Models.Article)ViewBag.ADinfo;
 }
 
 @section header{
-    Danh mục ảnh bài viết
+    Danh mục ảnh của bài viết:
+    @ADinfos.Title
 }
 
 <p>
@@ -17,12 +19,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Article.Title)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.MetaTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Image)
         </th>
@@ -50,12 +46,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Article.Title)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.MetaTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Image)
             </td>
@@ -83,3 +73,4 @@
     }
 
 </table>
+

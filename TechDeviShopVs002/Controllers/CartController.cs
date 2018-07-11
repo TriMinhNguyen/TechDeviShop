@@ -261,14 +261,16 @@ namespace TechDeviShopVs002.Controllers
                     _shoppingCart.ShoppingDate = DateTime.Now;
                     _shoppingCart.CustomerID = CusUserSession.CustomerID;
                     _shoppingCart.CreateUser = CusUserSession.CustomerID;
+                    _shoppingCart.IsActive = true;
+                    var _scart = new ShoppingCartDAL().Insert(_shoppingCart);
+
                     var _shoppingCartDetail = new ShoppingCartDetail();
-                    _shoppingCartDetail.ShoppingCartID = _shoppingCart.ShoppingCartID;
+                    _shoppingCartDetail.ShoppingCartID = _scart;
                     _shoppingCartDetail.ProductID = product.ProductID;
                     _shoppingCartDetail.ProductName = product.ProductName;
                     _shoppingCartDetail.Quantity = quantity;
                     _shoppingCartDetail.UnitPrice = product.Price;
                     _shoppingCartDetail.PromotionPrice = product.PromotionPrice;
-                    var _scart = new ShoppingCartDAL().Insert(_shoppingCart);
                     var _scartDetail = new ShoppingCartDetailDAL().Insert(_shoppingCartDetail);
 
                     ////tạo mới đối tượng cart item

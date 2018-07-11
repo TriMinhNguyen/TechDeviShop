@@ -1544,6 +1544,7 @@
     <Content Include="Areas\Admin\Views\Home\ChangeUserInfo.cshtml" />
     <Content Include="Areas\Admin\Views\OrderDetails\ODofCustomer.cshtml" />
     <Content Include="Areas\Admin\Views\OrderDetails\ODofOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\ArticleImages\ImageOfArtivle.cshtml" />
     <None Include="Assets\Client\NganLuong\Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Assets\Client\NganLuong\Scripts\jquery-1.4.1.js" />
     <Content Include="Assets\Client\NganLuong\Scripts\jquery-1.4.1.min.js" />

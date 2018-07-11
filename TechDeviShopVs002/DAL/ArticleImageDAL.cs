@@ -70,5 +70,10 @@ namespace TechDeviShopVs002.DAL
                 return false;
             }
         }
+
+        public List<ArticleImage> ListByArticleID(int id)
+        {
+            return db.ArticleImages.Where(x => x.ArticleID == id).OrderByDescending(x => x.CreateDate).Take(id).ToList();
+        }
     }
 }

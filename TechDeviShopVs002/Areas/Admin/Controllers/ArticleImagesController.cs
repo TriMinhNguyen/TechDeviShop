@@ -149,5 +149,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ViewResult ImageOfArtivle(int aID)
+        {
+            var model = new ArticleImageDAL().ListByArticleID(aID);
+
+            ViewBag.ADinfo = new ArticleDAL().ViewDetail(aID);
+            return View(model);
+        }
     }
 }
