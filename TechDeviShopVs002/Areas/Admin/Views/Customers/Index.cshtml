@@ -69,9 +69,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CustomerEmail)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
+            @if (item.IsActive == true)
+            {
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>*@
+                <td>
+                    Kích hoạt
+                </td>
+            }
+            else
+            {
+                <td>
+                    Khóa
+                </td>
+            }
             <td style="width:180px">
                 @Html.ActionLink("Sửa", "Edit", new { id = item.CustomerID }) |
                 @Html.ActionLink("Xem chi tiết", "Details", new { id = item.CustomerID }) |

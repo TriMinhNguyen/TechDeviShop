@@ -148,7 +148,13 @@ namespace TechDeviShopVs002.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            new ArticleDAL().Delete(id);
+            //new ArticleDAL().Delete(id);
+
+            var article = new ArticleDAL().ViewDetail(id);
+            article.IsActive = false;
+            var _dal = new ArticleDAL();
+            var _result = _dal.Update(article);
+
             return RedirectToAction("Index");
         }
 
