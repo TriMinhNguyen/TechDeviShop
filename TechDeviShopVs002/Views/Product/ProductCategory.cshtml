@@ -34,7 +34,8 @@
                                 <ul>
                                     @foreach (var itemChild in child)
                                     {
-                                        <li><a href="@url">@itemChild.CategoryName</a></li>
+                                        var childUrl = "/sanpham/" + itemChild.MetaTitle + "-" + itemChild.CategoryID;
+                                        <li><a href="@childUrl">@itemChild.CategoryName</a></li>
                                     }
                                 </ul>
                             </div>
